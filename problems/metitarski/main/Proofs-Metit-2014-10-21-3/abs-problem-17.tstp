@@ -1,0 +1,3165 @@
+% SZS output start CNFRefutation for abs-problem-17.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(leq_left_divide_mul_pos, axiom, (Y * Z < X | X / Z <= Y | Z <= 0)).
+
+cnf(leq_right_divide_mul_pos, axiom, (Y < X * Z | X <= Y / Z | Z <= 0)).
+
+cnf(leq_right_mul_divide_pos, axiom, (Y < X / Z | X <= Y * Z | Z <= 0)).
+
+cnf(leq_right_divide_mul_neg, axiom, (Y < X * Z | Y / Z <= X | 0 <= Z)).
+
+cnf(leq_right_mul_divide_neg, axiom, (Y < X / Z | Y * Z <= X | 0 <= Z)).
+
+cnf(exp_positive, axiom, (0 < Y | lgen(R, Y, exp(X)))).
+
+cnf(exp_lower_taylor_1, axiom,
+    (X < -1 | ~ lgen(R, Y, 1 + X) | lgen(R, Y, exp(X)))).
+
+cnf(exp_lower_bound_cf2, axiom,
+    (X < 0 | ~ lgen(R, Y, (X ^ 2 + 6 * X + 12) / (X ^ 2 - 6 * X + 12)) |
+     lgen(R, Y, exp(X)))).
+
+cnf(exp_lower_bound_cf3, axiom,
+    (0 <= X |
+     ~ lgen(R, Y,
+            -(X ^ 3 + 12 * X ^ 2 + 60 * X + 120) /
+            (X ^ 3 - 12 * X ^ 2 + 60 * X - 120)) | lgen(R, Y, exp(X)))).
+
+cnf(exp_upper_bound_case_3, axiom,
+    (0 < X |
+     ~ lgen(R, 2304 / (-(X ^ 3) + 6 * X ^ 2 - 24 * X + 48) ^ 2, Y) |
+     lgen(R, exp(X), Y))).
+
+cnf(exp_upper_bound_cf2, axiom,
+    (0 <= X | ~ lgen(R, (X ^ 2 + 6 * X + 12) / (X ^ 2 - 6 * X + 12), Y) |
+     lgen(R, exp(X), Y))).
+
+cnf(exp_upper_bound_cf3, axiom,
+    (X < 0 | 4 < X |
+     ~ lgen(R,
+            -(X ^ 3 + 12 * X ^ 2 + 60 * X + 120) /
+            (X ^ 3 - 12 * X ^ 2 + 60 * X - 120), Y) | lgen(R, exp(X), Y))).
+
+cnf(abs_nonnegative, axiom, (X < 0 | abs(X) = X)).
+
+cnf(abs_negative, axiom, (0 <= X | abs(X) = -X)).
+
+fof(abs_problem_17, conjecture,
+    (! [X] :
+       abs(exp(X) * (12 - 6 * X + X ^ 2) - (12 + 6 * X + X ^ 2)) <=
+       abs(X) ^ 5 * exp(abs(X)) / 60)).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       abs(exp(X) * (12 - 6 * X + X ^ 2) - (12 + 6 * X + X ^ 2)) <=
+       abs(X) ^ 5 * exp(abs(X)) / 60),
+    inference(strip, [], [abs_problem_17])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         abs(exp(X) * (12 - 6 * X + X ^ 2) - (12 + 6 * X + X ^ 2)) <=
+         abs(X) ^ 5 * exp(abs(X)) / 60),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       abs(X) ^ 5 * exp(abs(X)) / 60 <
+       abs(exp(X) * (12 - 6 * X + X ^ 2) - (12 + 6 * X + X ^ 2))),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (abs(skoXC1) ^ 5 * exp(abs(skoXC1)) / 60 <
+     abs(exp(skoXC1) * (12 - 6 * skoXC1 + skoXC1 ^ 2) -
+         (12 + 6 * skoXC1 + skoXC1 ^ 2))),
+    inference(skolemize, [], [normalize_0_0])).
+
+cnf(refute_0_0, plain,
+    ((-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) *
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -1440 + skoXC1 * (skoXC1 * (96 + skoXC1 * (skoXC1 * (-6 + skoXC1)))) |
+     12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     0 |
+     (-1440 +
+      skoXC1 * (skoXC1 * (96 + skoXC1 * (skoXC1 * (-6 + skoXC1))))) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <=
+     -120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))),
+    inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_1, plain,
+    (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1)) <
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) *
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) |
+     0 <= -120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1)) |
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) <=
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(0, exp(X_000098), X_000099) | exp(X_000098) <= X_000099),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_3, plain,
+    (4 < X_000098 | X_000098 < 0 |
+     ~ lgen(0,
+            -(X_000098 ^ 3 + 12 * X_000098 ^ 2 + 60 * X_000098 + 120) /
+            (X_000098 ^ 3 - 12 * X_000098 ^ 2 + 60 * X_000098 - 120),
+            X_000099) | lgen(0, exp(X_000098), X_000099)),
+    inference(subst, [], [exp_upper_bound_cf3])).
+
+cnf(refute_0_4, plain,
+    (4 < X_000098 | X_000098 < 0 |
+     ~ lgen(0,
+            -(X_000098 ^ 3 + 12 * X_000098 ^ 2 + 60 * X_000098 + 120) /
+            (X_000098 ^ 3 - 12 * X_000098 ^ 2 + 60 * X_000098 - 120),
+            X_000099) | exp(X_000098) <= X_000099),
+    inference(resolve, [], [refute_0_3, refute_0_2])).
+
+cnf(refute_0_5, plain,
+    (4 < X_000098 | X_000098 < 0 |
+     X_000099 <
+     (-120 + X_000098 * (-60 + X_000098 * (-12 + X_000098 * -1))) /
+     (-120 + X_000098 * (60 + X_000098 * (-12 + X_000098))) |
+     exp(X_000098) <= X_000099), inference(arithmetic, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (skoXC1 < 0 |
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) | 4 < skoXC1 |
+     exp(skoXC1) <=
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(subst, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (abs(skoXC1) ^ 5 * exp(abs(skoXC1)) / 60 <
+     abs(exp(skoXC1) * (12 - 6 * skoXC1 + skoXC1 ^ 2) -
+         (12 + 6 * skoXC1 + skoXC1 ^ 2))),
+    inference(canonicalize, [], [normalize_0_1])).
+
+cnf(refute_0_8, plain,
+    (abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 <
+     exp(abs(skoXC1)) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))))),
+    inference(arithmetic, [], [refute_0_7])).
+
+cnf(refute_0_9, plain, (skoXC1 < 0 | abs(skoXC1) = skoXC1),
+    inference(subst, [], [abs_nonnegative])).
+
+cnf(refute_0_10, plain,
+    (abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 <
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) |
+     abs(skoXC1) != skoXC1 |
+     exp(abs(skoXC1)) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) <=
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_11, plain,
+    (skoXC1 < 0 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 <
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) |
+     exp(abs(skoXC1)) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) <=
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1),
+    inference(resolve, [], [refute_0_9, refute_0_10])).
+
+cnf(refute_0_12, plain,
+    (skoXC1 < 0 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 <
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))))),
+    inference(resolve, [], [refute_0_11, refute_0_8])).
+
+cnf(refute_0_13, plain,
+    (skoXC1 < 0 |
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)))),
+    inference(arithmetic, [], [refute_0_12])).
+
+cnf(refute_0_14, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) < 0 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) =
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    inference(subst, [], [abs_nonnegative])).
+
+cnf(refute_0_15, plain,
+    (exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60))))) <
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) !=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_16, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) < 0 |
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60))))) <
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60)))))),
+    inference(resolve, [], [refute_0_14, refute_0_15])).
+
+cnf(refute_0_17, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) < 0 | skoXC1 < 0 |
+     exp(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60))))) <
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    inference(resolve, [], [refute_0_16, refute_0_13])).
+
+cnf(refute_0_18, plain,
+    (skoXC1 < 0 |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) <
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))))),
+    inference(arithmetic, [], [refute_0_17])).
+
+cnf(refute_0_19, plain,
+    (1440 + skoXC1 * (skoXC1 * (-96 + skoXC1 * (skoXC1 * (6 + skoXC1)))) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) *
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) |
+     0 <= -120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1)) |
+     (1440 +
+      skoXC1 * (skoXC1 * (-96 + skoXC1 * (skoXC1 * (6 + skoXC1))))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) <=
+     -12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_20, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) *
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1)))),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_21, plain,
+    (~ lgen(0, X_000085, exp(X_000084)) | X_000085 <= exp(X_000084)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_22, plain,
+    (~ lgen(0, X_000085,
+            -(X_000084 ^ 3 + 12 * X_000084 ^ 2 + 60 * X_000084 + 120) /
+            (X_000084 ^ 3 - 12 * X_000084 ^ 2 + 60 * X_000084 - 120)) |
+     0 <= X_000084 | lgen(0, X_000085, exp(X_000084))),
+    inference(subst, [], [exp_lower_bound_cf3])).
+
+cnf(refute_0_23, plain,
+    (~ lgen(0, X_000085,
+            -(X_000084 ^ 3 + 12 * X_000084 ^ 2 + 60 * X_000084 + 120) /
+            (X_000084 ^ 3 - 12 * X_000084 ^ 2 + 60 * X_000084 - 120)) |
+     X_000085 <= exp(X_000084) | 0 <= X_000084),
+    inference(resolve, [], [refute_0_22, refute_0_21])).
+
+cnf(refute_0_24, plain,
+    ((-120 + X_000084 * (-60 + X_000084 * (-12 + X_000084 * -1))) /
+     (-120 + X_000084 * (60 + X_000084 * (-12 + X_000084))) < X_000085 |
+     X_000085 <= exp(X_000084) | 0 <= X_000084),
+    inference(arithmetic, [], [refute_0_23])).
+
+cnf(refute_0_25, plain,
+    ((-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) | 0 <= skoXC1 |
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= exp(skoXC1)),
+    inference(subst, [], [refute_0_24])).
+
+cnf(refute_0_26, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) <
+     (1 + skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <=
+     1 + skoXC1 * -1), inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_27, plain,
+    (~ lgen(0, X_000050, exp(X_000049)) | X_000050 <= exp(X_000049)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_28, plain,
+    (X_000049 < -1 | ~ lgen(0, X_000050, 1 + X_000049) |
+     lgen(0, X_000050, exp(X_000049))),
+    inference(subst, [], [exp_lower_taylor_1])).
+
+cnf(refute_0_29, plain,
+    (X_000049 < -1 | ~ lgen(0, X_000050, 1 + X_000049) |
+     X_000050 <= exp(X_000049)),
+    inference(resolve, [], [refute_0_28, refute_0_27])).
+
+cnf(refute_0_30, plain,
+    (1 + X_000049 < X_000050 | X_000049 < -1 | X_000050 <= exp(X_000049)),
+    inference(arithmetic, [], [refute_0_29])).
+
+cnf(refute_0_31, plain,
+    (skoXC1 * -1 < -1 |
+     1 + skoXC1 * -1 <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <=
+     exp(skoXC1 * -1)), inference(subst, [], [refute_0_30])).
+
+cnf(refute_0_32, plain, (0 <= skoXC1 | abs(skoXC1) = -skoXC1),
+    inference(subst, [], [abs_negative])).
+
+cnf(refute_0_33, plain,
+    (abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 <
+     exp(-skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) |
+     abs(skoXC1) != -skoXC1 |
+     exp(abs(skoXC1)) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) <=
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_34, plain,
+    (abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 <
+     exp(-skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) |
+     0 <= skoXC1 |
+     exp(abs(skoXC1)) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) <=
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1),
+    inference(resolve, [], [refute_0_32, refute_0_33])).
+
+cnf(refute_0_35, plain,
+    (abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 <
+     exp(-skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) |
+     0 <= skoXC1), inference(resolve, [], [refute_0_34, refute_0_8])).
+
+cnf(refute_0_36, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_35])).
+
+cnf(refute_0_37, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (-skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(skoXC1) != -skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_38, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (-skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60)))))),
+    inference(resolve, [], [refute_0_32, refute_0_37])).
+
+cnf(refute_0_39, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (-skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_38, refute_0_36])).
+
+cnf(refute_0_40, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_39])).
+
+cnf(refute_0_41, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (-skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(skoXC1) != -skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_42, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (-skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_32, refute_0_41])).
+
+cnf(refute_0_43, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (-skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_42, refute_0_40])).
+
+cnf(refute_0_44, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_43])).
+
+cnf(refute_0_45, plain,
+    (-144 + skoXC1 * (skoXC1 * (12 + skoXC1 * (skoXC1 * -1))) <
+     (12 + skoXC1 * (6 + skoXC1)) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     (-144 + skoXC1 * (skoXC1 * (12 + skoXC1 * (skoXC1 * -1)))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= 12 + skoXC1 * (6 + skoXC1)),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_46, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) * (12 + skoXC1 * (-6 + skoXC1)) |
+     12 + skoXC1 * (-6 + skoXC1) <= 0 |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     (12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_47, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) <
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)), introduced(tautology, [assume])).
+
+cnf(refute_0_48, plain,
+    (exp(skoXC1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(split, [], [refute_0_47])).
+
+cnf(refute_0_49, plain,
+    (exp(skoXC1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_48])).
+
+cnf(refute_0_50, plain, (-12 < skoXC1 * (-6 + skoXC1)),
+    introduced(tautology, [decision])).
+
+cnf(refute_0_51, plain,
+    (exp(skoXC1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_49, refute_0_50])).
+
+cnf(refute_0_52, plain,
+    (~ lgen(0, X_000067, exp(X_000066)) | X_000067 <= exp(X_000066)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_53, plain,
+    (X_000066 < 0 |
+     ~ lgen(0, X_000067,
+            (X_000066 ^ 2 + 6 * X_000066 + 12) /
+            (X_000066 ^ 2 - 6 * X_000066 + 12)) |
+     lgen(0, X_000067, exp(X_000066))),
+    inference(subst, [], [exp_lower_bound_cf2])).
+
+cnf(refute_0_54, plain,
+    (X_000066 < 0 |
+     ~ lgen(0, X_000067,
+            (X_000066 ^ 2 + 6 * X_000066 + 12) /
+            (X_000066 ^ 2 - 6 * X_000066 + 12)) |
+     X_000067 <= exp(X_000066)),
+    inference(resolve, [], [refute_0_53, refute_0_52])).
+
+cnf(refute_0_55, plain,
+    ((12 + X_000066 * (6 + X_000066)) / (12 + X_000066 * (-6 + X_000066)) <
+     X_000067 | X_000066 < 0 | X_000067 <= exp(X_000066)),
+    inference(arithmetic, [], [refute_0_54])).
+
+cnf(refute_0_56, plain,
+    (skoXC1 < 0 |
+     (12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= exp(skoXC1)),
+    inference(subst, [], [refute_0_55])).
+
+cnf(refute_0_57, plain,
+    (skoXC1 < 0 |
+     (12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_56, refute_0_51])).
+
+cnf(refute_0_58, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) * (12 + skoXC1 * (-6 + skoXC1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | 12 + skoXC1 * (-6 + skoXC1) <= 0),
+    inference(resolve, [], [refute_0_46, refute_0_57])).
+
+cnf(refute_0_59, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     (-144 + skoXC1 * (skoXC1 * (12 + skoXC1 * (skoXC1 * -1)))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_58])).
+
+cnf(refute_0_60, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) <
+     (1 + skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= 1 + skoXC1),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_61, plain,
+    (skoXC1 < -1 |
+     1 + skoXC1 <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= exp(skoXC1)),
+    inference(subst, [], [refute_0_30])).
+
+cnf(refute_0_62, plain,
+    (skoXC1 < -1 |
+     1 + skoXC1 <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_61, refute_0_51])).
+
+cnf(refute_0_63, plain,
+    (skoXC1 < -1 |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) <
+     (1 + skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_60, refute_0_62])).
+
+cnf(refute_0_64, plain,
+    (skoXC1 < -1 | 0 < skoXC1 * (skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_63])).
+
+cnf(refute_0_65, plain,
+    (skoXC1 < -1 | 0 < skoXC1 * (skoXC1 * (6 + skoXC1 * -1)) |
+     -12 < skoXC1 * (-6 + skoXC1)), introduced(tautology, [decision])).
+
+cnf(refute_0_66, plain,
+    (skoXC1 < -1 | 0 < skoXC1 * (skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_64, refute_0_65])).
+
+cnf(refute_0_67, plain,
+    (0 < skoXC1 * (skoXC1 * (6 + skoXC1 * -1)) | -1 <= skoXC1),
+    introduced(tautology, [decision])).
+
+cnf(refute_0_68, plain,
+    (0 < skoXC1 * (skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_67, refute_0_66])).
+
+cnf(refute_0_69, plain,
+    (skoXC1 < 0 | -12 < skoXC1 * (-6 + skoXC1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(decision, [], [refute_0_68])).
+
+cnf(refute_0_70, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     (-144 + skoXC1 * (skoXC1 * (12 + skoXC1 * (skoXC1 * -1)))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_59, refute_0_69])).
+
+cnf(refute_0_71, plain,
+    (skoXC1 < 0 |
+     -144 + skoXC1 * (skoXC1 * (12 + skoXC1 * (skoXC1 * -1))) <
+     (12 + skoXC1 * (6 + skoXC1)) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_45, refute_0_70])).
+
+cnf(refute_0_72, plain,
+    (skoXC1 < 0 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_71])).
+
+cnf(refute_0_73, plain,
+    (skoXC1 < 0 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_72, refute_0_69])).
+
+cnf(refute_0_74, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_44, refute_0_73])).
+
+cnf(refute_0_75, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(skoXC1) != -skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * 1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_76, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * 1/60)))))),
+    inference(resolve, [], [refute_0_32, refute_0_75])).
+
+cnf(refute_0_77, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_76, refute_0_74])).
+
+cnf(refute_0_78, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(arithmetic, [], [refute_0_77])).
+
+cnf(refute_0_79, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_78, refute_0_73])).
+
+cnf(refute_0_80, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(skoXC1) != -skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_81, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_32, refute_0_80])).
+
+cnf(refute_0_82, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_81, refute_0_79])).
+
+cnf(refute_0_83, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(arithmetic, [], [refute_0_82])).
+
+cnf(refute_0_84, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_83, refute_0_73])).
+
+cnf(refute_0_85, plain,
+    (exp(skoXC1 * -1) *
+     (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(skoXC1) != -skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_86, plain,
+    (exp(skoXC1 * -1) *
+     (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))))),
+    inference(resolve, [], [refute_0_32, refute_0_85])).
+
+cnf(refute_0_87, plain,
+    (exp(skoXC1 * -1) *
+     (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_86, refute_0_84])).
+
+cnf(refute_0_88, plain,
+    (exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(arithmetic, [], [refute_0_87])).
+
+cnf(refute_0_89, plain,
+    (exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_88, refute_0_73])).
+
+cnf(refute_0_90, plain,
+    (0 <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) =
+     -(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)))),
+    inference(subst, [], [abs_negative])).
+
+cnf(refute_0_91, plain,
+    (exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) !=
+     -(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_92, plain,
+    (exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     0 <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_90, refute_0_91])).
+
+cnf(refute_0_93, plain,
+    (exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     0 <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_92, refute_0_89])).
+
+cnf(refute_0_94, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) <
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(arithmetic, [], [refute_0_93])).
+
+cnf(refute_0_95, plain,
+    (exp(skoXC1 * -1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(split, [], [refute_0_94])).
+
+cnf(refute_0_96, plain,
+    (exp(skoXC1 * -1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) |
+     skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <= 0),
+    inference(arithmetic, [], [refute_0_95])).
+
+cnf(refute_0_97, plain,
+    (0 < skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(decision, [], [refute_0_68, refute_0_73])).
+
+cnf(refute_0_98, plain,
+    (exp(skoXC1 * -1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_96, refute_0_97])).
+
+cnf(refute_0_99, plain,
+    (skoXC1 * -1 < -1 |
+     1 + skoXC1 * -1 <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_31, refute_0_98])).
+
+cnf(refute_0_100, plain,
+    (1 + skoXC1 * -1 <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     1 < skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(arithmetic, [], [refute_0_99])).
+
+cnf(refute_0_101, plain,
+    (exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 <= 1),
+    inference(decision, [], [refute_0_68, refute_0_73])).
+
+cnf(refute_0_102, plain,
+    (1 + skoXC1 * -1 <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+      exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_101, refute_0_100])).
+
+cnf(refute_0_103, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) <
+     (1 + skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_26, refute_0_102])).
+
+cnf(refute_0_104, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) |
+     skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <= 0),
+    inference(arithmetic, [], [refute_0_103])).
+
+cnf(refute_0_105, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_104, refute_0_97])).
+
+cnf(refute_0_106, plain,
+    (exp(skoXC1) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(split, [], [refute_0_105])).
+
+cnf(refute_0_107, plain,
+    (exp(skoXC1) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_106])).
+
+cnf(refute_0_108, plain,
+    (-12 < skoXC1 * (-6 + skoXC1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(decision, [], [refute_0_68, refute_0_73])).
+
+cnf(refute_0_109, plain,
+    (exp(skoXC1) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_107, refute_0_108])).
+
+cnf(refute_0_110, plain,
+    ((-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) | 0 <= skoXC1 |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_25, refute_0_109])).
+
+cnf(refute_0_111, plain,
+    ((-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_110, refute_0_73])).
+
+cnf(refute_0_112, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) *
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_20, refute_0_111])).
+
+cnf(refute_0_113, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     (1440 +
+      skoXC1 * (skoXC1 * (-96 + skoXC1 * (skoXC1 * (6 + skoXC1))))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_112])).
+
+cnf(refute_0_114, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     (1440 +
+      skoXC1 * (skoXC1 * (-96 + skoXC1 * (skoXC1 * (6 + skoXC1))))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_113, refute_0_108])).
+
+cnf(refute_0_115, plain,
+    (1440 + skoXC1 * (skoXC1 * (-96 + skoXC1 * (skoXC1 * (6 + skoXC1)))) <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) *
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) |
+     0 <= -120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_19, refute_0_114])).
+
+cnf(refute_0_116, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (skoXC1 *
+       (skoXC1 *
+        (skoXC1 *
+         (skoXC1 *
+          (-3 + skoXC1 * (6/5 + skoXC1 * (-13/60 + skoXC1 * 1/60)))))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) |
+     skoXC1 * (-60 + skoXC1 * (12 + skoXC1 * -1)) <= -120),
+    inference(arithmetic, [], [refute_0_115])).
+
+cnf(refute_0_117, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     0 * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= 0),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_118, plain,
+    (~ lgen(0, X_000010, exp(X_000009)) | X_000010 <= exp(X_000009)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_119, plain, (0 < X_000010 | lgen(0, X_000010, exp(X_000009))),
+    inference(subst, [], [exp_positive])).
+
+cnf(refute_0_120, plain, (0 < X_000010 | X_000010 <= exp(X_000009)),
+    inference(resolve, [], [refute_0_119, refute_0_118])).
+
+cnf(refute_0_121, plain,
+    (0 <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= exp(skoXC1)),
+    inference(subst, [], [refute_0_120])).
+
+cnf(refute_0_122, plain,
+    (0 <
+     (-12 +
+      skoXC1 *
+      (-6 +
+       skoXC1 *
+       (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60)))))) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_121, refute_0_109])).
+
+cnf(refute_0_123, plain,
+    (-12 +
+     skoXC1 *
+     (-6 +
+      skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (skoXC1 * (-1/60 + skoXC1 * 1/60))))) <
+     0 * (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_117, refute_0_122])).
+
+cnf(refute_0_124, plain,
+    (-12 <
+     skoXC1 *
+     (6 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (skoXC1 * (1/60 + skoXC1 * -1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_123])).
+
+cnf(refute_0_125, plain,
+    (-12 < skoXC1 * (-6 + skoXC1) |
+     -12 <
+     skoXC1 *
+     (6 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (skoXC1 * (1/60 + skoXC1 * -1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(decision, [], [refute_0_68, refute_0_73])).
+
+cnf(refute_0_126, plain,
+    (-12 <
+     skoXC1 *
+     (6 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (skoXC1 * (1/60 + skoXC1 * -1/60))))) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_124, refute_0_125])).
+
+cnf(refute_0_127, plain,
+    (exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) |
+     skoXC1 *
+     (skoXC1 *
+      (skoXC1 *
+       (skoXC1 *
+        (skoXC1 *
+         (skoXC1 *
+          (-3 + skoXC1 * (6/5 + skoXC1 * (-13/60 + skoXC1 * 1/60)))))))) <=
+     0 | skoXC1 * (-60 + skoXC1 * (12 + skoXC1 * -1)) <= -120),
+    inference(decision, [], [refute_0_126, refute_0_68, refute_0_73])).
+
+cnf(refute_0_128, plain,
+    (exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) |
+     skoXC1 * (-60 + skoXC1 * (12 + skoXC1 * -1)) <= -120),
+    inference(resolve, [], [refute_0_127, refute_0_116])).
+
+cnf(refute_0_129, plain,
+    (-120 < skoXC1 * (-60 + skoXC1 * (12 + skoXC1 * -1)) |
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(decision, [], [refute_0_126, refute_0_68, refute_0_73])).
+
+cnf(refute_0_130, plain,
+    (exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_128, refute_0_129])).
+
+cnf(refute_0_131, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))))),
+    inference(resolve, [], [refute_0_130, refute_0_18])).
+
+cnf(refute_0_132, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60))))) |
+     abs(skoXC1) != skoXC1 |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_133, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60))))) |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) *
+       (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)),
+    inference(resolve, [], [refute_0_9, refute_0_132])).
+
+cnf(refute_0_134, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_133, refute_0_131])).
+
+cnf(refute_0_135, plain,
+    (~ lgen(0, exp(X_000073), X_000074) | exp(X_000073) <= X_000074),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_136, plain,
+    (~ lgen(0,
+            (X_000073 ^ 2 + 6 * X_000073 + 12) /
+            (X_000073 ^ 2 - 6 * X_000073 + 12), X_000074) | 0 <= X_000073 |
+     lgen(0, exp(X_000073), X_000074)),
+    inference(subst, [], [exp_upper_bound_cf2])).
+
+cnf(refute_0_137, plain,
+    (~ lgen(0,
+            (X_000073 ^ 2 + 6 * X_000073 + 12) /
+            (X_000073 ^ 2 - 6 * X_000073 + 12), X_000074) | 0 <= X_000073 |
+     exp(X_000073) <= X_000074),
+    inference(resolve, [], [refute_0_136, refute_0_135])).
+
+cnf(refute_0_138, plain,
+    (X_000074 <
+     (12 + X_000073 * (6 + X_000073)) / (12 + X_000073 * (-6 + X_000073)) |
+     0 <= X_000073 | exp(X_000073) <= X_000074),
+    inference(arithmetic, [], [refute_0_137])).
+
+cnf(refute_0_139, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) <
+     (12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) |
+     0 <= skoXC1 |
+     exp(skoXC1) <=
+     (12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1))),
+    inference(subst, [], [refute_0_138])).
+
+cnf(refute_0_140, plain,
+    (12 + skoXC1 * (6 + skoXC1) +
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <
+     0 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) |
+     (12 + skoXC1 * (6 + skoXC1) +
+      exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <= 0),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_141, plain,
+    (0 <
+     (12 + skoXC1 * (6 + skoXC1) +
+      exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     (12 + skoXC1 * (6 + skoXC1) +
+      exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <=
+     exp(skoXC1 * -1)), inference(subst, [], [refute_0_120])).
+
+cnf(refute_0_142, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_76, refute_0_44])).
+
+cnf(refute_0_143, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_142])).
+
+cnf(refute_0_144, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) * (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_81, refute_0_143])).
+
+cnf(refute_0_145, plain,
+    (exp(skoXC1 * -1) *
+     (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_144])).
+
+cnf(refute_0_146, plain,
+    (exp(skoXC1 * -1) *
+     (-skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_86, refute_0_145])).
+
+cnf(refute_0_147, plain,
+    (exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_146])).
+
+cnf(refute_0_148, plain,
+    (exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) !=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_149, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) < 0 |
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <=
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_14, refute_0_148])).
+
+cnf(refute_0_150, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) < 0 |
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_149, refute_0_147])).
+
+cnf(refute_0_151, plain,
+    (12 + skoXC1 * (6 + skoXC1) +
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) <
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_150])).
+
+cnf(refute_0_152, plain,
+    (12 + skoXC1 * (6 + skoXC1) +
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <
+     exp(skoXC1 * -1) *
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1), inference(resolve, [], [refute_0_130, refute_0_151])).
+
+cnf(refute_0_153, plain,
+    (exp(skoXC1 * -1) <
+     (12 + skoXC1 * (6 + skoXC1) +
+      exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) |
+     0 <= skoXC1), inference(split, [], [refute_0_152])).
+
+cnf(refute_0_154, plain,
+    (exp(skoXC1 * -1) <
+     (12 + skoXC1 * (6 + skoXC1) +
+      exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1 |
+     skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <= 0),
+    inference(arithmetic, [], [refute_0_153])).
+
+cnf(refute_0_155, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) <
+     (-27648 + skoXC1 * (13824 + skoXC1 * -2304)) /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) |
+     -27648 + skoXC1 * (13824 + skoXC1 * -2304) <=
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) *
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) |
+     2304 +
+     skoXC1 *
+     (-2304 +
+      skoXC1 *
+      (1152 +
+       skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1))))) <= 0),
+    inference(subst, [], [leq_right_mul_divide_pos])).
+
+cnf(refute_0_156, plain,
+    (2304 /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) |
+     0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     2304 /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) *
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(subst, [], [leq_right_mul_divide_neg])).
+
+cnf(refute_0_157, plain,
+    (exp(X_000056) < X_000057 | ~ lgen(1, exp(X_000056), X_000057)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_158, plain,
+    (0 < X_000056 |
+     ~ lgen(1,
+            2304 /
+            (-(X_000056 ^ 3) + 6 * X_000056 ^ 2 - 24 * X_000056 + 48) ^ 2,
+            X_000057) | lgen(1, exp(X_000056), X_000057)),
+    inference(subst, [], [exp_upper_bound_case_3])).
+
+cnf(refute_0_159, plain,
+    (0 < X_000056 | exp(X_000056) < X_000057 |
+     ~ lgen(1,
+            2304 /
+            (-(X_000056 ^ 3) + 6 * X_000056 ^ 2 - 24 * X_000056 + 48) ^ 2,
+            X_000057)),
+    inference(resolve, [], [refute_0_158, refute_0_157])).
+
+cnf(refute_0_160, plain,
+    (0 < X_000056 | exp(X_000056) < X_000057 |
+     X_000057 <=
+     2304 /
+     (2304 +
+      X_000056 *
+      (-2304 +
+       X_000056 *
+       (1152 +
+        X_000056 *
+        (-384 + X_000056 * (84 + X_000056 * (-12 + X_000056))))))),
+    inference(arithmetic, [], [refute_0_159])).
+
+cnf(refute_0_161, plain,
+    (exp(skoXC1) <
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) | 0 < skoXC1 |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     2304 /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1))))))),
+    inference(subst, [], [refute_0_160])).
+
+cnf(refute_0_162, plain,
+    (0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= exp(skoXC1)),
+    inference(split, [], [refute_0_130])).
+
+cnf(refute_0_163, plain,
+    (skoXC1 * (-6 + skoXC1) <= -12 |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= exp(skoXC1)),
+    inference(arithmetic, [], [refute_0_162])).
+
+cnf(refute_0_164, plain,
+    ((-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <= exp(skoXC1)),
+    inference(resolve, [], [refute_0_163, refute_0_50])).
+
+cnf(refute_0_165, plain,
+    (0 < skoXC1 |
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) /
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     2304 /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1))))))),
+    inference(resolve, [], [refute_0_164, refute_0_161])).
+
+cnf(refute_0_166, plain,
+    (0 < skoXC1 | 0 <= -12 + skoXC1 * (6 + skoXC1 * -1) |
+     2304 /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) *
+     (-12 + skoXC1 * (6 + skoXC1 * -1)) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_165, refute_0_156])).
+
+cnf(refute_0_167, plain,
+    (0 < skoXC1 | skoXC1 * (-6 + skoXC1) <= -12 |
+     (-27648 + skoXC1 * (13824 + skoXC1 * -2304)) /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(arithmetic, [], [refute_0_166])).
+
+cnf(refute_0_168, plain, (-12 < skoXC1 * (-6 + skoXC1) | 0 < skoXC1),
+    introduced(tautology, [decision])).
+
+cnf(refute_0_169, plain,
+    (0 < skoXC1 |
+     (-27648 + skoXC1 * (13824 + skoXC1 * -2304)) /
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) <=
+     -12 + skoXC1 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_167, refute_0_168])).
+
+cnf(refute_0_170, plain,
+    (0 < skoXC1 |
+     -27648 + skoXC1 * (13824 + skoXC1 * -2304) <=
+     (-12 + skoXC1 * (-6 + skoXC1 * -1)) *
+     (2304 +
+      skoXC1 *
+      (-2304 +
+       skoXC1 *
+       (1152 +
+        skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1)))))) |
+     2304 +
+     skoXC1 *
+     (-2304 +
+      skoXC1 *
+      (1152 +
+       skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1))))) <= 0),
+    inference(resolve, [], [refute_0_169, refute_0_155])).
+
+cnf(refute_0_171, plain,
+    (0 < skoXC1 |
+     skoXC1 *
+     (skoXC1 *
+      (skoXC1 *
+       (skoXC1 *
+        (-144 +
+         skoXC1 * (-24 + skoXC1 * (24 + skoXC1 * (-6 + skoXC1))))))) <= 0 |
+     skoXC1 *
+     (-2304 +
+      skoXC1 *
+      (1152 +
+       skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1))))) <=
+     -2304), inference(arithmetic, [], [refute_0_170])).
+
+cnf(refute_0_172, plain,
+    (-2304 <
+     skoXC1 *
+     (-2304 +
+      skoXC1 *
+      (1152 + skoXC1 * (-384 + skoXC1 * (84 + skoXC1 * (-12 + skoXC1))))) |
+     0 < skoXC1 |
+     skoXC1 *
+     (skoXC1 *
+      (skoXC1 *
+       (skoXC1 *
+        (-144 +
+         skoXC1 * (-24 + skoXC1 * (24 + skoXC1 * (-6 + skoXC1))))))) <= 0),
+    introduced(tautology, [decision])).
+
+cnf(refute_0_173, plain,
+    (0 < skoXC1 |
+     skoXC1 *
+     (skoXC1 *
+      (skoXC1 *
+       (skoXC1 *
+        (-144 +
+         skoXC1 * (-24 + skoXC1 * (24 + skoXC1 * (-6 + skoXC1))))))) <= 0),
+    inference(resolve, [], [refute_0_171, refute_0_172])).
+
+cnf(refute_0_174, plain,
+    (0 < skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) |
+     0 <= skoXC1), inference(decision, [], [refute_0_173])).
+
+cnf(refute_0_175, plain,
+    (exp(skoXC1 * -1) <
+     (12 + skoXC1 * (6 + skoXC1) +
+      exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1), inference(resolve, [], [refute_0_154, refute_0_174])).
+
+cnf(refute_0_176, plain,
+    (0 <
+     (12 + skoXC1 * (6 + skoXC1) +
+      exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1))) /
+     (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1), inference(resolve, [], [refute_0_141, refute_0_175])).
+
+cnf(refute_0_177, plain,
+    (12 + skoXC1 * (6 + skoXC1) +
+     exp(skoXC1) * (-12 + skoXC1 * (6 + skoXC1 * -1)) <
+     0 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60))))) |
+     0 <= skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) |
+     0 <= skoXC1), inference(resolve, [], [refute_0_140, refute_0_176])).
+
+cnf(refute_0_178, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) | 0 <= skoXC1 |
+     skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <= 0),
+    inference(arithmetic, [], [refute_0_177])).
+
+cnf(refute_0_179, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_178, refute_0_174])).
+
+cnf(refute_0_180, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) <
+     exp(skoXC1) | 0 <= skoXC1 | 12 + skoXC1 * (-6 + skoXC1) <= 0),
+    inference(split, [], [refute_0_179])).
+
+cnf(refute_0_181, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) <
+     exp(skoXC1) | 0 <= skoXC1 | skoXC1 * (-6 + skoXC1) <= -12),
+    inference(arithmetic, [], [refute_0_180])).
+
+cnf(refute_0_182, plain, (-12 < skoXC1 * (-6 + skoXC1) | 0 <= skoXC1),
+    inference(decision, [], [refute_0_173])).
+
+cnf(refute_0_183, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) <
+     exp(skoXC1) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_181, refute_0_182])).
+
+cnf(refute_0_184, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) <
+     (12 + skoXC1 * (6 + skoXC1)) / (12 + skoXC1 * (-6 + skoXC1)) |
+     0 <= skoXC1), inference(resolve, [], [refute_0_139, refute_0_183])).
+
+cnf(refute_0_185, plain, (0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_184])).
+
+cnf(refute_0_186, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_185, refute_0_134])).
+
+cnf(refute_0_187, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * -1/60))))) |
+     abs(skoXC1) != skoXC1 |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_188, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * -1/60))))) |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)),
+    inference(resolve, [], [refute_0_9, refute_0_187])).
+
+cnf(refute_0_189, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_188, refute_0_186])).
+
+cnf(refute_0_190, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_185, refute_0_189])).
+
+cnf(refute_0_191, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     abs(skoXC1) != skoXC1 |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_192, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (skoXC1 * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)),
+    inference(resolve, [], [refute_0_9, refute_0_191])).
+
+cnf(refute_0_193, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_192, refute_0_190])).
+
+cnf(refute_0_194, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_185, refute_0_193])).
+
+cnf(refute_0_195, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     abs(skoXC1) != skoXC1 |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_196, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) *
+      (abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)),
+    inference(resolve, [], [refute_0_9, refute_0_195])).
+
+cnf(refute_0_197, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_196, refute_0_194])).
+
+cnf(refute_0_198, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_185, refute_0_197])).
+
+cnf(refute_0_199, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     abs(skoXC1) != skoXC1 |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_200, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      abs(skoXC1) * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <=
+     12 + skoXC1 * (6 + skoXC1)),
+    inference(resolve, [], [refute_0_9, refute_0_199])).
+
+cnf(refute_0_201, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 + skoXC1 * (-6 + skoXC1) +
+      skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_200, refute_0_198])).
+
+cnf(refute_0_202, plain,
+    (skoXC1 < 0 |
+     12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(arithmetic, [], [refute_0_201])).
+
+cnf(refute_0_203, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     exp(skoXC1) *
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_185, refute_0_202])).
+
+cnf(refute_0_204, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     exp(skoXC1) |
+     12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     0), inference(split, [], [refute_0_203])).
+
+cnf(refute_0_205, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     exp(skoXC1) |
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12), inference(arithmetic, [], [refute_0_204])).
+
+cnf(refute_0_206, plain,
+    (skoXC1 < 0 |
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) | 4 < skoXC1 |
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12), inference(resolve, [], [refute_0_6, refute_0_205])).
+
+cnf(refute_0_207, plain,
+    (12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <
+     0 | 12 + skoXC1 * (6 + skoXC1) < 0 |
+     0 <
+     12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))),
+    inference(split, [], [refute_0_203])).
+
+cnf(refute_0_208, plain,
+    (12 < skoXC1 * (-6 + skoXC1 * -1) |
+     -12 <
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) |
+     12 <
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60))))),
+    inference(arithmetic, [], [refute_0_207])).
+
+cnf(refute_0_209, plain,
+    (abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) * -1 < 0 |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) < 0 |
+     0 <
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))),
+    inference(split, [], [refute_0_8])).
+
+cnf(refute_0_210, plain,
+    (0 <
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) |
+     0 <
+     abs(skoXC1) *
+     (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * 1/60)))) |
+     0 <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)))),
+    inference(arithmetic, [], [refute_0_209])).
+
+cnf(refute_0_211, plain,
+    (0 <
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) |
+     0 <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | abs(skoXC1) != 0),
+    inference(split, [], [refute_0_210])).
+
+cnf(refute_0_212, plain,
+    (0 <
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) |
+     0 <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | skoXC1 != 0),
+    inference(arithmetic, [], [refute_0_211])).
+
+cnf(refute_0_213, plain, (abs(skoXC1) = abs(skoXC1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_214, plain,
+    (abs(skoXC1) != abs(skoXC1) | skoXC1 != 0 | abs(skoXC1) = abs(0)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_215, plain, (skoXC1 != 0 | abs(skoXC1) = abs(0)),
+    inference(resolve, [], [refute_0_213, refute_0_214])).
+
+cnf(refute_0_216, plain, (abs(skoXC1) * -1/60 = abs(skoXC1) * -1/60),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_217, plain,
+    (abs(skoXC1) * -1/60 != abs(skoXC1) * -1/60 | abs(skoXC1) != abs(0) |
+     abs(skoXC1) * -1/60 = abs(0) * -1/60),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_218, plain,
+    (abs(skoXC1) != abs(0) | abs(skoXC1) * -1/60 = abs(0) * -1/60),
+    inference(resolve, [], [refute_0_216, refute_0_217])).
+
+cnf(refute_0_219, plain,
+    (skoXC1 != 0 | abs(skoXC1) * -1/60 = abs(0) * -1/60),
+    inference(resolve, [], [refute_0_215, refute_0_218])).
+
+cnf(refute_0_220, plain,
+    (abs(0) * (abs(skoXC1) * -1/60) = abs(0) * (abs(skoXC1) * -1/60)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_221, plain,
+    (abs(0) * (abs(skoXC1) * -1/60) != abs(0) * (abs(skoXC1) * -1/60) |
+     abs(skoXC1) * -1/60 != abs(0) * -1/60 |
+     abs(0) * (abs(skoXC1) * -1/60) = abs(0) * (abs(0) * -1/60)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_222, plain,
+    (abs(skoXC1) * -1/60 != abs(0) * -1/60 |
+     abs(0) * (abs(skoXC1) * -1/60) = abs(0) * (abs(0) * -1/60)),
+    inference(resolve, [], [refute_0_220, refute_0_221])).
+
+cnf(refute_0_223, plain,
+    (skoXC1 != 0 |
+     abs(0) * (abs(skoXC1) * -1/60) = abs(0) * (abs(0) * -1/60)),
+    inference(resolve, [], [refute_0_219, refute_0_222])).
+
+cnf(refute_0_224, plain,
+    (abs(skoXC1) * (abs(skoXC1) * -1/60) =
+     abs(skoXC1) * (abs(skoXC1) * -1/60)), introduced(tautology, [refl])).
+
+cnf(refute_0_225, plain,
+    (abs(skoXC1) * (abs(skoXC1) * -1/60) !=
+     abs(skoXC1) * (abs(skoXC1) * -1/60) | abs(skoXC1) != abs(0) |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) = abs(0) * (abs(skoXC1) * -1/60)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_226, plain,
+    (abs(skoXC1) != abs(0) |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) = abs(0) * (abs(skoXC1) * -1/60)),
+    inference(resolve, [], [refute_0_224, refute_0_225])).
+
+cnf(refute_0_227, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) = abs(0) * (abs(skoXC1) * -1/60)),
+    inference(resolve, [], [refute_0_215, refute_0_226])).
+
+cnf(refute_0_228, plain, (X0 = X0), introduced(tautology, [refl])).
+
+cnf(refute_0_229, plain, (X0 != X0 | X0 != Y0 | Y0 = X0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_230, plain, (X0 != Y0 | Y0 = X0),
+    inference(resolve, [], [refute_0_228, refute_0_229])).
+
+cnf(refute_0_231, plain, (Y0 != X0 | Y0 != Z0 | X0 = Z0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_232, plain, (X0 != Y0 | Y0 != Z0 | X0 = Z0),
+    inference(resolve, [], [refute_0_230, refute_0_231])).
+
+cnf(refute_0_233, plain,
+    (abs(0) * (abs(skoXC1) * -1/60) != abs(0) * (abs(0) * -1/60) |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) !=
+     abs(0) * (abs(skoXC1) * -1/60) |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) = abs(0) * (abs(0) * -1/60)),
+    inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_234, plain,
+    (abs(0) * (abs(skoXC1) * -1/60) != abs(0) * (abs(0) * -1/60) |
+     skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) = abs(0) * (abs(0) * -1/60)),
+    inference(resolve, [], [refute_0_227, refute_0_233])).
+
+cnf(refute_0_235, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) = abs(0) * (abs(0) * -1/60)),
+    inference(resolve, [], [refute_0_223, refute_0_234])).
+
+cnf(refute_0_236, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_237, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) !=
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) |
+     abs(skoXC1) * (abs(skoXC1) * -1/60) != abs(0) * (abs(0) * -1/60) |
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(0) * (abs(0) * -1/60))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_238, plain,
+    (abs(skoXC1) * (abs(skoXC1) * -1/60) != abs(0) * (abs(0) * -1/60) |
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(0) * (abs(0) * -1/60))),
+    inference(resolve, [], [refute_0_236, refute_0_237])).
+
+cnf(refute_0_239, plain,
+    (skoXC1 != 0 |
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(0) * (abs(0) * -1/60))),
+    inference(resolve, [], [refute_0_235, refute_0_238])).
+
+cnf(refute_0_240, plain,
+    (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_241, plain,
+    (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) !=
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) |
+     abs(skoXC1) != abs(0) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_242, plain,
+    (abs(skoXC1) != abs(0) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60))),
+    inference(resolve, [], [refute_0_240, refute_0_241])).
+
+cnf(refute_0_243, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60))),
+    inference(resolve, [], [refute_0_215, refute_0_242])).
+
+cnf(refute_0_244, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) !=
+     abs(0) * (abs(0) * (abs(0) * -1/60)) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) !=
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(0) * (abs(0) * -1/60))),
+    inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_245, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) !=
+     abs(0) * (abs(0) * (abs(0) * -1/60)) | skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(0) * (abs(0) * -1/60))),
+    inference(resolve, [], [refute_0_243, refute_0_244])).
+
+cnf(refute_0_246, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) =
+     abs(0) * (abs(0) * (abs(0) * -1/60))),
+    inference(resolve, [], [refute_0_239, refute_0_245])).
+
+cnf(refute_0_247, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_248, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) !=
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) !=
+     abs(0) * (abs(0) * (abs(0) * -1/60)) |
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_249, plain,
+    (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)) !=
+     abs(0) * (abs(0) * (abs(0) * -1/60)) |
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))),
+    inference(resolve, [], [refute_0_247, refute_0_248])).
+
+cnf(refute_0_250, plain,
+    (skoXC1 != 0 |
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))),
+    inference(resolve, [], [refute_0_246, refute_0_249])).
+
+cnf(refute_0_251, plain,
+    (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_252, plain,
+    (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) !=
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) |
+     abs(skoXC1) != abs(0) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_253, plain,
+    (abs(skoXC1) != abs(0) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))),
+    inference(resolve, [], [refute_0_251, refute_0_252])).
+
+cnf(refute_0_254, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))),
+    inference(resolve, [], [refute_0_215, refute_0_253])).
+
+cnf(refute_0_255, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) !=
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) !=
+     abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))),
+    inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_256, plain,
+    (abs(0) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) !=
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))) | skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))),
+    inference(resolve, [], [refute_0_254, refute_0_255])).
+
+cnf(refute_0_257, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))),
+    inference(resolve, [], [refute_0_250, refute_0_256])).
+
+cnf(refute_0_258, plain,
+    (abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_259, plain,
+    (abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) !=
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) |
+     abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) !=
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))) |
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_260, plain,
+    (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))) !=
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))) |
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))))),
+    inference(resolve, [], [refute_0_258, refute_0_259])).
+
+cnf(refute_0_261, plain,
+    (skoXC1 != 0 |
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))))),
+    inference(resolve, [], [refute_0_257, refute_0_260])).
+
+cnf(refute_0_262, plain,
+    (abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_263, plain,
+    (abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) !=
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) |
+     abs(skoXC1) != abs(0) |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_264, plain,
+    (abs(skoXC1) != abs(0) |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))),
+    inference(resolve, [], [refute_0_262, refute_0_263])).
+
+cnf(refute_0_265, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60))))),
+    inference(resolve, [], [refute_0_215, refute_0_264])).
+
+cnf(refute_0_266, plain,
+    (abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) !=
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) !=
+     abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))))),
+    inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_267, plain,
+    (abs(0) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) !=
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     skoXC1 != 0 |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))))),
+    inference(resolve, [], [refute_0_265, refute_0_266])).
+
+cnf(refute_0_268, plain,
+    (skoXC1 != 0 |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) =
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60))))),
+    inference(resolve, [], [refute_0_261, refute_0_267])).
+
+cnf(refute_0_269, plain,
+    (0 < abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) !=
+     abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) <= 0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_270, plain,
+    (0 < abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     skoXC1 != 0 |
+     abs(skoXC1) *
+     (abs(skoXC1) *
+      (abs(skoXC1) * (abs(skoXC1) * (abs(skoXC1) * -1/60)))) <= 0),
+    inference(resolve, [], [refute_0_268, refute_0_269])).
+
+cnf(refute_0_271, plain,
+    (0 < abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     0 <
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) | skoXC1 != 0),
+    inference(resolve, [], [refute_0_270, refute_0_212])).
+
+cnf(refute_0_272, plain, (-6 + skoXC1 = -6 + skoXC1),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_273, plain,
+    (-6 + skoXC1 != -6 + skoXC1 | skoXC1 != 0 | -6 + skoXC1 = -6 + 0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_274, plain, (skoXC1 != 0 | -6 + skoXC1 = -6 + 0),
+    inference(resolve, [], [refute_0_272, refute_0_273])).
+
+cnf(refute_0_275, plain, (0 * (-6 + skoXC1) = 0 * (-6 + skoXC1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_276, plain,
+    (0 * (-6 + skoXC1) != 0 * (-6 + skoXC1) | -6 + skoXC1 != -6 + 0 |
+     0 * (-6 + skoXC1) = 0 * (-6 + 0)), introduced(tautology, [equality])).
+
+cnf(refute_0_277, plain,
+    (-6 + skoXC1 != -6 + 0 | 0 * (-6 + skoXC1) = 0 * (-6 + 0)),
+    inference(resolve, [], [refute_0_275, refute_0_276])).
+
+cnf(refute_0_278, plain, (skoXC1 != 0 | 0 * (-6 + skoXC1) = 0 * (-6 + 0)),
+    inference(resolve, [], [refute_0_274, refute_0_277])).
+
+cnf(refute_0_279, plain, (skoXC1 * (-6 + skoXC1) = skoXC1 * (-6 + skoXC1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_280, plain,
+    (skoXC1 * (-6 + skoXC1) != skoXC1 * (-6 + skoXC1) | skoXC1 != 0 |
+     skoXC1 * (-6 + skoXC1) = 0 * (-6 + skoXC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_281, plain,
+    (skoXC1 != 0 | skoXC1 * (-6 + skoXC1) = 0 * (-6 + skoXC1)),
+    inference(resolve, [], [refute_0_279, refute_0_280])).
+
+cnf(refute_0_282, plain,
+    (0 * (-6 + skoXC1) != 0 * (-6 + 0) |
+     skoXC1 * (-6 + skoXC1) != 0 * (-6 + skoXC1) |
+     skoXC1 * (-6 + skoXC1) = 0 * (-6 + 0)),
+    inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_283, plain,
+    (0 * (-6 + skoXC1) != 0 * (-6 + 0) | skoXC1 != 0 |
+     skoXC1 * (-6 + skoXC1) = 0 * (-6 + 0)),
+    inference(resolve, [], [refute_0_281, refute_0_282])).
+
+cnf(refute_0_284, plain,
+    (skoXC1 != 0 | skoXC1 * (-6 + skoXC1) = 0 * (-6 + 0)),
+    inference(resolve, [], [refute_0_278, refute_0_283])).
+
+cnf(refute_0_285, plain,
+    (12 + skoXC1 * (-6 + skoXC1) = 12 + skoXC1 * (-6 + skoXC1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_286, plain,
+    (skoXC1 * (-6 + skoXC1) != 0 * (-6 + 0) |
+     12 + skoXC1 * (-6 + skoXC1) != 12 + skoXC1 * (-6 + skoXC1) |
+     12 + skoXC1 * (-6 + skoXC1) = 12 + 0 * (-6 + 0)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_287, plain,
+    (skoXC1 * (-6 + skoXC1) != 0 * (-6 + 0) |
+     12 + skoXC1 * (-6 + skoXC1) = 12 + 0 * (-6 + 0)),
+    inference(resolve, [], [refute_0_285, refute_0_286])).
+
+cnf(refute_0_288, plain,
+    (skoXC1 != 0 | 12 + skoXC1 * (-6 + skoXC1) = 12 + 0 * (-6 + 0)),
+    inference(resolve, [], [refute_0_284, refute_0_287])).
+
+cnf(refute_0_289, plain,
+    (exp(0) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_290, plain,
+    (exp(0) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1)) |
+     12 + skoXC1 * (-6 + skoXC1) != 12 + 0 * (-6 + 0) |
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + 0 * (-6 + 0))), introduced(tautology, [equality])).
+
+cnf(refute_0_291, plain,
+    (12 + skoXC1 * (-6 + skoXC1) != 12 + 0 * (-6 + 0) |
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_289, refute_0_290])).
+
+cnf(refute_0_292, plain,
+    (skoXC1 != 0 |
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_288, refute_0_291])).
+
+cnf(refute_0_293, plain, (exp(skoXC1) = exp(skoXC1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_294, plain,
+    (exp(skoXC1) != exp(skoXC1) | skoXC1 != 0 | exp(skoXC1) = exp(0)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_295, plain, (skoXC1 != 0 | exp(skoXC1) = exp(0)),
+    inference(resolve, [], [refute_0_293, refute_0_294])).
+
+cnf(refute_0_296, plain,
+    (exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_297, plain,
+    (exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) | exp(skoXC1) != exp(0) |
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_298, plain,
+    (exp(skoXC1) != exp(0) |
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1))),
+    inference(resolve, [], [refute_0_296, refute_0_297])).
+
+cnf(refute_0_299, plain,
+    (skoXC1 != 0 |
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1))),
+    inference(resolve, [], [refute_0_295, refute_0_298])).
+
+cnf(refute_0_300, plain,
+    (exp(0) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     exp(0) * (12 + 0 * (-6 + 0)) |
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     exp(0) * (12 + skoXC1 * (-6 + skoXC1)) |
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + 0 * (-6 + 0))), inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_301, plain,
+    (exp(0) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     exp(0) * (12 + 0 * (-6 + 0)) | skoXC1 != 0 |
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_299, refute_0_300])).
+
+cnf(refute_0_302, plain,
+    (skoXC1 != 0 |
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_292, refute_0_301])).
+
+cnf(refute_0_303, plain,
+    (-12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_304, plain,
+    (exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     exp(0) * (12 + 0 * (-6 + 0)) |
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_305, plain,
+    (exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     exp(0) * (12 + 0 * (-6 + 0)) |
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_303, refute_0_304])).
+
+cnf(refute_0_306, plain,
+    (skoXC1 != 0 |
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_302, refute_0_305])).
+
+cnf(refute_0_307, plain, (skoXC1 * -1 = skoXC1 * -1),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_308, plain,
+    (skoXC1 * -1 != skoXC1 * -1 | skoXC1 != 0 | skoXC1 * -1 = 0 * -1),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_309, plain, (skoXC1 != 0 | skoXC1 * -1 = 0 * -1),
+    inference(resolve, [], [refute_0_307, refute_0_308])).
+
+cnf(refute_0_310, plain, (-6 + skoXC1 * -1 = -6 + skoXC1 * -1),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_311, plain,
+    (skoXC1 * -1 != 0 * -1 | -6 + skoXC1 * -1 != -6 + skoXC1 * -1 |
+     -6 + skoXC1 * -1 = -6 + 0 * -1), introduced(tautology, [equality])).
+
+cnf(refute_0_312, plain,
+    (skoXC1 * -1 != 0 * -1 | -6 + skoXC1 * -1 = -6 + 0 * -1),
+    inference(resolve, [], [refute_0_310, refute_0_311])).
+
+cnf(refute_0_313, plain, (skoXC1 != 0 | -6 + skoXC1 * -1 = -6 + 0 * -1),
+    inference(resolve, [], [refute_0_309, refute_0_312])).
+
+cnf(refute_0_314, plain, (0 * (-6 + skoXC1 * -1) = 0 * (-6 + skoXC1 * -1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_315, plain,
+    (0 * (-6 + skoXC1 * -1) != 0 * (-6 + skoXC1 * -1) |
+     -6 + skoXC1 * -1 != -6 + 0 * -1 |
+     0 * (-6 + skoXC1 * -1) = 0 * (-6 + 0 * -1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_316, plain,
+    (-6 + skoXC1 * -1 != -6 + 0 * -1 |
+     0 * (-6 + skoXC1 * -1) = 0 * (-6 + 0 * -1)),
+    inference(resolve, [], [refute_0_314, refute_0_315])).
+
+cnf(refute_0_317, plain,
+    (skoXC1 != 0 | 0 * (-6 + skoXC1 * -1) = 0 * (-6 + 0 * -1)),
+    inference(resolve, [], [refute_0_313, refute_0_316])).
+
+cnf(refute_0_318, plain,
+    (skoXC1 * (-6 + skoXC1 * -1) = skoXC1 * (-6 + skoXC1 * -1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_319, plain,
+    (skoXC1 * (-6 + skoXC1 * -1) != skoXC1 * (-6 + skoXC1 * -1) |
+     skoXC1 != 0 | skoXC1 * (-6 + skoXC1 * -1) = 0 * (-6 + skoXC1 * -1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_320, plain,
+    (skoXC1 != 0 | skoXC1 * (-6 + skoXC1 * -1) = 0 * (-6 + skoXC1 * -1)),
+    inference(resolve, [], [refute_0_318, refute_0_319])).
+
+cnf(refute_0_321, plain,
+    (0 * (-6 + skoXC1 * -1) != 0 * (-6 + 0 * -1) |
+     skoXC1 * (-6 + skoXC1 * -1) != 0 * (-6 + skoXC1 * -1) |
+     skoXC1 * (-6 + skoXC1 * -1) = 0 * (-6 + 0 * -1)),
+    inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_322, plain,
+    (0 * (-6 + skoXC1 * -1) != 0 * (-6 + 0 * -1) | skoXC1 != 0 |
+     skoXC1 * (-6 + skoXC1 * -1) = 0 * (-6 + 0 * -1)),
+    inference(resolve, [], [refute_0_320, refute_0_321])).
+
+cnf(refute_0_323, plain,
+    (skoXC1 != 0 | skoXC1 * (-6 + skoXC1 * -1) = 0 * (-6 + 0 * -1)),
+    inference(resolve, [], [refute_0_317, refute_0_322])).
+
+cnf(refute_0_324, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) =
+     -12 + skoXC1 * (-6 + skoXC1 * -1)), introduced(tautology, [refl])).
+
+cnf(refute_0_325, plain,
+    (skoXC1 * (-6 + skoXC1 * -1) != 0 * (-6 + 0 * -1) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) !=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) = -12 + 0 * (-6 + 0 * -1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_326, plain,
+    (skoXC1 * (-6 + skoXC1 * -1) != 0 * (-6 + 0 * -1) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) = -12 + 0 * (-6 + 0 * -1)),
+    inference(resolve, [], [refute_0_324, refute_0_325])).
+
+cnf(refute_0_327, plain,
+    (skoXC1 != 0 |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) = -12 + 0 * (-6 + 0 * -1)),
+    inference(resolve, [], [refute_0_323, refute_0_326])).
+
+cnf(refute_0_328, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_329, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) != -12 + 0 * (-6 + 0 * -1) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_330, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) != -12 + 0 * (-6 + 0 * -1) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    inference(resolve, [], [refute_0_328, refute_0_329])).
+
+cnf(refute_0_331, plain,
+    (skoXC1 != 0 |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))),
+    inference(resolve, [], [refute_0_327, refute_0_330])).
+
+cnf(refute_0_332, plain,
+    (-12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0)) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     -12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))),
+    inference(subst, [], [refute_0_232])).
+
+cnf(refute_0_333, plain,
+    (-12 + 0 * (-6 + 0 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0)) | skoXC1 != 0 |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_331, refute_0_332])).
+
+cnf(refute_0_334, plain,
+    (skoXC1 != 0 |
+     -12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) =
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))),
+    inference(resolve, [], [refute_0_306, refute_0_333])).
+
+cnf(refute_0_335, plain,
+    (abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) =
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_336, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) !=
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) =
+     abs(-12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0)))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_337, plain,
+    (-12 + skoXC1 * (-6 + skoXC1 * -1) +
+     exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1)) !=
+     -12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0)) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) =
+     abs(-12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0)))),
+    inference(resolve, [], [refute_0_335, refute_0_336])).
+
+cnf(refute_0_338, plain,
+    (skoXC1 != 0 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) =
+     abs(-12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0)))),
+    inference(resolve, [], [refute_0_334, refute_0_337])).
+
+cnf(refute_0_339, plain,
+    (0 < abs(-12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) !=
+     abs(-12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))) |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <= 0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_340, plain,
+    (0 < abs(-12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))) |
+     skoXC1 != 0 |
+     abs(-12 + skoXC1 * (-6 + skoXC1 * -1) +
+         exp(skoXC1) * (12 + skoXC1 * (-6 + skoXC1))) <= 0),
+    inference(resolve, [], [refute_0_338, refute_0_339])).
+
+cnf(refute_0_341, plain,
+    (0 < abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     0 < abs(-12 + 0 * (-6 + 0 * -1) + exp(0) * (12 + 0 * (-6 + 0))) |
+     skoXC1 != 0), inference(resolve, [], [refute_0_340, refute_0_271])).
+
+cnf(refute_0_342, plain,
+    (0 < abs(0) * (abs(0) * (abs(0) * (abs(0) * (abs(0) * -1/60)))) |
+     0 < abs(0) | skoXC1 != 0), inference(arithmetic, [], [refute_0_341])).
+
+cnf(refute_0_343, plain, (0 < abs(0) | abs(0) != 0 | skoXC1 != 0),
+    inference(split, [], [refute_0_342])).
+
+cnf(refute_0_344, plain, (0 < abs(0) | skoXC1 != 0),
+    inference(arithmetic, [], [refute_0_343])).
+
+cnf(refute_0_345, plain, (0 < 0 | abs(0) = 0),
+    inference(subst, [], [abs_nonnegative])).
+
+cnf(refute_0_346, plain, (0 < 0 | abs(0) != 0 | abs(0) <= 0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_347, plain, (0 < 0 | abs(0) <= 0),
+    inference(resolve, [], [refute_0_345, refute_0_346])).
+
+cnf(refute_0_348, plain, (0 < 0 | skoXC1 != 0),
+    inference(resolve, [], [refute_0_347, refute_0_344])).
+
+cnf(refute_0_349, plain, (skoXC1 != 0),
+    inference(arithmetic, [], [refute_0_348])).
+
+cnf(refute_0_350, plain,
+    (-12 <
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) |
+     12 <
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) |
+     skoXC1 * (-6 + skoXC1 * -1) <= 12),
+    inference(decision, [], [refute_0_173, refute_0_185, refute_0_349])).
+
+cnf(refute_0_351, plain,
+    (-12 <
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) |
+     12 <
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60))))),
+    inference(resolve, [], [refute_0_350, refute_0_208])).
+
+cnf(refute_0_352, plain,
+    (4 < skoXC1 | 0 <= skoXC1 |
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12),
+    inference(decision, [],
+              [refute_0_351, refute_0_173, refute_0_185, refute_0_349])).
+
+cnf(refute_0_353, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) | 4 < skoXC1 |
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12), inference(resolve, [], [refute_0_352, refute_0_206])).
+
+cnf(refute_0_354, plain,
+    (skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12 | skoXC1 <= 4),
+    inference(decision, [],
+              [refute_0_351, refute_0_173, refute_0_185, refute_0_349])).
+
+cnf(refute_0_355, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) |
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12), inference(resolve, [], [refute_0_354, refute_0_353])).
+
+cnf(refute_0_356, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     0 *
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     0 <=
+     12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) |
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <= 0),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_357, plain,
+    (0 <
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <=
+     exp(skoXC1)), inference(subst, [], [refute_0_120])).
+
+cnf(refute_0_358, plain,
+    (exp(skoXC1) <
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     0 <=
+     12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))),
+    inference(split, [], [refute_0_203])).
+
+cnf(refute_0_359, plain,
+    (exp(skoXC1) <
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) <=
+     12), inference(arithmetic, [], [refute_0_358])).
+
+cnf(refute_0_360, plain,
+    (0 <
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) <=
+     12), inference(resolve, [], [refute_0_357, refute_0_359])).
+
+cnf(refute_0_361, plain,
+    (12 + skoXC1 * (6 + skoXC1) <
+     0 *
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     0 <=
+     12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) |
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) <=
+     12), inference(resolve, [], [refute_0_356, refute_0_360])).
+
+cnf(refute_0_362, plain,
+    (12 < skoXC1 * (-6 + skoXC1 * -1) |
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) <=
+     12), inference(arithmetic, [], [refute_0_361])).
+
+cnf(refute_0_363, plain,
+    (skoXC1 * (-6 + skoXC1 * -1) <= 12 |
+     skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) <=
+     12),
+    inference(decision, [],
+              [refute_0_351, refute_0_173, refute_0_185, refute_0_349])).
+
+cnf(refute_0_364, plain,
+    (skoXC1 * (6 + skoXC1 * (-1 + skoXC1 * (skoXC1 * (skoXC1 * 1/60)))) <=
+     12), inference(resolve, [], [refute_0_363, refute_0_362])).
+
+cnf(refute_0_365, plain,
+    (-12 <
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))),
+    inference(resolve, [], [refute_0_364, refute_0_351])).
+
+cnf(refute_0_366, plain,
+    ((12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) /
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1)))),
+    inference(resolve, [], [refute_0_355, refute_0_365])).
+
+cnf(refute_0_367, plain,
+    (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1)) <
+     (12 + skoXC1 * (6 + skoXC1)) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) *
+     (-120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))) |
+     0 <= -120 + skoXC1 * (60 + skoXC1 * (-12 + skoXC1))),
+    inference(resolve, [], [refute_0_1, refute_0_366])).
+
+cnf(refute_0_368, plain,
+    (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1)) <
+     (-1440 +
+      skoXC1 * (skoXC1 * (96 + skoXC1 * (skoXC1 * (-6 + skoXC1))))) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) |
+     skoXC1 * (-60 + skoXC1 * (12 + skoXC1 * -1)) <= -120),
+    inference(arithmetic, [], [refute_0_367])).
+
+cnf(refute_0_369, plain,
+    (-120 < skoXC1 * (-60 + skoXC1 * (12 + skoXC1 * -1))),
+    inference(decision, [],
+              [refute_0_364, refute_0_351, refute_0_173, refute_0_185,
+               refute_0_349])).
+
+cnf(refute_0_370, plain,
+    (-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1)) <
+     (-1440 +
+      skoXC1 * (skoXC1 * (96 + skoXC1 * (skoXC1 * (-6 + skoXC1))))) /
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))))),
+    inference(resolve, [], [refute_0_368, refute_0_369])).
+
+cnf(refute_0_371, plain,
+    ((-120 + skoXC1 * (-60 + skoXC1 * (-12 + skoXC1 * -1))) *
+     (12 +
+      skoXC1 *
+      (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60))))) <
+     -1440 + skoXC1 * (skoXC1 * (96 + skoXC1 * (skoXC1 * (-6 + skoXC1)))) |
+     12 +
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     0), inference(resolve, [], [refute_0_0, refute_0_370])).
+
+cnf(refute_0_372, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (skoXC1 *
+       (skoXC1 *
+        (skoXC1 * (skoXC1 * (-1 + skoXC1 * (-1/5 + skoXC1 * -1/60))))))) |
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12), inference(arithmetic, [], [refute_0_371])).
+
+cnf(refute_0_373, plain,
+    (skoXC1 *
+     (skoXC1 *
+      (skoXC1 *
+       (skoXC1 *
+        (skoXC1 * (skoXC1 * (-1 + skoXC1 * (-1/5 + skoXC1 * -1/60))))))) <=
+     0 |
+     skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12),
+    inference(decision, [],
+              [refute_0_364, refute_0_351, refute_0_173, refute_0_185,
+               refute_0_349])).
+
+cnf(refute_0_374, plain,
+    (skoXC1 * (-6 + skoXC1 * (1 + skoXC1 * (skoXC1 * (skoXC1 * -1/60)))) <=
+     -12), inference(resolve, [], [refute_0_373, refute_0_372])).
+
+cnf(refute_0_375, plain, ($false),
+    inference(resolve, [], [refute_0_374, refute_0_365])).
+% SZS output end CNFRefutation for abs-problem-17.tptp

@@ -1,0 +1,55 @@
+% SZS output start CNFRefutation for cos-problem-11.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(cos_lower_bound_0, axiom,
+    (~ lgen(R, Y, 1 - X ^ 2 / 2) | lgen(R, Y, cos(X)))).
+
+fof(cos_problem_11, conjecture, (! [X] : 0 <= cos(X) - 1 + X ^ 2 / 2)).
+
+fof(subgoal_0, plain, (! [X] : 0 <= cos(X) - 1 + X ^ 2 / 2),
+    inference(strip, [], [cos_problem_11])).
+
+fof(negate_0_0, plain, (~ ! [X] : 0 <= cos(X) - 1 + X ^ 2 / 2),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (? [X] : cos(X) - 1 + X ^ 2 / 2 < 0),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain, (cos(skoXC1) - 1 + skoXC1 ^ 2 / 2 < 0),
+    inference(skolemize, [], [normalize_0_0])).
+
+cnf(refute_0_0, plain, (cos(skoXC1) - 1 + skoXC1 ^ 2 / 2 < 0),
+    inference(canonicalize, [], [normalize_0_1])).
+
+cnf(refute_0_1, plain, (cos(skoXC1) < 1 + skoXC1 * (skoXC1 * -1/2)),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(0, X_000010, cos(X_000009)) | X_000010 <= cos(X_000009)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_3, plain,
+    (~ lgen(0, X_000010, 1 - X_000009 ^ 2 / 2) |
+     lgen(0, X_000010, cos(X_000009))),
+    inference(subst, [], [cos_lower_bound_0])).
+
+cnf(refute_0_4, plain,
+    (~ lgen(0, X_000010, 1 - X_000009 ^ 2 / 2) |
+     X_000010 <= cos(X_000009)),
+    inference(resolve, [], [refute_0_3, refute_0_2])).
+
+cnf(refute_0_5, plain,
+    (1 + X_000009 * (X_000009 * -1/2) < X_000010 |
+     X_000010 <= cos(X_000009)), inference(arithmetic, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (1 + skoXC1 * (skoXC1 * -1/2) < 1 + skoXC1 * (skoXC1 * -1/2) |
+     1 + skoXC1 * (skoXC1 * -1/2) <= cos(skoXC1)),
+    inference(subst, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (1 + skoXC1 * (skoXC1 * -1/2) < 1 + skoXC1 * (skoXC1 * -1/2)),
+    inference(resolve, [], [refute_0_6, refute_0_1])).
+
+cnf(refute_0_8, plain, ($false), inference(arithmetic, [], [refute_0_7])).
+% SZS output end CNFRefutation for cos-problem-11.tptp

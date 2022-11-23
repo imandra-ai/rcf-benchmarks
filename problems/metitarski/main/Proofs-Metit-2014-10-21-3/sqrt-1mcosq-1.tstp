@@ -1,0 +1,2066 @@
+% SZS output start CNFRefutation for sqrt-1mcosq-1.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(leq_left_divide_mul_pos, axiom, (Y * Z < X | X / Z <= Y | Z <= 0)).
+
+cnf(leq_right_divide_mul_pos, axiom, (Y < X * Z | X <= Y / Z | Z <= 0)).
+
+cnf(leq_right_divide_mul_neg, axiom, (Y < X * Z | Y / Z <= X | 0 <= Z)).
+
+cnf(sqrt_ge, axiom, (~ lgen(R, Y ^ 2, X) | lgen(R, Y, sqrt(X)))).
+
+cnf(cos_upper_bound_0, axiom,
+    (~ lgen(R, 1 - X ^ 2 / 2 + X ^ 4 / 24, Y) | lgen(R, cos(X), Y))).
+
+cnf(cos_upper_bound_2, axiom,
+    (~ lgen(R,
+            1 - X ^ 2 / 2 + X ^ 4 / 24 - X ^ 6 / 720 + X ^ 8 / 40320 -
+            X ^ 10 / 3628800 + X ^ 12 / 479001600, Y) |
+     lgen(R, cos(X), Y))).
+
+cnf(cos_lower_bound_0, axiom,
+    (~ lgen(R, Y, 1 - X ^ 2 / 2) | lgen(R, Y, cos(X)))).
+
+cnf(cos_lower_bound_2, axiom,
+    (~ lgen(R, Y,
+            1 - X ^ 2 / 2 + X ^ 4 / 24 - X ^ 6 / 720 + X ^ 8 / 40320 -
+            X ^ 10 / 3628800) | lgen(R, Y, cos(X)))).
+
+fof(pi_upper_bound, axiom, (pi < 31415927/10000000)).
+
+fof(pi_lower_bound, axiom, (15707963/5000000 < pi)).
+
+fof(sqrt_1mcosq_1, conjecture,
+    (! [X] :
+       ((0 < X & X < pi / 2 - 10 ^ -12) =>
+        2 / pi <= sqrt(1 - cos(X) ^ 2) / X))).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       ((0 < X & X < pi / 2 - 10 ^ -12) =>
+        2 / pi <= sqrt(1 - cos(X) ^ 2) / X)),
+    inference(strip, [], [sqrt_1mcosq_1])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         ((0 < X & X < pi / 2 - 10 ^ -12) =>
+          2 / pi <= sqrt(1 - cos(X) ^ 2) / X)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       (0 < X & X < pi / 2 - 10 ^ -12 &
+        sqrt(1 - cos(X) ^ 2) / X < 2 / pi)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (skoXC1 < pi / 2 - 10 ^ -12 &
+     sqrt(1 - cos(skoXC1) ^ 2) / skoXC1 < 2 / pi & 0 < skoXC1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (sqrt(1 - cos(skoXC1) ^ 2) / skoXC1 < 2 / pi),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (skoXC1 < pi / 2 - 10 ^ -12),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [pi_lower_bound])).
+
+fof(normalize_0_5, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [pi_upper_bound])).
+
+fof(normalize_0_6, plain, (0 < skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) |
+     0 <=
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * -1/3628800))))))))))) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) <=
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_1, plain,
+    (~ lgen(0, X_000035, cos(X_000034)) | X_000035 <= cos(X_000034)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(0, X_000035,
+            1 - X_000034 ^ 2 / 2 + X_000034 ^ 4 / 24 - X_000034 ^ 6 / 720 +
+            X_000034 ^ 8 / 40320 - X_000034 ^ 10 / 3628800) |
+     lgen(0, X_000035, cos(X_000034))),
+    inference(subst, [], [cos_lower_bound_2])).
+
+cnf(refute_0_3, plain,
+    (~ lgen(0, X_000035,
+            1 - X_000034 ^ 2 / 2 + X_000034 ^ 4 / 24 - X_000034 ^ 6 / 720 +
+            X_000034 ^ 8 / 40320 - X_000034 ^ 10 / 3628800) |
+     X_000035 <= cos(X_000034)),
+    inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (1 +
+     X_000034 *
+     (X_000034 *
+      (-1/2 +
+       X_000034 *
+       (X_000034 *
+        (1/24 +
+         X_000034 *
+         (X_000034 *
+          (-1/720 +
+           X_000034 *
+           (X_000034 *
+            (1/40320 + X_000034 * (X_000034 * -1/3628800))))))))) <
+     X_000035 | X_000035 <= cos(X_000034)),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) <=
+     cos(skoXC1)), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <=
+     cos(skoXC1)), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_7, plain,
+    ((1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * pi) <
+     skoXC1 * (skoXC1 * 4) | pi * pi <= 0 |
+     skoXC1 * (skoXC1 * 4) / (pi * pi) <=
+     1 + cos(skoXC1) * (cos(skoXC1) * -1)),
+    inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_8, plain,
+    (~ lgen(0, X_000014, sqrt(X_000013)) | X_000014 <= sqrt(X_000013)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_9, plain,
+    (~ lgen(0, X_000014 ^ 2, X_000013) |
+     lgen(0, X_000014, sqrt(X_000013))), inference(subst, [], [sqrt_ge])).
+
+cnf(refute_0_10, plain,
+    (~ lgen(0, X_000014 ^ 2, X_000013) | X_000014 <= sqrt(X_000013)),
+    inference(resolve, [], [refute_0_9, refute_0_8])).
+
+cnf(refute_0_11, plain,
+    (X_000013 < X_000014 * X_000014 | X_000014 <= sqrt(X_000013)),
+    inference(arithmetic, [], [refute_0_10])).
+
+cnf(refute_0_12, plain,
+    (1 + cos(skoXC1) * (cos(skoXC1) * -1) <
+     skoXC1 * -2 / (pi * -1) * (skoXC1 * -2 / (pi * -1)) |
+     skoXC1 * -2 / (pi * -1) <=
+     sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1))),
+    inference(subst, [], [refute_0_11])).
+
+cnf(refute_0_13, plain,
+    (-2 * skoXC1 < sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * -1) |
+     sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * -1) / skoXC1 <=
+     -2 | skoXC1 <= 0), inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_14, plain, (sqrt(1 - cos(skoXC1) ^ 2) / skoXC1 < 2 / pi),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_15, plain,
+    (sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) / skoXC1 < 2 / pi),
+    inference(arithmetic, [], [refute_0_14])).
+
+cnf(refute_0_16, plain,
+    (sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) / skoXC1 * pi < 2 |
+     2 / pi <= sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) / skoXC1 |
+     pi <= 0), inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_17, plain,
+    (sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) / skoXC1 * pi < 2 |
+     pi <= 0), inference(resolve, [], [refute_0_16, refute_0_15])).
+
+cnf(refute_0_18, plain,
+    (-2 < sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * -1) / skoXC1 |
+     pi <= 0), inference(arithmetic, [], [refute_0_17])).
+
+cnf(refute_0_19, plain, (skoXC1 < pi / 2 - 10 ^ -12),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_20, plain, (skoXC1 < -1/1000000000000 + pi * 1/2),
+    inference(arithmetic, [], [refute_0_19])).
+
+cnf(refute_0_21, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_22, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_23, plain, (0 < skoXC1),
+    inference(canonicalize, [], [normalize_0_6])).
+
+cnf(refute_0_24, plain, (0 < pi),
+    inference(decision, [],
+              [refute_0_20, refute_0_21, refute_0_22, refute_0_23])).
+
+cnf(refute_0_25, plain,
+    (-2 < sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * -1) / skoXC1),
+    inference(resolve, [], [refute_0_18, refute_0_24])).
+
+cnf(refute_0_26, plain,
+    (-2 * skoXC1 < sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * -1) |
+     skoXC1 <= 0), inference(resolve, [], [refute_0_13, refute_0_25])).
+
+cnf(refute_0_27, plain,
+    (-2 * skoXC1 < sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * -1)),
+    inference(resolve, [], [refute_0_26, refute_0_23])).
+
+cnf(refute_0_28, plain,
+    (skoXC1 * -2 < sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * -1)),
+    inference(arithmetic, [], [refute_0_27])).
+
+cnf(refute_0_29, plain,
+    (sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) < skoXC1 * -2 / (pi * -1) |
+     0 <= pi * -1), inference(split, [], [refute_0_28])).
+
+cnf(refute_0_30, plain,
+    (sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) < skoXC1 * -2 / (pi * -1) |
+     pi <= 0), inference(arithmetic, [], [refute_0_29])).
+
+cnf(refute_0_31, plain,
+    (sqrt(1 + cos(skoXC1) * (cos(skoXC1) * -1)) < skoXC1 * -2 / (pi * -1)),
+    inference(resolve, [], [refute_0_30, refute_0_24])).
+
+cnf(refute_0_32, plain,
+    (1 + cos(skoXC1) * (cos(skoXC1) * -1) <
+     skoXC1 * -2 / (pi * -1) * (skoXC1 * -2 / (pi * -1))),
+    inference(resolve, [], [refute_0_12, refute_0_31])).
+
+cnf(refute_0_33, plain,
+    (1 + cos(skoXC1) * (cos(skoXC1) * -1) <
+     skoXC1 * (skoXC1 * 4) / (pi * pi)),
+    inference(arithmetic, [], [refute_0_32])).
+
+cnf(refute_0_34, plain,
+    ((1 + cos(skoXC1) * (cos(skoXC1) * -1)) * (pi * pi) <
+     skoXC1 * (skoXC1 * 4) | pi * pi <= 0),
+    inference(resolve, [], [refute_0_7, refute_0_33])).
+
+cnf(refute_0_35, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) * (cos(skoXC1) * (pi * pi)) | pi * pi <= 0),
+    inference(arithmetic, [], [refute_0_34])).
+
+cnf(refute_0_36, plain, (0 < pi * pi),
+    inference(decision, [],
+              [refute_0_20, refute_0_21, refute_0_22, refute_0_23])).
+
+cnf(refute_0_37, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) * (cos(skoXC1) * (pi * pi))),
+    inference(resolve, [], [refute_0_35, refute_0_36])).
+
+cnf(refute_0_38, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) |
+     0 <= cos(skoXC1) * (pi * pi)), inference(split, [], [refute_0_37])).
+
+cnf(refute_0_39, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) |
+     cos(skoXC1) * (pi * (pi * -1)) <= 0),
+    inference(arithmetic, [], [refute_0_38])).
+
+cnf(refute_0_40, plain,
+    (cos(skoXC1) * (pi * pi) < 0 | pi * pi + skoXC1 * (skoXC1 * -4) < 0 |
+     0 < cos(skoXC1) * (pi * pi)), inference(split, [], [refute_0_37])).
+
+cnf(refute_0_41, plain,
+    (0 < cos(skoXC1) * (pi * (pi * -1)) | 0 < cos(skoXC1) * (pi * pi) |
+     pi * pi < skoXC1 * (skoXC1 * 4)),
+    inference(arithmetic, [], [refute_0_40])).
+
+cnf(refute_0_42, plain, (skoXC1 * (skoXC1 * 4) <= pi * pi),
+    inference(decision, [],
+              [refute_0_20, refute_0_21, refute_0_22, refute_0_23])).
+
+cnf(refute_0_43, plain,
+    (0 < cos(skoXC1) * (pi * (pi * -1)) | 0 < cos(skoXC1) * (pi * pi)),
+    inference(resolve, [], [refute_0_42, refute_0_41])).
+
+cnf(refute_0_44, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 *
+             (1/40320 +
+              skoXC1 *
+              (skoXC1 *
+               (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600)))))))))))) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) |
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) |
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) <=
+     0), inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_45, plain,
+    (~ lgen(0, cos(X_000041), X_000042) | cos(X_000041) <= X_000042),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_46, plain,
+    (~ lgen(0,
+            1 - X_000041 ^ 2 / 2 + X_000041 ^ 4 / 24 - X_000041 ^ 6 / 720 +
+            X_000041 ^ 8 / 40320 - X_000041 ^ 10 / 3628800 +
+            X_000041 ^ 12 / 479001600, X_000042) |
+     lgen(0, cos(X_000041), X_000042)),
+    inference(subst, [], [cos_upper_bound_2])).
+
+cnf(refute_0_47, plain,
+    (~ lgen(0,
+            1 - X_000041 ^ 2 / 2 + X_000041 ^ 4 / 24 - X_000041 ^ 6 / 720 +
+            X_000041 ^ 8 / 40320 - X_000041 ^ 10 / 3628800 +
+            X_000041 ^ 12 / 479001600, X_000042) |
+     cos(X_000041) <= X_000042),
+    inference(resolve, [], [refute_0_46, refute_0_45])).
+
+cnf(refute_0_48, plain,
+    (X_000042 <
+     1 +
+     X_000041 *
+     (X_000041 *
+      (-1/2 +
+       X_000041 *
+       (X_000041 *
+        (1/24 +
+         X_000041 *
+         (X_000041 *
+          (-1/720 +
+           X_000041 *
+           (X_000041 *
+            (1/40320 +
+             X_000041 *
+             (X_000041 *
+              (-1/3628800 + X_000041 * (X_000041 * 1/479001600))))))))))) |
+     cos(X_000041) <= X_000042), inference(arithmetic, [], [refute_0_47])).
+
+cnf(refute_0_49, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) <
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) |
+     cos(skoXC1) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))))),
+    inference(subst, [], [refute_0_48])).
+
+cnf(refute_0_50, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) |
+     cos(skoXC1) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi))),
+    inference(subst, [], [refute_0_48])).
+
+cnf(refute_0_51, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <
+     cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0),
+    inference(split, [], [refute_0_37])).
+
+cnf(refute_0_52, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_50, refute_0_51])).
+
+cnf(refute_0_53, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 *
+             (1/40320 +
+              skoXC1 *
+              (skoXC1 *
+               (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600)))))))))))) *
+     (cos(skoXC1) * (pi * pi)) | cos(skoXC1) * (pi * pi) <= 0 |
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_54, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 *
+             (1/40320 +
+              skoXC1 *
+              (skoXC1 *
+               (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600)))))))))))) *
+     (cos(skoXC1) * (pi * pi)) | cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_53, refute_0_52])).
+
+cnf(refute_0_55, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(arithmetic, [], [refute_0_54])).
+
+cnf(refute_0_56, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) <
+     cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0 |
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) <=
+     0), inference(split, [], [refute_0_55])).
+
+cnf(refute_0_57, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) <
+     cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) <=
+     pi * (pi * -1)), inference(arithmetic, [], [refute_0_56])).
+
+cnf(refute_0_58, plain,
+    (0 <
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) |
+     cos(skoXC1) <= 0), inference(subst, [], [refute_0_48])).
+
+cnf(refute_0_59, plain,
+    (0 < cos(skoXC1) * (pi * pi) | cos(skoXC1) * (pi * pi) <= 0),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_60, plain,
+    (0 / (pi * pi) < cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0 |
+     pi * pi <= 0), inference(split, [], [refute_0_59])).
+
+cnf(refute_0_61, plain,
+    (0 < cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0 | pi * pi <= 0),
+    inference(arithmetic, [], [refute_0_60])).
+
+cnf(refute_0_62, plain, (0 < cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_61, refute_0_36])).
+
+cnf(refute_0_63, plain,
+    (0 <
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_58, refute_0_62])).
+
+cnf(refute_0_64, plain,
+    (-1 <
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(arithmetic, [], [refute_0_63])).
+
+cnf(refute_0_65, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24)))) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) |
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24))) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) |
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))) <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_66, plain,
+    (~ lgen(0, cos(X_000027), X_000028) | cos(X_000027) <= X_000028),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_67, plain,
+    (~ lgen(0, 1 - X_000027 ^ 2 / 2 + X_000027 ^ 4 / 24, X_000028) |
+     lgen(0, cos(X_000027), X_000028)),
+    inference(subst, [], [cos_upper_bound_0])).
+
+cnf(refute_0_68, plain,
+    (~ lgen(0, 1 - X_000027 ^ 2 / 2 + X_000027 ^ 4 / 24, X_000028) |
+     cos(X_000027) <= X_000028),
+    inference(resolve, [], [refute_0_67, refute_0_66])).
+
+cnf(refute_0_69, plain,
+    (X_000028 <
+     1 + X_000027 * (X_000027 * (-1/2 + X_000027 * (X_000027 * 1/24))) |
+     cos(X_000027) <= X_000028), inference(arithmetic, [], [refute_0_68])).
+
+cnf(refute_0_70, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) <
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24))) |
+     cos(skoXC1) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))))),
+    inference(subst, [], [refute_0_69])).
+
+cnf(refute_0_71, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24))) |
+     cos(skoXC1) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi))),
+    inference(subst, [], [refute_0_69])).
+
+cnf(refute_0_72, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_71, refute_0_51])).
+
+cnf(refute_0_73, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24)))) *
+     (cos(skoXC1) * (pi * pi)) | cos(skoXC1) * (pi * pi) <= 0 |
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24))) <=
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_74, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24)))) *
+     (cos(skoXC1) * (pi * pi)) | cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_73, refute_0_72])).
+
+cnf(refute_0_75, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(arithmetic, [], [refute_0_74])).
+
+cnf(refute_0_76, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) <
+     cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0 |
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))) <= 0),
+    inference(split, [], [refute_0_75])).
+
+cnf(refute_0_77, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) <
+     cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))) <=
+     pi * (pi * -1)), inference(arithmetic, [], [refute_0_76])).
+
+cnf(refute_0_78, plain,
+    (pi * (pi * -1) <
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(decision, [],
+              [refute_0_64, refute_0_20, refute_0_21, refute_0_22,
+               refute_0_23])).
+
+cnf(refute_0_79, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) <
+     cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_77, refute_0_78])).
+
+cnf(refute_0_80, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) <
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_70, refute_0_79])).
+
+cnf(refute_0_81, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24)))) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24)))))) |
+     cos(skoXC1) * (pi * pi) <= 0 |
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))) <= 0),
+    inference(resolve, [], [refute_0_65, refute_0_80])).
+
+cnf(refute_0_82, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/3) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/24) +
+           skoXC1 * (skoXC1 * (pi * (pi * 1/576))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))) <=
+     pi * (pi * -1)), inference(arithmetic, [], [refute_0_81])).
+
+cnf(refute_0_83, plain,
+    (pi * (pi * -1) <
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) + skoXC1 * (skoXC1 * (pi * (pi * 1/24))))) |
+     0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/3) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/24) +
+           skoXC1 * (skoXC1 * (pi * (pi * 1/576))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(decision, [],
+              [refute_0_64, refute_0_20, refute_0_21, refute_0_22,
+               refute_0_23])).
+
+cnf(refute_0_84, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/3) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/24) +
+           skoXC1 * (skoXC1 * (pi * (pi * 1/576))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_82, refute_0_83])).
+
+cnf(refute_0_85, plain,
+    (pi * (pi * -1) <
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(decision, [],
+              [refute_0_23, refute_0_22, refute_0_21, refute_0_20,
+               refute_0_64, refute_0_84])).
+
+cnf(refute_0_86, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) <
+     cos(skoXC1) | cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_57, refute_0_85])).
+
+cnf(refute_0_87, plain,
+    ((pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) <
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 *
+            (1/40320 +
+             skoXC1 *
+             (skoXC1 *
+              (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_49, refute_0_86])).
+
+cnf(refute_0_88, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 *
+             (1/40320 +
+              skoXC1 *
+              (skoXC1 *
+               (-1/3628800 + skoXC1 * (skoXC1 * 1/479001600)))))))))))) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 *
+              (skoXC1 *
+               (pi * (pi * -1/3628800) +
+                skoXC1 * (skoXC1 * (pi * (pi * 1/479001600)))))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0 |
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) <=
+     0), inference(resolve, [], [refute_0_44, refute_0_87])).
+
+cnf(refute_0_89, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/3) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -2/45) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/315) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -2/14175) +
+               skoXC1 *
+               (skoXC1 *
+                (pi * (pi * 2/467775) +
+                 skoXC1 *
+                 (skoXC1 *
+                  (pi * (pi * -1/10644480) +
+                   skoXC1 *
+                   (skoXC1 *
+                    (pi * (pi * 139/89413632000) +
+                     skoXC1 *
+                     (skoXC1 *
+                      (pi * (pi * -47/2414168064000) +
+                       skoXC1 *
+                       (skoXC1 *
+                        (pi * (pi * 13/72425041920000) +
+                         skoXC1 *
+                         (skoXC1 *
+                          (pi * (pi * -1/869100503040000) +
+                           skoXC1 *
+                           (skoXC1 *
+                            (pi *
+                             (pi *
+                              1/
+                              229442532802560000))))))))))))))))))))))))) |
+     cos(skoXC1) * (pi * pi) <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) <=
+     pi * (pi * -1)), inference(arithmetic, [], [refute_0_88])).
+
+cnf(refute_0_90, plain,
+    (cos(skoXC1) * (pi * pi) <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) <=
+     pi * (pi * -1) |
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/3) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -2/45) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/315) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -2/14175) +
+               skoXC1 *
+               (skoXC1 *
+                (pi * (pi * 2/467775) +
+                 skoXC1 *
+                 (skoXC1 *
+                  (pi * (pi * -1/10644480) +
+                   skoXC1 *
+                   (skoXC1 *
+                    (pi * (pi * 139/89413632000) +
+                     skoXC1 *
+                     (skoXC1 *
+                      (pi * (pi * -47/2414168064000) +
+                       skoXC1 *
+                       (skoXC1 *
+                        (pi * (pi * 13/72425041920000) +
+                         skoXC1 *
+                         (skoXC1 *
+                          (pi * (pi * -1/869100503040000) +
+                           skoXC1 *
+                           (skoXC1 *
+                            (pi *
+                             (pi *
+                              1/
+                              229442532802560000))))))))))))))))))))))))) <=
+     0),
+    inference(decision, [],
+              [refute_0_23, refute_0_22, refute_0_21, refute_0_20,
+               refute_0_64, refute_0_84])).
+
+cnf(refute_0_91, plain,
+    (cos(skoXC1) * (pi * pi) <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -1/3628800) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/479001600))))))))))))) <=
+     pi * (pi * -1)), inference(resolve, [], [refute_0_90, refute_0_89])).
+
+cnf(refute_0_92, plain, (cos(skoXC1) * (pi * pi) <= 0),
+    inference(resolve, [], [refute_0_91, refute_0_85])).
+
+cnf(refute_0_93, plain, (0 < cos(skoXC1) * (pi * (pi * -1))),
+    inference(resolve, [], [refute_0_92, refute_0_43])).
+
+cnf(refute_0_94, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi))),
+    inference(resolve, [], [refute_0_39, refute_0_93])).
+
+cnf(refute_0_95, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi))),
+    inference(resolve, [], [refute_0_6, refute_0_94])).
+
+cnf(refute_0_96, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))) *
+     (cos(skoXC1) * (pi * pi)) | 0 <= cos(skoXC1) * (pi * pi) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <=
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_97, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))) *
+     (cos(skoXC1) * (pi * pi)) | 0 <= cos(skoXC1) * (pi * pi)),
+    inference(resolve, [], [refute_0_96, refute_0_95])).
+
+cnf(refute_0_98, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) |
+     cos(skoXC1) * (pi * (pi * -1)) <= 0),
+    inference(arithmetic, [], [refute_0_97])).
+
+cnf(refute_0_99, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800))))))))))))),
+    inference(resolve, [], [refute_0_98, refute_0_93])).
+
+cnf(refute_0_100, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) |
+     0 <=
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))),
+    inference(split, [], [refute_0_99])).
+
+cnf(refute_0_101, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * 1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * -1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * 1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * -1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * 1/3628800))))))))))) <=
+     pi * pi), inference(arithmetic, [], [refute_0_100])).
+
+cnf(refute_0_102, plain,
+    (~ lgen(0, X_000021, cos(X_000020)) | X_000021 <= cos(X_000020)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_103, plain,
+    (~ lgen(0, X_000021, 1 - X_000020 ^ 2 / 2) |
+     lgen(0, X_000021, cos(X_000020))),
+    inference(subst, [], [cos_lower_bound_0])).
+
+cnf(refute_0_104, plain,
+    (~ lgen(0, X_000021, 1 - X_000020 ^ 2 / 2) |
+     X_000021 <= cos(X_000020)),
+    inference(resolve, [], [refute_0_103, refute_0_102])).
+
+cnf(refute_0_105, plain,
+    (1 + X_000020 * (X_000020 * -1/2) < X_000021 |
+     X_000021 <= cos(X_000020)),
+    inference(arithmetic, [], [refute_0_104])).
+
+cnf(refute_0_106, plain,
+    (1 + skoXC1 * (skoXC1 * -1/2) < 0 | 0 <= cos(skoXC1)),
+    inference(subst, [], [refute_0_105])).
+
+cnf(refute_0_107, plain,
+    (cos(skoXC1) < 0 / (pi * (pi * -1)) | 0 <= pi * (pi * -1)),
+    inference(split, [], [refute_0_93])).
+
+cnf(refute_0_108, plain, (cos(skoXC1) < 0 | pi * pi <= 0),
+    inference(arithmetic, [], [refute_0_107])).
+
+cnf(refute_0_109, plain, (cos(skoXC1) < 0),
+    inference(resolve, [], [refute_0_108, refute_0_36])).
+
+cnf(refute_0_110, plain, (1 + skoXC1 * (skoXC1 * -1/2) < 0),
+    inference(resolve, [], [refute_0_106, refute_0_109])).
+
+cnf(refute_0_111, plain, (1 < skoXC1 * (skoXC1 * 1/2)),
+    inference(arithmetic, [], [refute_0_110])).
+
+cnf(refute_0_112, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     0 | 0 <= cos(skoXC1)), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_113, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     0), inference(resolve, [], [refute_0_112, refute_0_109])).
+
+cnf(refute_0_114, plain,
+    (1 <
+     skoXC1 *
+     (skoXC1 *
+      (1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (1/720 +
+           skoXC1 *
+           (skoXC1 * (-1/40320 + skoXC1 * (skoXC1 * 1/3628800)))))))))),
+    inference(arithmetic, [], [refute_0_113])).
+
+cnf(refute_0_115, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))) *
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) |
+     0 <= pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2))) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) <=
+     1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_116, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) <= cos(skoXC1)),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_117, plain,
+    (1 + skoXC1 * (skoXC1 * -1/2) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <=
+     cos(skoXC1)), inference(subst, [], [refute_0_105])).
+
+cnf(refute_0_118, plain,
+    (1 + skoXC1 * (skoXC1 * -1/2) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi))),
+    inference(resolve, [], [refute_0_117, refute_0_94])).
+
+cnf(refute_0_119, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 + skoXC1 * (skoXC1 * -1/2)) * (cos(skoXC1) * (pi * pi)) |
+     0 <= cos(skoXC1) * (pi * pi) |
+     (pi * pi + skoXC1 * (skoXC1 * -4)) / (cos(skoXC1) * (pi * pi)) <=
+     1 + skoXC1 * (skoXC1 * -1/2)),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_120, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 + skoXC1 * (skoXC1 * -1/2)) * (cos(skoXC1) * (pi * pi)) |
+     0 <= cos(skoXC1) * (pi * pi)),
+    inference(resolve, [], [refute_0_119, refute_0_118])).
+
+cnf(refute_0_121, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) * (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) |
+     cos(skoXC1) * (pi * (pi * -1)) <= 0),
+    inference(arithmetic, [], [refute_0_120])).
+
+cnf(refute_0_122, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     cos(skoXC1) * (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2))))),
+    inference(resolve, [], [refute_0_121, refute_0_93])).
+
+cnf(refute_0_123, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) |
+     0 <= pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))),
+    inference(split, [], [refute_0_122])).
+
+cnf(refute_0_124, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) |
+     skoXC1 * (skoXC1 * (pi * (pi * 1/2))) <= pi * pi),
+    inference(arithmetic, [], [refute_0_123])).
+
+cnf(refute_0_125, plain, (pi * pi < skoXC1 * (skoXC1 * (pi * (pi * 1/2)))),
+    inference(decision, [],
+              [refute_0_114, refute_0_111, refute_0_20, refute_0_21,
+               refute_0_22, refute_0_23])).
+
+cnf(refute_0_126, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2))))),
+    inference(resolve, [], [refute_0_124, refute_0_125])).
+
+cnf(refute_0_127, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2))))),
+    inference(resolve, [], [refute_0_116, refute_0_126])).
+
+cnf(refute_0_128, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))) *
+     (pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))) |
+     0 <= pi * pi + skoXC1 * (skoXC1 * (pi * (pi * -1/2)))),
+    inference(resolve, [], [refute_0_115, refute_0_127])).
+
+cnf(refute_0_129, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 7/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/45) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 29/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -23/1814400) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/7257600))))))))))))) |
+     skoXC1 * (skoXC1 * (pi * (pi * 1/2))) <= pi * pi),
+    inference(arithmetic, [], [refute_0_128])).
+
+cnf(refute_0_130, plain,
+    (pi * pi < skoXC1 * (skoXC1 * (pi * (pi * 1/2))) |
+     0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 7/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/45) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 29/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -23/1814400) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/7257600)))))))))))))),
+    inference(decision, [],
+              [refute_0_114, refute_0_111, refute_0_20, refute_0_21,
+               refute_0_22, refute_0_23])).
+
+cnf(refute_0_131, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 7/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/45) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 29/40320) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -23/1814400) +
+               skoXC1 * (skoXC1 * (pi * (pi * 1/7257600)))))))))))))),
+    inference(resolve, [], [refute_0_129, refute_0_130])).
+
+cnf(refute_0_132, plain,
+    (pi * pi <
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * 1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * -1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * 1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * -1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * 1/3628800)))))))))))),
+    inference(decision, [],
+              [refute_0_23, refute_0_22, refute_0_21, refute_0_20,
+               refute_0_111, refute_0_114, refute_0_131])).
+
+cnf(refute_0_133, plain,
+    (cos(skoXC1) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800))))))))))))),
+    inference(resolve, [], [refute_0_101, refute_0_132])).
+
+cnf(refute_0_134, plain,
+    (1 +
+     skoXC1 *
+     (skoXC1 *
+      (-1/2 +
+       skoXC1 *
+       (skoXC1 *
+        (1/24 +
+         skoXC1 *
+         (skoXC1 *
+          (-1/720 +
+           skoXC1 *
+           (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800))))))))) <
+     (pi * pi + skoXC1 * (skoXC1 * -4)) /
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800))))))))))))),
+    inference(resolve, [], [refute_0_5, refute_0_133])).
+
+cnf(refute_0_135, plain,
+    (pi * pi + skoXC1 * (skoXC1 * -4) <
+     (1 +
+      skoXC1 *
+      (skoXC1 *
+       (-1/2 +
+        skoXC1 *
+        (skoXC1 *
+         (1/24 +
+          skoXC1 *
+          (skoXC1 *
+           (-1/720 +
+            skoXC1 *
+            (skoXC1 * (1/40320 + skoXC1 * (skoXC1 * -1/3628800)))))))))) *
+     (pi * pi +
+      skoXC1 *
+      (skoXC1 *
+       (pi * (pi * -1/2) +
+        skoXC1 *
+        (skoXC1 *
+         (pi * (pi * 1/24) +
+          skoXC1 *
+          (skoXC1 *
+           (pi * (pi * -1/720) +
+            skoXC1 *
+            (skoXC1 *
+             (pi * (pi * 1/40320) +
+              skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))) |
+     0 <=
+     pi * pi +
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * -1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * -1/3628800)))))))))))),
+    inference(resolve, [], [refute_0_0, refute_0_134])).
+
+cnf(refute_0_136, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/3) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -2/45) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/315) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -2/14175) +
+               skoXC1 *
+               (skoXC1 *
+                (pi * (pi * 31/7257600) +
+                 skoXC1 *
+                 (skoXC1 *
+                  (pi * (pi * -1/10886400) +
+                   skoXC1 *
+                   (skoXC1 *
+                    (pi * (pi * 101/73156608000) +
+                     skoXC1 *
+                     (skoXC1 *
+                      (pi * (pi * -1/73156608000) +
+                       skoXC1 *
+                       (skoXC1 *
+                        (pi * (pi * 1/13168189440000))))))))))))))))))))) |
+     skoXC1 *
+     (skoXC1 *
+      (pi * (pi * 1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * -1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * 1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * -1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * 1/3628800))))))))))) <=
+     pi * pi), inference(arithmetic, [], [refute_0_135])).
+
+cnf(refute_0_137, plain,
+    (skoXC1 *
+     (skoXC1 *
+      (pi * (pi * 1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * -1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * 1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * -1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * 1/3628800))))))))))) <=
+     pi * pi |
+     skoXC1 *
+     (skoXC1 *
+      (4 + pi * (pi * -1) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * 1/3) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * -2/45) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * 1/315) +
+             skoXC1 *
+             (skoXC1 *
+              (pi * (pi * -2/14175) +
+               skoXC1 *
+               (skoXC1 *
+                (pi * (pi * 31/7257600) +
+                 skoXC1 *
+                 (skoXC1 *
+                  (pi * (pi * -1/10886400) +
+                   skoXC1 *
+                   (skoXC1 *
+                    (pi * (pi * 101/73156608000) +
+                     skoXC1 *
+                     (skoXC1 *
+                      (pi * (pi * -1/73156608000) +
+                       skoXC1 *
+                       (skoXC1 *
+                        (pi *
+                         (pi * 1/13168189440000))))))))))))))))))))) <= 0),
+    inference(decision, [],
+              [refute_0_23, refute_0_22, refute_0_21, refute_0_20,
+               refute_0_111, refute_0_114, refute_0_131])).
+
+cnf(refute_0_138, plain,
+    (skoXC1 *
+     (skoXC1 *
+      (pi * (pi * 1/2) +
+       skoXC1 *
+       (skoXC1 *
+        (pi * (pi * -1/24) +
+         skoXC1 *
+         (skoXC1 *
+          (pi * (pi * 1/720) +
+           skoXC1 *
+           (skoXC1 *
+            (pi * (pi * -1/40320) +
+             skoXC1 * (skoXC1 * (pi * (pi * 1/3628800))))))))))) <=
+     pi * pi), inference(resolve, [], [refute_0_137, refute_0_136])).
+
+cnf(refute_0_139, plain, ($false),
+    inference(resolve, [], [refute_0_138, refute_0_132])).
+% SZS output end CNFRefutation for sqrt-1mcosq-1.tptp

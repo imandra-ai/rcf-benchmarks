@@ -1,0 +1,306 @@
+% SZS output start CNFRefutation for ground-problem-18.tptp
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(leq_left_mul_divide_pos, axiom, (Y / Z < X | X * Z <= Y | Z <= 0)).
+
+cnf(leq_right_mul_divide_pos, axiom, (Y < X / Z | X <= Y * Z | Z <= 0)).
+
+cnf(leq_right_mul_divide_neg, axiom, (Y < X / Z | Y * Z <= X | 0 <= Z)).
+
+cnf(ln_upper_bound_cf5, axiom,
+    (X <= 0 |
+     ~ lgen(R,
+            1/3 * (X ^ 2 + 19 * X + 10) * (X - 1) /
+            (3 * X ^ 2 + 6 * X + 1), Y) | lgen(R, ln(X), Y))).
+
+cnf(exp_upper_bound_case_5, axiom,
+    (3 < X |
+     ~ lgen(R, 21743271936 / (-(X ^ 3) + 12 * X ^ 2 - 96 * X + 384) ^ 4,
+            Y) | lgen(R, exp(X), Y))).
+
+fof(pi_upper_bound, axiom, (pi < 31415927/10000000)).
+
+fof(pi_lower_bound, axiom, (15707963/5000000 < pi)).
+
+fof(ground_problem_18, conjecture, (ln(pi) < pi / exp(1))).
+
+fof(subgoal_0, plain, (ln(pi) < pi / exp(1)),
+    inference(strip, [], [ground_problem_18])).
+
+fof(negate_0_0, plain, (~ ~ pi / exp(1) <= ln(pi)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (pi / exp(1) <= ln(pi)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [pi_lower_bound])).
+
+fof(normalize_0_2, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [pi_upper_bound])).
+
+cnf(refute_0_0, plain,
+    (21743271936/7992538801 <
+     pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) |
+     0 <= 10/3 + pi * (3 + pi * (-6 + pi * -1/3)) |
+     21743271936/7992538801 * (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <=
+     pi * (-1 + pi * (-6 + pi * -3))),
+    inference(subst, [], [leq_right_mul_divide_neg])).
+
+cnf(refute_0_1, plain,
+    (exp(X_000079) < X_000080 | ~ lgen(1, exp(X_000079), X_000080)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_2, plain,
+    (3 < X_000079 |
+     ~ lgen(1,
+            21743271936 /
+            (-(X_000079 ^ 3) + 12 * X_000079 ^ 2 - 96 * X_000079 + 384) ^
+            4, X_000080) | lgen(1, exp(X_000079), X_000080)),
+    inference(subst, [], [exp_upper_bound_case_5])).
+
+cnf(refute_0_3, plain,
+    (3 < X_000079 | exp(X_000079) < X_000080 |
+     ~ lgen(1,
+            21743271936 /
+            (-(X_000079 ^ 3) + 12 * X_000079 ^ 2 - 96 * X_000079 + 384) ^
+            4, X_000080)),
+    inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (3 < X_000079 | exp(X_000079) < X_000080 |
+     X_000080 <=
+     21743271936 /
+     (21743271936 +
+      X_000079 *
+      (-21743271936 +
+       X_000079 *
+       (10871635968 +
+        X_000079 *
+        (-3623878656 +
+         X_000079 *
+         (891813888 +
+          X_000079 *
+          (-169869312 +
+           X_000079 *
+           (25657344 +
+            X_000079 *
+            (-3096576 +
+             X_000079 *
+             (297216 +
+              X_000079 *
+              (-22272 +
+               X_000079 * (1248 + X_000079 * (-48 + X_000079))))))))))))),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (3 < 1 |
+     exp(1) <
+     pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) |
+     pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <=
+     21743271936 /
+     (21743271936 +
+      1 *
+      (-21743271936 +
+       1 *
+       (10871635968 +
+        1 *
+        (-3623878656 +
+         1 *
+         (891813888 +
+          1 *
+          (-169869312 +
+           1 *
+           (25657344 +
+            1 *
+            (-3096576 +
+             1 *
+             (297216 + 1 * (-22272 + 1 * (1248 + 1 * (-48 + 1))))))))))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (-10/3 + pi * (-3 + pi * (6 + pi * 1/3)) <
+     pi * (1 + pi * (6 + pi * 3)) / exp(1) |
+     pi * (1 + pi * (6 + pi * 3)) <=
+     (-10/3 + pi * (-3 + pi * (6 + pi * 1/3))) * exp(1) | exp(1) <= 0),
+    inference(subst, [], [leq_right_mul_divide_pos])).
+
+cnf(refute_0_7, plain,
+    ((-10/3 + pi * (-3 + pi * (6 + pi * 1/3))) / (1 + pi * (6 + pi * 3)) <
+     pi / exp(1) |
+     pi / exp(1) * (1 + pi * (6 + pi * 3)) <=
+     -10/3 + pi * (-3 + pi * (6 + pi * 1/3)) | 1 + pi * (6 + pi * 3) <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_8, plain, (pi / exp(1) <= ln(pi)),
+    inference(canonicalize, [], [normalize_0_0])).
+
+cnf(refute_0_9, plain,
+    (ln(X_000100) < X_000101 | ~ lgen(1, ln(X_000100), X_000101)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_10, plain,
+    (~ lgen(1,
+            1/3 * (X_000100 ^ 2 + 19 * X_000100 + 10) * (X_000100 - 1) /
+            (3 * X_000100 ^ 2 + 6 * X_000100 + 1), X_000101) |
+     X_000100 <= 0 | lgen(1, ln(X_000100), X_000101)),
+    inference(subst, [], [ln_upper_bound_cf5])).
+
+cnf(refute_0_11, plain,
+    (ln(X_000100) < X_000101 |
+     ~ lgen(1,
+            1/3 * (X_000100 ^ 2 + 19 * X_000100 + 10) * (X_000100 - 1) /
+            (3 * X_000100 ^ 2 + 6 * X_000100 + 1), X_000101) |
+     X_000100 <= 0), inference(resolve, [], [refute_0_10, refute_0_9])).
+
+cnf(refute_0_12, plain,
+    (ln(X_000100) < X_000101 | X_000100 <= 0 |
+     X_000101 <=
+     (-10/3 + X_000100 * (-3 + X_000100 * (6 + X_000100 * 1/3))) /
+     (1 + X_000100 * (6 + X_000100 * 3))),
+    inference(arithmetic, [], [refute_0_11])).
+
+cnf(refute_0_13, plain,
+    (ln(pi) < pi / exp(1) |
+     pi / exp(1) <=
+     (-10/3 + pi * (-3 + pi * (6 + pi * 1/3))) / (1 + pi * (6 + pi * 3)) |
+     pi <= 0), inference(subst, [], [refute_0_12])).
+
+cnf(refute_0_14, plain,
+    (pi / exp(1) <=
+     (-10/3 + pi * (-3 + pi * (6 + pi * 1/3))) / (1 + pi * (6 + pi * 3)) |
+     pi <= 0), inference(resolve, [], [refute_0_8, refute_0_13])).
+
+cnf(refute_0_15, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [normalize_0_1])).
+
+cnf(refute_0_16, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_17, plain, (0 < pi),
+    inference(decision, [], [refute_0_15, refute_0_16])).
+
+cnf(refute_0_18, plain,
+    (pi / exp(1) <=
+     (-10/3 + pi * (-3 + pi * (6 + pi * 1/3))) / (1 + pi * (6 + pi * 3))),
+    inference(resolve, [], [refute_0_14, refute_0_17])).
+
+cnf(refute_0_19, plain,
+    (pi / exp(1) * (1 + pi * (6 + pi * 3)) <=
+     -10/3 + pi * (-3 + pi * (6 + pi * 1/3)) | 1 + pi * (6 + pi * 3) <= 0),
+    inference(resolve, [], [refute_0_18, refute_0_7])).
+
+cnf(refute_0_20, plain,
+    (pi * (6 + pi * 3) <= -1 |
+     pi * (1 + pi * (6 + pi * 3)) / exp(1) <=
+     -10/3 + pi * (-3 + pi * (6 + pi * 1/3))),
+    inference(arithmetic, [], [refute_0_19])).
+
+cnf(refute_0_21, plain, (-1 < pi * (6 + pi * 3)),
+    inference(decision, [], [refute_0_15, refute_0_16])).
+
+cnf(refute_0_22, plain,
+    (pi * (1 + pi * (6 + pi * 3)) / exp(1) <=
+     -10/3 + pi * (-3 + pi * (6 + pi * 1/3))),
+    inference(resolve, [], [refute_0_20, refute_0_21])).
+
+cnf(refute_0_23, plain,
+    (pi * (1 + pi * (6 + pi * 3)) <=
+     (-10/3 + pi * (-3 + pi * (6 + pi * 1/3))) * exp(1) | exp(1) <= 0),
+    inference(resolve, [], [refute_0_22, refute_0_6])).
+
+cnf(refute_0_24, plain,
+    (exp(1) * (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <=
+     pi * (-1 + pi * (-6 + pi * -3))),
+    inference(arithmetic, [], [refute_0_23])).
+
+cnf(refute_0_25, plain,
+    (0 <= 10/3 + pi * (3 + pi * (-6 + pi * -1/3)) |
+     pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <= exp(1)),
+    inference(split, [], [refute_0_24])).
+
+cnf(refute_0_26, plain,
+    (pi * (-3 + pi * (6 + pi * 1/3)) <= 10/3 |
+     pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <= exp(1)),
+    inference(arithmetic, [], [refute_0_25])).
+
+cnf(refute_0_27, plain, (10/3 < pi * (-3 + pi * (6 + pi * 1/3))),
+    inference(decision, [], [refute_0_15, refute_0_16])).
+
+cnf(refute_0_28, plain,
+    (pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <= exp(1)),
+    inference(resolve, [], [refute_0_26, refute_0_27])).
+
+cnf(refute_0_29, plain,
+    (3 < 1 |
+     pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <=
+     21743271936 /
+     (21743271936 +
+      1 *
+      (-21743271936 +
+       1 *
+       (10871635968 +
+        1 *
+        (-3623878656 +
+         1 *
+         (891813888 +
+          1 *
+          (-169869312 +
+           1 *
+           (25657344 +
+            1 *
+            (-3096576 +
+             1 *
+             (297216 + 1 * (-22272 + 1 * (1248 + 1 * (-48 + 1))))))))))))),
+    inference(resolve, [], [refute_0_28, refute_0_5])).
+
+cnf(refute_0_30, plain,
+    (pi * (-1 + pi * (-6 + pi * -3)) /
+     (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <= 21743271936/7992538801),
+    inference(arithmetic, [], [refute_0_29])).
+
+cnf(refute_0_31, plain,
+    (0 <= 10/3 + pi * (3 + pi * (-6 + pi * -1/3)) |
+     21743271936/7992538801 * (10/3 + pi * (3 + pi * (-6 + pi * -1/3))) <=
+     pi * (-1 + pi * (-6 + pi * -3))),
+    inference(resolve, [], [refute_0_30, refute_0_0])).
+
+cnf(refute_0_32, plain,
+    (pi * (-3 + pi * (6 + pi * 1/3)) <= 10/3 |
+     pi *
+     (73222354609/7992538801 +
+      pi * (-82504398810/7992538801 + pi * 16729859091/7992538801)) <=
+     -72477573120/7992538801), inference(arithmetic, [], [refute_0_31])).
+
+cnf(refute_0_33, plain,
+    (10/3 < pi * (-3 + pi * (6 + pi * 1/3)) |
+     pi *
+     (73222354609/7992538801 +
+      pi * (-82504398810/7992538801 + pi * 16729859091/7992538801)) <=
+     -72477573120/7992538801),
+    inference(decision, [], [refute_0_15, refute_0_16])).
+
+cnf(refute_0_34, plain,
+    (pi *
+     (73222354609/7992538801 +
+      pi * (-82504398810/7992538801 + pi * 16729859091/7992538801)) <=
+     -72477573120/7992538801),
+    inference(resolve, [], [refute_0_32, refute_0_33])).
+
+cnf(refute_0_35, plain,
+    (-72477573120/7992538801 <
+     pi *
+     (73222354609/7992538801 +
+      pi * (-82504398810/7992538801 + pi * 16729859091/7992538801))),
+    inference(decision, [], [refute_0_15, refute_0_16])).
+
+cnf(refute_0_36, plain, ($false),
+    inference(resolve, [], [refute_0_34, refute_0_35])).
+% SZS output end CNFRefutation for ground-problem-18.tptp

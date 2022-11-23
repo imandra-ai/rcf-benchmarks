@@ -1,0 +1,11 @@
+-----[begin problem]-----
+% In Mathematica format:
+Timing[Resolve[Exists[{skoXC1,skoBC1,skoAC1}, ForAll[{}, And[0<=skoXC1,skoXC1!=0,skoAC1>0,skoBC1>0,skoXC1>0]]], Reals]]
+
+% In QepcadB format:
+(E skoXC1) (E skoBC1) (E skoAC1) [[0<=skoXC1]/\[[skoXC1 /=0]/\[[0<skoAC1]/\[[0<skoBC1]/\[0<skoXC1]]]]].
+
+% In SMTLib2 format:
+(declare-fun skoXC1 () Real) (declare-fun skoBC1 () Real) (declare-fun skoAC1 () Real) (assert (and (<= 0. skoXC1) (and (not (= skoXC1 0.)) (and (not (<= skoAC1 0.)) (and (not (<= skoBC1 0.)) (not (<= skoXC1 0.)))))))
+-----[end problem]-----
+

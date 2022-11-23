@@ -1,0 +1,119 @@
+% SZS output start CNFRefutation for ground-problem-8.tptp
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(exp_upper_bound_case_5, axiom,
+    (3 < X |
+     ~ lgen(R, 21743271936 / (-(X ^ 3) + 12 * X ^ 2 - 96 * X + 384) ^ 4,
+            Y) | lgen(R, exp(X), Y))).
+
+fof(ground_problem_8, conjecture, (exp(2) < 3 ^ 3 / 2)).
+
+fof(subgoal_0, plain, (exp(2) < 3 ^ 3 / 2),
+    inference(strip, [], [ground_problem_8])).
+
+fof(negate_0_0, plain, (~ ~ 3 ^ 3 / 2 <= exp(2)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (3 ^ 3 / 2 <= exp(2)),
+    inference(canonicalize, [], [negate_0_0])).
+
+cnf(refute_0_0, plain, (3 ^ 3 / 2 <= exp(2)),
+    inference(canonicalize, [], [normalize_0_0])).
+
+cnf(refute_0_1, plain, (27/2 <= exp(2)),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (exp(X_000040) < X_000041 | ~ lgen(1, exp(X_000040), X_000041)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_3, plain,
+    (3 < X_000040 |
+     ~ lgen(1,
+            21743271936 /
+            (-(X_000040 ^ 3) + 12 * X_000040 ^ 2 - 96 * X_000040 + 384) ^
+            4, X_000041) | lgen(1, exp(X_000040), X_000041)),
+    inference(subst, [], [exp_upper_bound_case_5])).
+
+cnf(refute_0_4, plain,
+    (3 < X_000040 | exp(X_000040) < X_000041 |
+     ~ lgen(1,
+            21743271936 /
+            (-(X_000040 ^ 3) + 12 * X_000040 ^ 2 - 96 * X_000040 + 384) ^
+            4, X_000041)),
+    inference(resolve, [], [refute_0_3, refute_0_2])).
+
+cnf(refute_0_5, plain,
+    (3 < X_000040 | exp(X_000040) < X_000041 |
+     X_000041 <=
+     21743271936 /
+     (21743271936 +
+      X_000040 *
+      (-21743271936 +
+       X_000040 *
+       (10871635968 +
+        X_000040 *
+        (-3623878656 +
+         X_000040 *
+         (891813888 +
+          X_000040 *
+          (-169869312 +
+           X_000040 *
+           (25657344 +
+            X_000040 *
+            (-3096576 +
+             X_000040 *
+             (297216 +
+              X_000040 *
+              (-22272 +
+               X_000040 * (1248 + X_000040 * (-48 + X_000040))))))))))))),
+    inference(arithmetic, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (3 < 2 | exp(2) < 27/2 |
+     27/2 <=
+     21743271936 /
+     (21743271936 +
+      2 *
+      (-21743271936 +
+       2 *
+       (10871635968 +
+        2 *
+        (-3623878656 +
+         2 *
+         (891813888 +
+          2 *
+          (-169869312 +
+           2 *
+           (25657344 +
+            2 *
+            (-3096576 +
+             2 *
+             (297216 + 2 * (-22272 + 2 * (1248 + 2 * (-48 + 2))))))))))))),
+    inference(subst, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (3 < 2 |
+     27/2 <=
+     21743271936 /
+     (21743271936 +
+      2 *
+      (-21743271936 +
+       2 *
+       (10871635968 +
+        2 *
+        (-3623878656 +
+         2 *
+         (891813888 +
+          2 *
+          (-169869312 +
+           2 *
+           (25657344 +
+            2 *
+            (-3096576 +
+             2 *
+             (297216 + 2 * (-22272 + 2 * (1248 + 2 * (-48 + 2))))))))))))),
+    inference(resolve, [], [refute_0_1, refute_0_6])).
+
+cnf(refute_0_8, plain, ($false), inference(arithmetic, [], [refute_0_7])).
+% SZS output end CNFRefutation for ground-problem-8.tptp

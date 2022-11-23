@@ -1,0 +1,410 @@
+% SZS output start CNFRefutation for ground-problem-17.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(leq_left_divide_mul_pos, axiom, (Y * Z < X | X / Z <= Y | Z <= 0)).
+
+cnf(leq_left_mul_divide_pos, axiom, (Y / Z < X | X * Z <= Y | Z <= 0)).
+
+cnf(leq_right_mul_divide_pos, axiom, (Y < X / Z | X <= Y * Z | Z <= 0)).
+
+cnf(leq_right_divide_mul_neg, axiom, (Y < X * Z | Y / Z <= X | 0 <= Z)).
+
+cnf(ln_lower_bound_cf3, axiom,
+    (X <= 0 | ~ lgen(R, Y, 1/2 * (1 + 5 * X) * (X - 1) / (X * (2 + X))) |
+     lgen(R, Y, ln(X)))).
+
+cnf(exp_lower_bound_cf2, axiom,
+    (X < 0 | ~ lgen(R, Y, (X ^ 2 + 6 * X + 12) / (X ^ 2 - 6 * X + 12)) |
+     lgen(R, Y, exp(X)))).
+
+fof(ground_problem_17, conjecture, (2 / (ln(2) ^ 2 * exp(1)) < 2)).
+
+fof(subgoal_0, plain, (2 / (ln(2) ^ 2 * exp(1)) < 2),
+    inference(strip, [], [ground_problem_17])).
+
+fof(negate_0_0, plain, (~ ~ 2 <= 2 / (ln(2) ^ 2 * exp(1))),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (2 <= 2 / (ln(2) ^ 2 * exp(1))),
+    inference(canonicalize, [], [negate_0_0])).
+
+cnf(refute_0_0, plain,
+    (~ lgen(0, X_000062, exp(X_000061)) | X_000062 <= exp(X_000061)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_1, plain,
+    (X_000061 < 0 |
+     ~ lgen(0, X_000062,
+            (X_000061 ^ 2 + 6 * X_000061 + 12) /
+            (X_000061 ^ 2 - 6 * X_000061 + 12)) |
+     lgen(0, X_000062, exp(X_000061))),
+    inference(subst, [], [exp_lower_bound_cf2])).
+
+cnf(refute_0_2, plain,
+    (X_000061 < 0 |
+     ~ lgen(0, X_000062,
+            (X_000061 ^ 2 + 6 * X_000061 + 12) /
+            (X_000061 ^ 2 - 6 * X_000061 + 12)) |
+     X_000062 <= exp(X_000061)),
+    inference(resolve, [], [refute_0_1, refute_0_0])).
+
+cnf(refute_0_3, plain,
+    ((12 + X_000061 * (6 + X_000061)) / (12 + X_000061 * (-6 + X_000061)) <
+     X_000062 | X_000061 < 0 | X_000062 <= exp(X_000061)),
+    inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain,
+    (1 < 0 | (12 + 1 * (6 + 1)) / (12 + 1 * (-6 + 1)) < 256/121 |
+     256/121 <= exp(1)), inference(subst, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (-1 < 11/16 * (exp(1) * -11/16) | 0 <= exp(1) * -11/16 |
+     -1 / (exp(1) * -11/16) <= 11/16),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_6, plain,
+    (~ lgen(0, X_000069, ln(X_000068)) | X_000069 <= ln(X_000068)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_7, plain,
+    (~ lgen(0, X_000069,
+            1/2 * (1 + 5 * X_000068) * (X_000068 - 1) /
+            (X_000068 * (2 + X_000068))) | X_000068 <= 0 |
+     lgen(0, X_000069, ln(X_000068))),
+    inference(subst, [], [ln_lower_bound_cf3])).
+
+cnf(refute_0_8, plain,
+    (~ lgen(0, X_000069,
+            1/2 * (1 + 5 * X_000068) * (X_000068 - 1) /
+            (X_000068 * (2 + X_000068))) | X_000068 <= 0 |
+     X_000069 <= ln(X_000068)),
+    inference(resolve, [], [refute_0_7, refute_0_6])).
+
+cnf(refute_0_9, plain,
+    ((-1/2 + X_000068 * (-2 + X_000068 * 5/2)) /
+     (X_000068 * (2 + X_000068)) < X_000069 | X_000068 <= 0 |
+     X_000069 <= ln(X_000068)), inference(arithmetic, [], [refute_0_8])).
+
+cnf(refute_0_10, plain,
+    ((-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) < -1 / (exp(1) * -11/16) |
+     2 <= 0 | -1 / (exp(1) * -11/16) <= ln(2)),
+    inference(subst, [], [refute_0_9])).
+
+cnf(refute_0_11, plain,
+    (11/16 * (ln(2) * exp(1)) < 1 | ln(2) * exp(1) <= 0 |
+     1 / (ln(2) * exp(1)) <= 11/16),
+    inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_12, plain,
+    ((-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) < 1 / (ln(2) * exp(1)) |
+     2 <= 0 | 1 / (ln(2) * exp(1)) <= ln(2)),
+    inference(subst, [], [refute_0_9])).
+
+cnf(refute_0_13, plain,
+    (X_000062 < exp(X_000061) | ~ lgen(1, X_000062, exp(X_000061))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_14, plain,
+    (X_000061 < 0 |
+     ~ lgen(1, X_000062,
+            (X_000061 ^ 2 + 6 * X_000061 + 12) /
+            (X_000061 ^ 2 - 6 * X_000061 + 12)) |
+     lgen(1, X_000062, exp(X_000061))),
+    inference(subst, [], [exp_lower_bound_cf2])).
+
+cnf(refute_0_15, plain,
+    (X_000061 < 0 | X_000062 < exp(X_000061) |
+     ~ lgen(1, X_000062,
+            (X_000061 ^ 2 + 6 * X_000061 + 12) /
+            (X_000061 ^ 2 - 6 * X_000061 + 12))),
+    inference(resolve, [], [refute_0_14, refute_0_13])).
+
+cnf(refute_0_16, plain,
+    (X_000061 < 0 | X_000062 < exp(X_000061) |
+     (12 + X_000061 * (6 + X_000061)) /
+     (12 + X_000061 * (-6 + X_000061)) <= X_000062),
+    inference(arithmetic, [], [refute_0_15])).
+
+cnf(refute_0_17, plain,
+    (1 < 0 | 256/121 < exp(1) |
+     (12 + 1 * (6 + 1)) / (12 + 1 * (-6 + 1)) <= 256/121),
+    inference(subst, [], [refute_0_16])).
+
+cnf(refute_0_18, plain,
+    (1 / (exp(1) * 11/16) < 11/16 | 11/16 * (exp(1) * 11/16) <= 1 |
+     exp(1) * 11/16 <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_19, plain,
+    (X_000069 < ln(X_000068) | ~ lgen(1, X_000069, ln(X_000068))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_20, plain,
+    (~ lgen(1, X_000069,
+            1/2 * (1 + 5 * X_000068) * (X_000068 - 1) /
+            (X_000068 * (2 + X_000068))) | X_000068 <= 0 |
+     lgen(1, X_000069, ln(X_000068))),
+    inference(subst, [], [ln_lower_bound_cf3])).
+
+cnf(refute_0_21, plain,
+    (X_000069 < ln(X_000068) |
+     ~ lgen(1, X_000069,
+            1/2 * (1 + 5 * X_000068) * (X_000068 - 1) /
+            (X_000068 * (2 + X_000068))) | X_000068 <= 0),
+    inference(resolve, [], [refute_0_20, refute_0_19])).
+
+cnf(refute_0_22, plain,
+    (X_000069 < ln(X_000068) | X_000068 <= 0 |
+     (-1/2 + X_000068 * (-2 + X_000068 * 5/2)) /
+     (X_000068 * (2 + X_000068)) <= X_000069),
+    inference(arithmetic, [], [refute_0_21])).
+
+cnf(refute_0_23, plain,
+    (1 / (exp(1) * 11/16) < ln(2) | 2 <= 0 |
+     (-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) <= 1 / (exp(1) * 11/16)),
+    inference(subst, [], [refute_0_22])).
+
+cnf(refute_0_24, plain,
+    (1 / (ln(2) * exp(1)) < 11/16 | 11/16 * (ln(2) * exp(1)) <= 1 |
+     ln(2) * exp(1) <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_25, plain, (2 <= 2 / (ln(2) ^ 2 * exp(1))),
+    inference(canonicalize, [], [normalize_0_0])).
+
+cnf(refute_0_26, plain, (2 <= 2 / (ln(2) * (ln(2) * exp(1)))),
+    inference(arithmetic, [], [refute_0_25])).
+
+cnf(refute_0_27, plain,
+    (2 / (ln(2) * (ln(2) * exp(1))) < 2 |
+     2 * (ln(2) * (ln(2) * exp(1))) <= 2 | ln(2) * (ln(2) * exp(1)) <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_28, plain,
+    (2 * (ln(2) * (ln(2) * exp(1))) <= 2 | ln(2) * (ln(2) * exp(1)) <= 0),
+    inference(resolve, [], [refute_0_26, refute_0_27])).
+
+cnf(refute_0_29, plain,
+    (ln(2) * (ln(2) * (exp(1) * 2)) <= 2 | ln(2) * (ln(2) * exp(1)) <= 0),
+    inference(arithmetic, [], [refute_0_28])).
+
+cnf(refute_0_30, plain,
+    (0 < ln(2) * (ln(2) * exp(1)) | ln(2) * (ln(2) * exp(1)) <= 0),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_31, plain,
+    (0 < ln(2) * (ln(2) * exp(1)) | exp(1) <= 0 | ln(2) = 0),
+    inference(split, [], [refute_0_30])).
+
+cnf(refute_0_32, plain, (0 < ln(2) * (ln(2) * exp(1))),
+    inference(arithmetic, [], [refute_0_31])).
+
+cnf(refute_0_33, plain, (ln(2) * (ln(2) * (exp(1) * 2)) <= 2),
+    inference(resolve, [], [refute_0_29, refute_0_32])).
+
+cnf(refute_0_34, plain,
+    (ln(2) * (exp(1) * 2) <= 0 | ln(2) <= 2 / (ln(2) * (exp(1) * 2))),
+    inference(split, [], [refute_0_33])).
+
+cnf(refute_0_35, plain,
+    (ln(2) * (exp(1) * 2) <= 0 | ln(2) <= 1 / (ln(2) * exp(1))),
+    inference(arithmetic, [], [refute_0_34])).
+
+cnf(refute_0_36, plain,
+    (0 < ln(2) * (exp(1) * 2) | ln(2) * (exp(1) * 2) <= 0),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_37, plain,
+    (0 < ln(2) * (exp(1) * 2) | exp(1) * 2 <= 0 |
+     ln(2) <= 0 / (exp(1) * 2)), inference(split, [], [refute_0_36])).
+
+cnf(refute_0_38, plain, (0 < ln(2) * (exp(1) * 2)),
+    inference(arithmetic, [], [refute_0_37])).
+
+cnf(refute_0_39, plain, (ln(2) <= 1 / (ln(2) * exp(1))),
+    inference(resolve, [], [refute_0_35, refute_0_38])).
+
+cnf(refute_0_40, plain,
+    (1 / (ln(2) * exp(1)) < ln(2) | 2 <= 0 |
+     (-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) <= 1 / (ln(2) * exp(1))),
+    inference(subst, [], [refute_0_22])).
+
+cnf(refute_0_41, plain,
+    (2 <= 0 |
+     (-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) <= 1 / (ln(2) * exp(1))),
+    inference(resolve, [], [refute_0_39, refute_0_40])).
+
+cnf(refute_0_42, plain, (11/16 <= 1 / (ln(2) * exp(1))),
+    inference(arithmetic, [], [refute_0_41])).
+
+cnf(refute_0_43, plain,
+    (11/16 * (ln(2) * exp(1)) <= 1 | ln(2) * exp(1) <= 0),
+    inference(resolve, [], [refute_0_42, refute_0_24])).
+
+cnf(refute_0_44, plain,
+    (ln(2) < 1 / (ln(2) * exp(1)) | 1 <= ln(2) * (ln(2) * exp(1)) |
+     ln(2) * exp(1) <= 0),
+    inference(subst, [], [leq_right_mul_divide_pos])).
+
+cnf(refute_0_45, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) |
+     ln(2) * (ln(2) * (exp(1) * -2)) <= -2),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_46, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 0 <= ln(2) * (exp(1) * -2) |
+     -2 / (ln(2) * (exp(1) * -2)) <= ln(2)),
+    inference(split, [], [refute_0_45])).
+
+cnf(refute_0_47, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | ln(2) * (exp(1) * 2) <= 0 |
+     1 / (ln(2) * exp(1)) <= ln(2)),
+    inference(arithmetic, [], [refute_0_46])).
+
+cnf(refute_0_48, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 1 / (ln(2) * exp(1)) <= ln(2)),
+    inference(resolve, [], [refute_0_47, refute_0_38])).
+
+cnf(refute_0_49, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 1 <= ln(2) * (ln(2) * exp(1)) |
+     ln(2) * exp(1) <= 0),
+    inference(resolve, [], [refute_0_48, refute_0_44])).
+
+cnf(refute_0_50, plain, (0 < 0 | ln(2) * exp(1) < 0 | 0 < ln(2) * exp(1)),
+    inference(split, [], [refute_0_32])).
+
+cnf(refute_0_51, plain, (0 < ln(2) * (exp(1) * -1) | 0 < ln(2) * exp(1)),
+    inference(arithmetic, [], [refute_0_50])).
+
+cnf(refute_0_52, plain,
+    (ln(2) < 0 / (ln(2) * exp(1)) | 0 <= ln(2) * exp(1)),
+    inference(split, [], [refute_0_32])).
+
+cnf(refute_0_53, plain, (ln(2) * (exp(1) * -1) <= 0),
+    inference(arithmetic, [], [refute_0_52])).
+
+cnf(refute_0_54, plain, (0 < ln(2) * exp(1)),
+    inference(resolve, [], [refute_0_53, refute_0_51])).
+
+cnf(refute_0_55, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 1 <= ln(2) * (ln(2) * exp(1))),
+    inference(resolve, [], [refute_0_49, refute_0_54])).
+
+cnf(refute_0_56, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) |
+     ln(2) * (ln(2) * (exp(1) * -1)) <= -1),
+    inference(arithmetic, [], [refute_0_55])).
+
+cnf(refute_0_57, plain,
+    (ln(2) * (exp(1) * -1) < 0 | 0 < ln(2) * (exp(1) * -1) |
+     -2 < ln(2) * (ln(2) * (exp(1) * -2)) | 0 <= -1),
+    inference(split, [], [refute_0_56])).
+
+cnf(refute_0_58, plain,
+    (0 < ln(2) * (exp(1) * -1) | -2 < ln(2) * (ln(2) * (exp(1) * -2)) |
+     0 < ln(2) * exp(1)), inference(arithmetic, [], [refute_0_57])).
+
+cnf(refute_0_59, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 0 < ln(2) * exp(1)),
+    inference(resolve, [], [refute_0_53, refute_0_58])).
+
+cnf(refute_0_60, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 11/16 * (ln(2) * exp(1)) <= 1),
+    inference(resolve, [], [refute_0_43, refute_0_59])).
+
+cnf(refute_0_61, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | ln(2) * (exp(1) * 11/16) <= 1),
+    inference(arithmetic, [], [refute_0_60])).
+
+cnf(refute_0_62, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | exp(1) * 11/16 <= 0 |
+     ln(2) <= 1 / (exp(1) * 11/16)), inference(split, [], [refute_0_61])).
+
+cnf(refute_0_63, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | ln(2) <= 1 / (exp(1) * 11/16)),
+    inference(arithmetic, [], [refute_0_62])).
+
+cnf(refute_0_64, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 2 <= 0 |
+     (-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) <= 1 / (exp(1) * 11/16)),
+    inference(resolve, [], [refute_0_63, refute_0_23])).
+
+cnf(refute_0_65, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 11/16 <= 1 / (exp(1) * 11/16)),
+    inference(arithmetic, [], [refute_0_64])).
+
+cnf(refute_0_66, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | 11/16 * (exp(1) * 11/16) <= 1 |
+     exp(1) * 11/16 <= 0),
+    inference(resolve, [], [refute_0_65, refute_0_18])).
+
+cnf(refute_0_67, plain,
+    (-2 < ln(2) * (ln(2) * (exp(1) * -2)) | exp(1) <= 256/121),
+    inference(arithmetic, [], [refute_0_66])).
+
+cnf(refute_0_68, plain,
+    (1 < 0 | -2 < ln(2) * (ln(2) * (exp(1) * -2)) |
+     (12 + 1 * (6 + 1)) / (12 + 1 * (-6 + 1)) <= 256/121),
+    inference(resolve, [], [refute_0_67, refute_0_17])).
+
+cnf(refute_0_69, plain, (-2 < ln(2) * (ln(2) * (exp(1) * -2))),
+    inference(arithmetic, [], [refute_0_68])).
+
+cnf(refute_0_70, plain,
+    (ln(2) < -2 / (ln(2) * (exp(1) * -2)) | 0 <= ln(2) * (exp(1) * -2)),
+    inference(split, [], [refute_0_69])).
+
+cnf(refute_0_71, plain,
+    (ln(2) < 1 / (ln(2) * exp(1)) | ln(2) * (exp(1) * 2) <= 0),
+    inference(arithmetic, [], [refute_0_70])).
+
+cnf(refute_0_72, plain, (ln(2) < 1 / (ln(2) * exp(1))),
+    inference(resolve, [], [refute_0_71, refute_0_38])).
+
+cnf(refute_0_73, plain,
+    ((-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) < 1 / (ln(2) * exp(1)) |
+     2 <= 0), inference(resolve, [], [refute_0_12, refute_0_72])).
+
+cnf(refute_0_74, plain, (11/16 < 1 / (ln(2) * exp(1))),
+    inference(arithmetic, [], [refute_0_73])).
+
+cnf(refute_0_75, plain,
+    (11/16 * (ln(2) * exp(1)) < 1 | ln(2) * exp(1) <= 0),
+    inference(resolve, [], [refute_0_11, refute_0_74])).
+
+cnf(refute_0_76, plain, (11/16 * (ln(2) * exp(1)) < 1),
+    inference(resolve, [], [refute_0_75, refute_0_54])).
+
+cnf(refute_0_77, plain, (-1 < ln(2) * (exp(1) * -11/16)),
+    inference(arithmetic, [], [refute_0_76])).
+
+cnf(refute_0_78, plain,
+    (ln(2) < -1 / (exp(1) * -11/16) | 0 <= exp(1) * -11/16),
+    inference(split, [], [refute_0_77])).
+
+cnf(refute_0_79, plain, (ln(2) < -1 / (exp(1) * -11/16)),
+    inference(arithmetic, [], [refute_0_78])).
+
+cnf(refute_0_80, plain,
+    ((-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) < -1 / (exp(1) * -11/16) |
+     2 <= 0), inference(resolve, [], [refute_0_10, refute_0_79])).
+
+cnf(refute_0_81, plain, (11/16 < -1 / (exp(1) * -11/16)),
+    inference(arithmetic, [], [refute_0_80])).
+
+cnf(refute_0_82, plain,
+    (-1 < 11/16 * (exp(1) * -11/16) | 0 <= exp(1) * -11/16),
+    inference(resolve, [], [refute_0_5, refute_0_81])).
+
+cnf(refute_0_83, plain, (exp(1) < 256/121),
+    inference(arithmetic, [], [refute_0_82])).
+
+cnf(refute_0_84, plain,
+    (1 < 0 | (12 + 1 * (6 + 1)) / (12 + 1 * (-6 + 1)) < 256/121),
+    inference(resolve, [], [refute_0_4, refute_0_83])).
+
+cnf(refute_0_85, plain, ($false),
+    inference(arithmetic, [], [refute_0_84])).
+% SZS output end CNFRefutation for ground-problem-17.tptp

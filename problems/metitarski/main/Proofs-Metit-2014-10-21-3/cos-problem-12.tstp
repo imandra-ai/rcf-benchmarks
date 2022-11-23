@@ -1,0 +1,181 @@
+% SZS output start CNFRefutation for cos-problem-12.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(cos_upper_bound_0, axiom,
+    (~ lgen(R, 1 - X ^ 2 / 2 + X ^ 4 / 24, Y) | lgen(R, cos(X), Y))).
+
+cnf(cos_lower_bound_0, axiom,
+    (~ lgen(R, Y, 1 - X ^ 2 / 2) | lgen(R, Y, cos(X)))).
+
+fof(pi_upper_bound, axiom, (pi < 31415927/10000000)).
+
+fof(pi_lower_bound, axiom, (15707963/5000000 < pi)).
+
+fof(cos_problem_12, conjecture,
+    (! [X, Y] :
+       (X ^ 2 + Y ^ 2 <= pi => cos(X) + cos(Y) <= 1 + cos(X * Y)))).
+
+fof(subgoal_0, plain,
+    (! [X, Y] :
+       (X ^ 2 + Y ^ 2 <= pi => cos(X) + cos(Y) <= 1 + cos(X * Y))),
+    inference(strip, [], [cos_problem_12])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, Y] :
+         (X ^ 2 + Y ^ 2 <= pi => cos(X) + cos(Y) <= 1 + cos(X * Y))),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X, Y] : (1 + cos(X * Y) < cos(X) + cos(Y) & X ^ 2 + Y ^ 2 <= pi)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (1 + cos(skoXC1 * skoYC1) < cos(skoXC1) + cos(skoYC1) &
+     skoXC1 ^ 2 + skoYC1 ^ 2 <= pi),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (1 + cos(skoXC1 * skoYC1) < cos(skoXC1) + cos(skoYC1)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (skoXC1 ^ 2 + skoYC1 ^ 2 <= pi),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [pi_lower_bound])).
+
+fof(normalize_0_5, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [pi_upper_bound])).
+
+cnf(refute_0_0, plain,
+    (~ lgen(0, cos(X_000016), X_000017) | cos(X_000016) <= X_000017),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_1, plain,
+    (~ lgen(0, 1 - X_000016 ^ 2 / 2 + X_000016 ^ 4 / 24, X_000017) |
+     lgen(0, cos(X_000016), X_000017)),
+    inference(subst, [], [cos_upper_bound_0])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(0, 1 - X_000016 ^ 2 / 2 + X_000016 ^ 4 / 24, X_000017) |
+     cos(X_000016) <= X_000017),
+    inference(resolve, [], [refute_0_1, refute_0_0])).
+
+cnf(refute_0_3, plain,
+    (X_000017 <
+     1 + X_000016 * (X_000016 * (-1/2 + X_000016 * (X_000016 * 1/24))) |
+     cos(X_000016) <= X_000017), inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain,
+    (1 +
+     skoYC1 *
+     (skoYC1 *
+      (1/2 + skoXC1 * (skoXC1 * -1/2) + skoYC1 * (skoYC1 * -1/24))) <
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24))) |
+     cos(skoXC1) <=
+     1 +
+     skoYC1 *
+     (skoYC1 *
+      (1/2 + skoXC1 * (skoXC1 * -1/2) + skoYC1 * (skoYC1 * -1/24)))),
+    inference(subst, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (1 + cos(skoXC1 * skoYC1) < cos(skoXC1) + cos(skoYC1)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_6, plain,
+    (cos(skoYC1 * skoXC1) < -1 + cos(skoXC1) + cos(skoYC1)),
+    inference(arithmetic, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (~ lgen(0, X_000010, cos(X_000009)) | X_000010 <= cos(X_000009)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_8, plain,
+    (~ lgen(0, X_000010, 1 - X_000009 ^ 2 / 2) |
+     lgen(0, X_000010, cos(X_000009))),
+    inference(subst, [], [cos_lower_bound_0])).
+
+cnf(refute_0_9, plain,
+    (~ lgen(0, X_000010, 1 - X_000009 ^ 2 / 2) |
+     X_000010 <= cos(X_000009)),
+    inference(resolve, [], [refute_0_8, refute_0_7])).
+
+cnf(refute_0_10, plain,
+    (1 + X_000009 * (X_000009 * -1/2) < X_000010 |
+     X_000010 <= cos(X_000009)), inference(arithmetic, [], [refute_0_9])).
+
+cnf(refute_0_11, plain,
+    (1 + skoYC1 * skoXC1 * (skoYC1 * skoXC1 * -1/2) <
+     -1 + cos(skoXC1) + cos(skoYC1) |
+     -1 + cos(skoXC1) + cos(skoYC1) <= cos(skoYC1 * skoXC1)),
+    inference(subst, [], [refute_0_10])).
+
+cnf(refute_0_12, plain,
+    (1 + skoYC1 * skoXC1 * (skoYC1 * skoXC1 * -1/2) <
+     -1 + cos(skoXC1) + cos(skoYC1)),
+    inference(resolve, [], [refute_0_11, refute_0_6])).
+
+cnf(refute_0_13, plain,
+    (2 + skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * -1/2))) +
+     cos(skoXC1) * -1 < cos(skoYC1)),
+    inference(arithmetic, [], [refute_0_12])).
+
+cnf(refute_0_14, plain,
+    (2 + skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * -1/2))) +
+     cos(skoXC1) * -1 <
+     1 + skoYC1 * (skoYC1 * (-1/2 + skoYC1 * (skoYC1 * 1/24))) |
+     cos(skoYC1) <=
+     2 + skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * -1/2))) +
+     cos(skoXC1) * -1), inference(subst, [], [refute_0_3])).
+
+cnf(refute_0_15, plain,
+    (2 + skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * -1/2))) +
+     cos(skoXC1) * -1 <
+     1 + skoYC1 * (skoYC1 * (-1/2 + skoYC1 * (skoYC1 * 1/24)))),
+    inference(resolve, [], [refute_0_14, refute_0_13])).
+
+cnf(refute_0_16, plain,
+    (1 +
+     skoYC1 *
+     (skoYC1 *
+      (1/2 + skoXC1 * (skoXC1 * -1/2) + skoYC1 * (skoYC1 * -1/24))) <
+     cos(skoXC1)), inference(arithmetic, [], [refute_0_15])).
+
+cnf(refute_0_17, plain,
+    (1 +
+     skoYC1 *
+     (skoYC1 *
+      (1/2 + skoXC1 * (skoXC1 * -1/2) + skoYC1 * (skoYC1 * -1/24))) <
+     1 + skoXC1 * (skoXC1 * (-1/2 + skoXC1 * (skoXC1 * 1/24)))),
+    inference(resolve, [], [refute_0_4, refute_0_16])).
+
+cnf(refute_0_18, plain,
+    (skoXC1 * (skoXC1 * (1/2 + skoXC1 * (skoXC1 * -1/24))) <
+     skoYC1 *
+     (skoYC1 *
+      (-1/2 + skoXC1 * (skoXC1 * 1/2) + skoYC1 * (skoYC1 * 1/24)))),
+    inference(arithmetic, [], [refute_0_17])).
+
+cnf(refute_0_19, plain, (skoXC1 ^ 2 + skoYC1 ^ 2 <= pi),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_20, plain, (skoYC1 * skoYC1 <= pi + skoXC1 * (skoXC1 * -1)),
+    inference(arithmetic, [], [refute_0_19])).
+
+cnf(refute_0_21, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_22, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_23, plain,
+    (skoYC1 *
+     (skoYC1 *
+      (-1/2 + skoXC1 * (skoXC1 * 1/2) + skoYC1 * (skoYC1 * 1/24))) <=
+     skoXC1 * (skoXC1 * (1/2 + skoXC1 * (skoXC1 * -1/24)))),
+    inference(decision, [], [refute_0_20, refute_0_21, refute_0_22])).
+
+cnf(refute_0_24, plain, ($false),
+    inference(resolve, [], [refute_0_23, refute_0_18])).
+% SZS output end CNFRefutation for cos-problem-12.tptp

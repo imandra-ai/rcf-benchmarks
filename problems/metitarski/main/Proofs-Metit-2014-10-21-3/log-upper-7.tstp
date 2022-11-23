@@ -1,0 +1,76 @@
+% SZS output start CNFRefutation for log-upper-7.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(ln_upper_bound_cf1, axiom,
+    (X <= 0 | ~ lgen(R, X - 1, Y) | lgen(R, ln(X), Y))).
+
+fof(log_upper_bound_problem_7, conjecture,
+    (! [X] : (-1 < X => ln(1 + X) <= X + 2 * X ^ 2))).
+
+fof(subgoal_0, plain, (! [X] : (-1 < X => ln(1 + X) <= X + 2 * X ^ 2)),
+    inference(strip, [], [log_upper_bound_problem_7])).
+
+fof(negate_0_0, plain, (~ ! [X] : (-1 < X => ln(1 + X) <= X + 2 * X ^ 2)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (? [X] : (-1 < X & X + 2 * X ^ 2 < ln(1 + X))),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (skoXC1 + 2 * skoXC1 ^ 2 < ln(1 + skoXC1) & -1 < skoXC1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (skoXC1 + 2 * skoXC1 ^ 2 < ln(1 + skoXC1)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (-1 < skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain, (skoXC1 + 2 * skoXC1 ^ 2 < ln(1 + skoXC1)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain, (skoXC1 * (1 + skoXC1 * 2) < ln(1 + skoXC1)),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(0, ln(X_000033), X_000034) | ln(X_000033) <= X_000034),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_3, plain,
+    (~ lgen(0, X_000033 - 1, X_000034) | X_000033 <= 0 |
+     lgen(0, ln(X_000033), X_000034)),
+    inference(subst, [], [ln_upper_bound_cf1])).
+
+cnf(refute_0_4, plain,
+    (~ lgen(0, X_000033 - 1, X_000034) | X_000033 <= 0 |
+     ln(X_000033) <= X_000034),
+    inference(resolve, [], [refute_0_3, refute_0_2])).
+
+cnf(refute_0_5, plain,
+    (X_000034 < -1 + X_000033 | X_000033 <= 0 | ln(X_000033) <= X_000034),
+    inference(arithmetic, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (skoXC1 * (1 + skoXC1 * 2) < -1 + (1 + skoXC1) | 1 + skoXC1 <= 0 |
+     ln(1 + skoXC1) <= skoXC1 * (1 + skoXC1 * 2)),
+    inference(subst, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (skoXC1 * (1 + skoXC1 * 2) < -1 + (1 + skoXC1) | 1 + skoXC1 <= 0),
+    inference(resolve, [], [refute_0_6, refute_0_1])).
+
+cnf(refute_0_8, plain, (0 < skoXC1 * (skoXC1 * -2) | skoXC1 <= -1),
+    inference(arithmetic, [], [refute_0_7])).
+
+cnf(refute_0_9, plain, (-1 < skoXC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_10, plain, (skoXC1 * (skoXC1 * -2) <= 0 | skoXC1 <= -1),
+    inference(decision, [], [refute_0_9])).
+
+cnf(refute_0_11, plain, (skoXC1 <= -1),
+    inference(resolve, [], [refute_0_10, refute_0_8])).
+
+cnf(refute_0_12, plain, ($false),
+    inference(resolve, [], [refute_0_11, refute_0_9])).
+% SZS output end CNFRefutation for log-upper-7.tptp

@@ -1,0 +1,11 @@
+-----[begin problem]-----
+% In Mathematica format:
+Timing[Resolve[Exists[{V000040,V000060}, ForAll[{}, And[V000060<=(5/2),0<=V000060,(-5/2)>V000040,0>V000040]]], Reals]]
+
+% In QepcadB format:
+(E V000040) (E V000060) [[V000060<=5/2]/\[[0<=V000060]/\[[V000040<-5/2]/\[V000040<0]]]].
+
+% In SMTLib2 format:
+(declare-fun V000040 () Real) (declare-fun V000060 () Real) (assert (and (<= V000060 (/ 5. 2.)) (and (<= 0. V000060) (and (not (<= (/ (- 5.) 2.) V000040)) (not (<= 0. V000040))))))
+-----[end problem]-----
+

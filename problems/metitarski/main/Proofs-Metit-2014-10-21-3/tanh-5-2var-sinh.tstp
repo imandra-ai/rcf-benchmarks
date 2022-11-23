@@ -1,0 +1,1566 @@
+% SZS output start CNFRefutation for tanh-5-2var-sinh.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(leq_left_divide_mul_pos, axiom, (Y * Z < X | X / Z <= Y | Z <= 0)).
+
+cnf(leq_right_divide_mul_pos, axiom, (Y < X * Z | X <= Y / Z | Z <= 0)).
+
+cnf(tanh_upper_bound_pos0, axiom,
+    (X < 0 | ~ lgen(R, X, Y) | lgen(R, tanh(X), Y))).
+
+cnf(sinh_taylor_lower_bound_pos1, axiom,
+    (X < 1 |
+     ~ lgen(R, Y,
+            1/2 *
+            (1 + 1/3 * X + 1/18 * X ^ 2 + 1/162 * X ^ 3 + 1/1944 * X ^ 4 +
+             1/29160 * X ^ 5) ^ 3 -
+            1152 / (X ^ 3 + 6 * X ^ 2 + 24 * X + 48) ^ 2) |
+     lgen(R, Y, sinh(X)))).
+
+cnf(sinh_lower_bound_pos1, axiom,
+    (X < 0 | 5/2 < X |
+     ~ lgen(R, Y,
+            12 * X * (X ^ 2 + 12) /
+            ((X ^ 2 - 6 * X + 12) * (X ^ 2 + 6 * X + 12))) |
+     lgen(R, Y, sinh(X)))).
+
+fof(tanh_5_2v, conjecture,
+    (! [X, Y] : ((0 < X & 0 < Y) => Y * tanh(X) <= sinh(Y * X)))).
+
+fof(subgoal_0, plain,
+    (! [X, Y] : ((0 < X & 0 < Y) => Y * tanh(X) <= sinh(Y * X))),
+    inference(strip, [], [tanh_5_2v])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, Y] : ((0 < X & 0 < Y) => Y * tanh(X) <= sinh(Y * X))),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X, Y] : (0 < X & 0 < Y & sinh(Y * X) < Y * tanh(X))),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (sinh(skoYC1 * skoXC1) < skoYC1 * tanh(skoXC1) & 0 < skoXC1 &
+     0 < skoYC1), inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (sinh(skoYC1 * skoXC1) < skoYC1 * tanh(skoXC1)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (0 < skoYC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (0 < skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (skoYC1 *
+     (skoXC1 * 144 +
+      skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12))))) <
+     skoYC1 * skoXC1 *
+     (144 +
+      skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * -12) +
+        skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))) |
+     skoYC1 * skoXC1 <=
+     skoYC1 *
+     (skoXC1 * 144 +
+      skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12))))) /
+     (144 +
+      skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * -12) +
+        skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))) |
+     144 +
+     skoYC1 *
+     (skoYC1 *
+      (skoXC1 * (skoXC1 * -12) +
+       skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))) <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_1, plain,
+    (sinh(skoYC1 * skoXC1) < skoXC1 * skoYC1 |
+     skoXC1 <= sinh(skoYC1 * skoXC1) / skoYC1 | skoYC1 <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_2, plain, (sinh(skoYC1 * skoXC1) < skoYC1 * tanh(skoXC1)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_3, plain, (sinh(skoYC1 * skoXC1) < tanh(skoXC1) * skoYC1),
+    inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain,
+    (sinh(skoYC1 * skoXC1) / skoYC1 < tanh(skoXC1) | skoYC1 <= 0),
+    inference(split, [], [refute_0_3])).
+
+cnf(refute_0_5, plain, (0 < skoYC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_6, plain, (sinh(skoYC1 * skoXC1) / skoYC1 < tanh(skoXC1)),
+    inference(resolve, [], [refute_0_4, refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (~ lgen(0, tanh(X_000033), X_000034) | tanh(X_000033) <= X_000034),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_8, plain,
+    (X_000033 < 0 | ~ lgen(0, X_000033, X_000034) |
+     lgen(0, tanh(X_000033), X_000034)),
+    inference(subst, [], [tanh_upper_bound_pos0])).
+
+cnf(refute_0_9, plain,
+    (X_000033 < 0 | ~ lgen(0, X_000033, X_000034) |
+     tanh(X_000033) <= X_000034),
+    inference(resolve, [], [refute_0_8, refute_0_7])).
+
+cnf(refute_0_10, plain,
+    (X_000034 < X_000033 | X_000033 < 0 | tanh(X_000033) <= X_000034),
+    inference(arithmetic, [], [refute_0_9])).
+
+cnf(refute_0_11, plain,
+    (skoXC1 < 0 | sinh(skoYC1 * skoXC1) / skoYC1 < skoXC1 |
+     tanh(skoXC1) <= sinh(skoYC1 * skoXC1) / skoYC1),
+    inference(subst, [], [refute_0_10])).
+
+cnf(refute_0_12, plain,
+    (skoXC1 < 0 | sinh(skoYC1 * skoXC1) / skoYC1 < skoXC1),
+    inference(resolve, [], [refute_0_11, refute_0_6])).
+
+cnf(refute_0_13, plain, (0 < skoXC1),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_14, plain, (0 <= skoXC1),
+    inference(decision, [], [refute_0_5, refute_0_13])).
+
+cnf(refute_0_15, plain, (sinh(skoYC1 * skoXC1) / skoYC1 < skoXC1),
+    inference(resolve, [], [refute_0_14, refute_0_12])).
+
+cnf(refute_0_16, plain,
+    (sinh(skoYC1 * skoXC1) < skoXC1 * skoYC1 | skoYC1 <= 0),
+    inference(resolve, [], [refute_0_1, refute_0_15])).
+
+cnf(refute_0_17, plain, (sinh(skoYC1 * skoXC1) < skoXC1 * skoYC1),
+    inference(resolve, [], [refute_0_16, refute_0_5])).
+
+cnf(refute_0_18, plain, (sinh(skoYC1 * skoXC1) < skoYC1 * skoXC1),
+    inference(arithmetic, [], [refute_0_17])).
+
+cnf(refute_0_19, plain,
+    (~ lgen(0, X_000083, sinh(X_000082)) | X_000083 <= sinh(X_000082)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_20, plain,
+    (5/2 < X_000082 | X_000082 < 0 |
+     ~ lgen(0, X_000083,
+            12 * X_000082 * (X_000082 ^ 2 + 12) /
+            ((X_000082 ^ 2 - 6 * X_000082 + 12) *
+             (X_000082 ^ 2 + 6 * X_000082 + 12))) |
+     lgen(0, X_000083, sinh(X_000082))),
+    inference(subst, [], [sinh_lower_bound_pos1])).
+
+cnf(refute_0_21, plain,
+    (5/2 < X_000082 | X_000082 < 0 |
+     ~ lgen(0, X_000083,
+            12 * X_000082 * (X_000082 ^ 2 + 12) /
+            ((X_000082 ^ 2 - 6 * X_000082 + 12) *
+             (X_000082 ^ 2 + 6 * X_000082 + 12))) |
+     X_000083 <= sinh(X_000082)),
+    inference(resolve, [], [refute_0_20, refute_0_19])).
+
+cnf(refute_0_22, plain,
+    (5/2 < X_000082 |
+     X_000082 * (144 + X_000082 * (X_000082 * 12)) /
+     (144 + X_000082 * (X_000082 * (-12 + X_000082 * X_000082))) <
+     X_000083 | X_000082 < 0 | X_000083 <= sinh(X_000082)),
+    inference(arithmetic, [], [refute_0_21])).
+
+cnf(refute_0_23, plain,
+    (skoYC1 * skoXC1 < 0 | 5/2 < skoYC1 * skoXC1 |
+     skoYC1 * skoXC1 * (144 + skoYC1 * skoXC1 * (skoYC1 * skoXC1 * 12)) /
+     (144 +
+      skoYC1 * skoXC1 *
+      (skoYC1 * skoXC1 * (-12 + skoYC1 * skoXC1 * (skoYC1 * skoXC1)))) <
+     skoYC1 * skoXC1 | skoYC1 * skoXC1 <= sinh(skoYC1 * skoXC1)),
+    inference(subst, [], [refute_0_22])).
+
+cnf(refute_0_24, plain,
+    (skoYC1 * skoXC1 < 0 | 5/2 < skoYC1 * skoXC1 |
+     skoYC1 * skoXC1 * (144 + skoYC1 * skoXC1 * (skoYC1 * skoXC1 * 12)) /
+     (144 +
+      skoYC1 * skoXC1 *
+      (skoYC1 * skoXC1 * (-12 + skoYC1 * skoXC1 * (skoYC1 * skoXC1)))) <
+     skoYC1 * skoXC1), inference(resolve, [], [refute_0_23, refute_0_18])).
+
+cnf(refute_0_25, plain,
+    (0 < skoYC1 * (skoXC1 * -1) | 5/2 < skoYC1 * skoXC1 |
+     skoYC1 *
+     (skoXC1 * 144 +
+      skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12))))) /
+     (144 +
+      skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * -12) +
+        skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))) <
+     skoYC1 * skoXC1), inference(arithmetic, [], [refute_0_24])).
+
+cnf(refute_0_26, plain,
+    ((1/2 +
+      skoYC1 *
+      (skoXC1 * -1/2 +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * 1/4) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * 1/12)) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/48))) +
+          skoYC1 *
+          (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/240)))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 *
+             (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 121/174960))))) +
+            skoYC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 17/174960)))))) +
+             skoYC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 * (skoXC1 * (skoXC1 * 49/4199040))))))) +
+              skoYC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 * (skoXC1 * (skoXC1 * 409/340122240)))))))) +
+               skoYC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 * (skoXC1 * 361/3401222400))))))))) +
+                skoYC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 * (skoXC1 * 1/125971200)))))))))) +
+                 skoYC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 * 181/367332019200))))))))))) +
+                  skoYC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 * 1/40814668800)))))))))))) +
+                   skoYC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 * 1/1101996057600))))))))))))) +
+                    skoYC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   1/
+                                   49589822592000)))))))))))))))))))))))))))))) *
+     (2304 +
+      skoYC1 *
+      (skoXC1 * 2304 +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * 1152) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+          skoYC1 *
+          (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))))))) <
+     1152 |
+     2304 +
+     skoYC1 *
+     (skoXC1 * 2304 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1152) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))))) <= 0 |
+     1152 /
+     (2304 +
+      skoYC1 *
+      (skoXC1 * 2304 +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * 1152) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+          skoYC1 *
+          (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))))))) <=
+     1/2 +
+     skoYC1 *
+     (skoXC1 * -1/2 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1/4) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 1/12)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/48))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/240)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 121/174960))))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 17/174960)))))) +
+            skoYC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 49/4199040))))))) +
+             skoYC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 * (skoXC1 * (skoXC1 * 409/340122240)))))))) +
+              skoYC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 * (skoXC1 * 361/3401222400))))))))) +
+               skoYC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 * (skoXC1 * 1/125971200)))))))))) +
+                skoYC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 * (skoXC1 * 181/367332019200))))))))))) +
+                 skoYC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 * (skoXC1 * 1/40814668800)))))))))))) +
+                  skoYC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 * 1/1101996057600))))))))))))) +
+                   skoYC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  1/
+                                  49589822592000)))))))))))))))))))))))))))))),
+    inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_27, plain,
+    (~ lgen(0, X_000069, sinh(X_000068)) | X_000069 <= sinh(X_000068)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_28, plain,
+    (X_000068 < 1 |
+     ~ lgen(0, X_000069,
+            1/2 *
+            (1 + 1/3 * X_000068 + 1/18 * X_000068 ^ 2 +
+             1/162 * X_000068 ^ 3 + 1/1944 * X_000068 ^ 4 +
+             1/29160 * X_000068 ^ 5) ^ 3 -
+            1152 /
+            (X_000068 ^ 3 + 6 * X_000068 ^ 2 + 24 * X_000068 + 48) ^ 2) |
+     lgen(0, X_000069, sinh(X_000068))),
+    inference(subst, [], [sinh_taylor_lower_bound_pos1])).
+
+cnf(refute_0_29, plain,
+    (X_000068 < 1 |
+     ~ lgen(0, X_000069,
+            1/2 *
+            (1 + 1/3 * X_000068 + 1/18 * X_000068 ^ 2 +
+             1/162 * X_000068 ^ 3 + 1/1944 * X_000068 ^ 4 +
+             1/29160 * X_000068 ^ 5) ^ 3 -
+            1152 /
+            (X_000068 ^ 3 + 6 * X_000068 ^ 2 + 24 * X_000068 + 48) ^ 2) |
+     X_000069 <= sinh(X_000068)),
+    inference(resolve, [], [refute_0_28, refute_0_27])).
+
+cnf(refute_0_30, plain,
+    (1/2 +
+     X_000068 *
+     (1/2 +
+      X_000068 *
+      (1/4 +
+       X_000068 *
+       (1/12 +
+        X_000068 *
+        (1/48 +
+         X_000068 *
+         (1/240 +
+          X_000068 *
+          (121/174960 +
+           X_000068 *
+           (17/174960 +
+            X_000068 *
+            (49/4199040 +
+             X_000068 *
+             (409/340122240 +
+              X_000068 *
+              (361/3401222400 +
+               X_000068 *
+               (1/125971200 +
+                X_000068 *
+                (181/367332019200 +
+                 X_000068 *
+                 (1/40814668800 +
+                  X_000068 *
+                  (1/1101996057600 +
+                   X_000068 * 1/49589822592000)))))))))))))) +
+     1152 /
+     (2304 +
+      X_000068 *
+      (2304 +
+       X_000068 *
+       (1152 +
+        X_000068 *
+        (384 + X_000068 * (84 + X_000068 * (12 + X_000068)))))) * -1 <
+     X_000069 | X_000068 < 1 | X_000069 <= sinh(X_000068)),
+    inference(arithmetic, [], [refute_0_29])).
+
+cnf(refute_0_31, plain,
+    (skoYC1 * skoXC1 < 1 |
+     1/2 +
+     skoYC1 * skoXC1 *
+     (1/2 +
+      skoYC1 * skoXC1 *
+      (1/4 +
+       skoYC1 * skoXC1 *
+       (1/12 +
+        skoYC1 * skoXC1 *
+        (1/48 +
+         skoYC1 * skoXC1 *
+         (1/240 +
+          skoYC1 * skoXC1 *
+          (121/174960 +
+           skoYC1 * skoXC1 *
+           (17/174960 +
+            skoYC1 * skoXC1 *
+            (49/4199040 +
+             skoYC1 * skoXC1 *
+             (409/340122240 +
+              skoYC1 * skoXC1 *
+              (361/3401222400 +
+               skoYC1 * skoXC1 *
+               (1/125971200 +
+                skoYC1 * skoXC1 *
+                (181/367332019200 +
+                 skoYC1 * skoXC1 *
+                 (1/40814668800 +
+                  skoYC1 * skoXC1 *
+                  (1/1101996057600 +
+                   skoYC1 * skoXC1 * 1/49589822592000)))))))))))))) +
+     1152 /
+     (2304 +
+      skoYC1 * skoXC1 *
+      (2304 +
+       skoYC1 * skoXC1 *
+       (1152 +
+        skoYC1 * skoXC1 *
+        (384 +
+         skoYC1 * skoXC1 *
+         (84 + skoYC1 * skoXC1 * (12 + skoYC1 * skoXC1)))))) * -1 <
+     skoYC1 * skoXC1 | skoYC1 * skoXC1 <= sinh(skoYC1 * skoXC1)),
+    inference(subst, [], [refute_0_30])).
+
+cnf(refute_0_32, plain,
+    (skoYC1 * skoXC1 < 1 |
+     1/2 +
+     skoYC1 * skoXC1 *
+     (1/2 +
+      skoYC1 * skoXC1 *
+      (1/4 +
+       skoYC1 * skoXC1 *
+       (1/12 +
+        skoYC1 * skoXC1 *
+        (1/48 +
+         skoYC1 * skoXC1 *
+         (1/240 +
+          skoYC1 * skoXC1 *
+          (121/174960 +
+           skoYC1 * skoXC1 *
+           (17/174960 +
+            skoYC1 * skoXC1 *
+            (49/4199040 +
+             skoYC1 * skoXC1 *
+             (409/340122240 +
+              skoYC1 * skoXC1 *
+              (361/3401222400 +
+               skoYC1 * skoXC1 *
+               (1/125971200 +
+                skoYC1 * skoXC1 *
+                (181/367332019200 +
+                 skoYC1 * skoXC1 *
+                 (1/40814668800 +
+                  skoYC1 * skoXC1 *
+                  (1/1101996057600 +
+                   skoYC1 * skoXC1 * 1/49589822592000)))))))))))))) +
+     1152 /
+     (2304 +
+      skoYC1 * skoXC1 *
+      (2304 +
+       skoYC1 * skoXC1 *
+       (1152 +
+        skoYC1 * skoXC1 *
+        (384 +
+         skoYC1 * skoXC1 *
+         (84 + skoYC1 * skoXC1 * (12 + skoYC1 * skoXC1)))))) * -1 <
+     skoYC1 * skoXC1), inference(resolve, [], [refute_0_31, refute_0_18])).
+
+cnf(refute_0_33, plain,
+    (-1 < skoYC1 * (skoXC1 * -1) |
+     1/2 +
+     skoYC1 *
+     (skoXC1 * -1/2 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1/4) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 1/12)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/48))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/240)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 121/174960))))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 17/174960)))))) +
+            skoYC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 49/4199040))))))) +
+             skoYC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 * (skoXC1 * (skoXC1 * 409/340122240)))))))) +
+              skoYC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 * (skoXC1 * 361/3401222400))))))))) +
+               skoYC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 * (skoXC1 * 1/125971200)))))))))) +
+                skoYC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 * (skoXC1 * 181/367332019200))))))))))) +
+                 skoYC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 * (skoXC1 * 1/40814668800)))))))))))) +
+                  skoYC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 * 1/1101996057600))))))))))))) +
+                   skoYC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  1/
+                                  49589822592000))))))))))))))))))))))))))))) <
+     1152 /
+     (2304 +
+      skoYC1 *
+      (skoXC1 * 2304 +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * 1152) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+          skoYC1 *
+          (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))))))),
+    inference(arithmetic, [], [refute_0_32])).
+
+cnf(refute_0_34, plain,
+    ((1/2 +
+      skoYC1 *
+      (skoXC1 * -1/2 +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * 1/4) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * 1/12)) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/48))) +
+          skoYC1 *
+          (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 1/240)))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 *
+             (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 121/174960))))) +
+            skoYC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 17/174960)))))) +
+             skoYC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 * (skoXC1 * (skoXC1 * 49/4199040))))))) +
+              skoYC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 * (skoXC1 * (skoXC1 * 409/340122240)))))))) +
+               skoYC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 * (skoXC1 * 361/3401222400))))))))) +
+                skoYC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 * (skoXC1 * 1/125971200)))))))))) +
+                 skoYC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 * 181/367332019200))))))))))) +
+                  skoYC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 * 1/40814668800)))))))))))) +
+                   skoYC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 * 1/1101996057600))))))))))))) +
+                    skoYC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   1/
+                                   49589822592000)))))))))))))))))))))))))))))) *
+     (2304 +
+      skoYC1 *
+      (skoXC1 * 2304 +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * 1152) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+          skoYC1 *
+          (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))))))) <
+     1152 | -1 < skoYC1 * (skoXC1 * -1) |
+     2304 +
+     skoYC1 *
+     (skoXC1 * 2304 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1152) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))))) <= 0),
+    inference(resolve, [], [refute_0_26, refute_0_33])).
+
+cnf(refute_0_35, plain,
+    (-1 < skoYC1 * (skoXC1 * -1) |
+     0 <
+     skoYC1 *
+     (skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * -384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -378))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1068/5)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -40189/486))))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -3907/162)))))) +
+            skoYC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -4117/729))))))) +
+             skoYC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 * (skoXC1 * (skoXC1 * -1287851/1180980)))))))) +
+              skoYC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 * (skoXC1 * -4315211/23619600))))))))) +
+               skoYC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 * (skoXC1 * -210661/7873200)))))))))) +
+                skoYC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 * -4389173/1275458400))))))))))) +
+                 skoYC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 * -248269/637729200)))))))))))) +
+                  skoYC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 * -592163/15305500800))))))))))))) +
+                   skoYC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  -2315957/688747536000)))))))))))))) +
+                    skoYC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    -43613/172186884000))))))))))))))) +
+                     skoYC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      -22427/
+                                      1377495072000)))))))))))))))) +
+                      skoYC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        -14393/
+                                        16529940864000))))))))))))))))) +
+                       skoYC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        (skoXC1 *
+                                         (skoXC1 *
+                                          -613/
+                                          16529940864000)))))))))))))))))) +
+                        skoYC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        (skoXC1 *
+                                         (skoXC1 *
+                                          (skoXC1 *
+                                           (skoXC1 *
+                                            -19/
+                                            16529940864000))))))))))))))))))) +
+                         skoYC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        (skoXC1 *
+                                         (skoXC1 *
+                                          (skoXC1 *
+                                           (skoXC1 *
+                                            (skoXC1 *
+                                             (skoXC1 *
+                                              -1/
+                                              49589822592000))))))))))))))))))))))))))))))))))))))))) |
+     skoYC1 *
+     (skoXC1 * 2304 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1152) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))))) <=
+     -2304), inference(arithmetic, [], [refute_0_34])).
+
+cnf(refute_0_36, plain,
+    (-1 < skoYC1 * (skoXC1 * -1) |
+     skoYC1 *
+     (skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * -384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -378))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -1068/5)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 *
+            (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -40189/486))))) +
+           skoYC1 *
+           (skoXC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -3907/162)))))) +
+            skoYC1 *
+            (skoXC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * -4117/729))))))) +
+             skoYC1 *
+             (skoXC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 * (skoXC1 * (skoXC1 * -1287851/1180980)))))))) +
+              skoYC1 *
+              (skoXC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 * (skoXC1 * -4315211/23619600))))))))) +
+               skoYC1 *
+               (skoXC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 * (skoXC1 * -210661/7873200)))))))))) +
+                skoYC1 *
+                (skoXC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 * -4389173/1275458400))))))))))) +
+                 skoYC1 *
+                 (skoXC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 * -248269/637729200)))))))))))) +
+                  skoYC1 *
+                  (skoXC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 * -592163/15305500800))))))))))))) +
+                   skoYC1 *
+                   (skoXC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  -2315957/688747536000)))))))))))))) +
+                    skoYC1 *
+                    (skoXC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    -43613/172186884000))))))))))))))) +
+                     skoYC1 *
+                     (skoXC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      -22427/
+                                      1377495072000)))))))))))))))) +
+                      skoYC1 *
+                      (skoXC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        -14393/
+                                        16529940864000))))))))))))))))) +
+                       skoYC1 *
+                       (skoXC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        (skoXC1 *
+                                         (skoXC1 *
+                                          -613/
+                                          16529940864000)))))))))))))))))) +
+                        skoYC1 *
+                        (skoXC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        (skoXC1 *
+                                         (skoXC1 *
+                                          (skoXC1 *
+                                           (skoXC1 *
+                                            -19/
+                                            16529940864000))))))))))))))))))) +
+                         skoYC1 *
+                         (skoXC1 *
+                          (skoXC1 *
+                           (skoXC1 *
+                            (skoXC1 *
+                             (skoXC1 *
+                              (skoXC1 *
+                               (skoXC1 *
+                                (skoXC1 *
+                                 (skoXC1 *
+                                  (skoXC1 *
+                                   (skoXC1 *
+                                    (skoXC1 *
+                                     (skoXC1 *
+                                      (skoXC1 *
+                                       (skoXC1 *
+                                        (skoXC1 *
+                                         (skoXC1 *
+                                          (skoXC1 *
+                                           (skoXC1 *
+                                            (skoXC1 *
+                                             (skoXC1 *
+                                              -1/
+                                              49589822592000))))))))))))))))))))))))))))))))))))))))) <=
+     0 |
+     skoYC1 *
+     (skoXC1 * 2304 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1152) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))))) <=
+     -2304), inference(decision, [], [refute_0_5, refute_0_13])).
+
+cnf(refute_0_37, plain,
+    (-1 < skoYC1 * (skoXC1 * -1) |
+     skoYC1 *
+     (skoXC1 * 2304 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1152) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))))) <=
+     -2304), inference(resolve, [], [refute_0_36, refute_0_35])).
+
+cnf(refute_0_38, plain,
+    (-1 < skoYC1 * (skoXC1 * -1) |
+     -2304 <
+     skoYC1 *
+     (skoXC1 * 2304 +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1152) +
+       skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * 384)) +
+        skoYC1 *
+        (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 84))) +
+         skoYC1 *
+         (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12)))) +
+          skoYC1 *
+          (skoXC1 *
+           (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))))))),
+    inference(decision, [], [refute_0_5, refute_0_13])).
+
+cnf(refute_0_39, plain, (-1 < skoYC1 * (skoXC1 * -1)),
+    inference(resolve, [], [refute_0_37, refute_0_38])).
+
+cnf(refute_0_40, plain,
+    (5/2 < skoYC1 * skoXC1 | skoYC1 * (skoXC1 * -1) <= 0),
+    inference(decision, [], [refute_0_39, refute_0_5, refute_0_13])).
+
+cnf(refute_0_41, plain,
+    (5/2 < skoYC1 * skoXC1 |
+     skoYC1 *
+     (skoXC1 * 144 +
+      skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12))))) /
+     (144 +
+      skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * -12) +
+        skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))) <
+     skoYC1 * skoXC1), inference(resolve, [], [refute_0_40, refute_0_25])).
+
+cnf(refute_0_42, plain, (skoYC1 * skoXC1 <= 5/2),
+    inference(decision, [], [refute_0_39, refute_0_5, refute_0_13])).
+
+cnf(refute_0_43, plain,
+    (skoYC1 *
+     (skoXC1 * 144 +
+      skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12))))) /
+     (144 +
+      skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * -12) +
+        skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))) <
+     skoYC1 * skoXC1), inference(resolve, [], [refute_0_42, refute_0_41])).
+
+cnf(refute_0_44, plain,
+    (skoYC1 *
+     (skoXC1 * 144 +
+      skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * 12))))) <
+     skoYC1 * skoXC1 *
+     (144 +
+      skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * -12) +
+        skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))) |
+     144 +
+     skoYC1 *
+     (skoYC1 *
+      (skoXC1 * (skoXC1 * -12) +
+       skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))) <= 0),
+    inference(resolve, [], [refute_0_0, refute_0_43])).
+
+cnf(refute_0_45, plain,
+    (0 <
+     skoYC1 *
+     (skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * -24)) +
+        skoYC1 *
+        (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))) |
+     skoYC1 *
+     (skoYC1 *
+      (skoXC1 * (skoXC1 * -12) +
+       skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))) <=
+     -144), inference(arithmetic, [], [refute_0_44])).
+
+cnf(refute_0_46, plain,
+    (skoYC1 *
+     (skoYC1 *
+      (skoYC1 *
+       (skoXC1 * (skoXC1 * (skoXC1 * -24)) +
+        skoYC1 *
+        (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))))) <=
+     0 |
+     skoYC1 *
+     (skoYC1 *
+      (skoXC1 * (skoXC1 * -12) +
+       skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))) <=
+     -144),
+    inference(decision, [], [refute_0_39, refute_0_5, refute_0_13])).
+
+cnf(refute_0_47, plain,
+    (skoYC1 *
+     (skoYC1 *
+      (skoXC1 * (skoXC1 * -12) +
+       skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1)))))) <=
+     -144), inference(resolve, [], [refute_0_46, refute_0_45])).
+
+cnf(refute_0_48, plain,
+    (-144 <
+     skoYC1 *
+     (skoYC1 *
+      (skoXC1 * (skoXC1 * -12) +
+       skoYC1 * (skoYC1 * (skoXC1 * (skoXC1 * (skoXC1 * skoXC1))))))),
+    inference(decision, [], [refute_0_39, refute_0_5, refute_0_13])).
+
+cnf(refute_0_49, plain, ($false),
+    inference(resolve, [], [refute_0_47, refute_0_48])).
+% SZS output end CNFRefutation for tanh-5-2var-sinh.tptp

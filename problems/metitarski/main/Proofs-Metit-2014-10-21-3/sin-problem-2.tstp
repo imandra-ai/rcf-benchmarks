@@ -1,0 +1,62 @@
+% SZS output start CNFRefutation for sin-problem-2.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(sin_upper_bound_0_pos, axiom,
+    (X < 0 | ~ lgen(R, X, Y) | lgen(R, sin(X), Y))).
+
+fof(sin_problem_2, conjecture, (! [X] : (0 <= X => sin(X) <= X))).
+
+fof(subgoal_0, plain, (! [X] : (0 <= X => sin(X) <= X)),
+    inference(strip, [], [sin_problem_2])).
+
+fof(negate_0_0, plain, (~ ! [X] : (0 <= X => sin(X) <= X)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (? [X] : (X < sin(X) & 0 <= X)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain, (skoXC1 < sin(skoXC1) & 0 <= skoXC1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (skoXC1 < sin(skoXC1)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (0 <= skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain, (skoXC1 < sin(skoXC1)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (~ lgen(0, sin(X_000033), X_000034) | sin(X_000033) <= X_000034),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_2, plain,
+    (X_000033 < 0 | ~ lgen(0, X_000033, X_000034) |
+     lgen(0, sin(X_000033), X_000034)),
+    inference(subst, [], [sin_upper_bound_0_pos])).
+
+cnf(refute_0_3, plain,
+    (X_000033 < 0 | ~ lgen(0, X_000033, X_000034) |
+     sin(X_000033) <= X_000034),
+    inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (X_000034 < X_000033 | X_000033 < 0 | sin(X_000033) <= X_000034),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (skoXC1 < 0 | skoXC1 < skoXC1 | sin(skoXC1) <= skoXC1),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain, (skoXC1 < 0 | skoXC1 < skoXC1),
+    inference(resolve, [], [refute_0_5, refute_0_0])).
+
+cnf(refute_0_7, plain, (0 <= skoXC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_8, plain, (skoXC1 < skoXC1),
+    inference(resolve, [], [refute_0_7, refute_0_6])).
+
+cnf(refute_0_9, plain, ($false), inference(arithmetic, [], [refute_0_8])).
+% SZS output end CNFRefutation for sin-problem-2.tptp

@@ -1,0 +1,104 @@
+% SZS output start CNFRefutation for Nichols-Plot-Inverted-Pendulum-Fails-2-1.tptp
+cnf(leq_right_divide_mul_pos, axiom, (Y < X * Z | X <= Y / Z | Z <= 0)).
+
+fof('Nichols_Plot_Inverted_Pendulum_Fails_2_1', conjecture,
+    (! [X] :
+       (633/512 <= X =>
+        0 <=
+        arctan((105247 * X ^ 3 + 3890 * X ^ 5 - 169932 * X) /
+               (14325 * X ^ 4 + 406627 * X ^ 2 - 16660))))).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       (633/512 <= X =>
+        0 <=
+        arctan((105247 * X ^ 3 + 3890 * X ^ 5 - 169932 * X) /
+               (14325 * X ^ 4 + 406627 * X ^ 2 - 16660)))),
+    inference(strip, [], ['Nichols_Plot_Inverted_Pendulum_Fails_2_1'])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         (633/512 <= X =>
+          0 <=
+          arctan((105247 * X ^ 3 + 3890 * X ^ 5 - 169932 * X) /
+                 (14325 * X ^ 4 + 406627 * X ^ 2 - 16660)))),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       (arctan((105247 * X ^ 3 + 3890 * X ^ 5 - 169932 * X) /
+               (14325 * X ^ 4 + 406627 * X ^ 2 - 16660)) < 0 &
+        633/512 <= X)), inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (arctan((105247 * skoXC1 ^ 3 + 3890 * skoXC1 ^ 5 - 169932 * skoXC1) /
+            (14325 * skoXC1 ^ 4 + 406627 * skoXC1 ^ 2 - 16660)) < 0 &
+     633/512 <= skoXC1), inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (arctan((105247 * skoXC1 ^ 3 + 3890 * skoXC1 ^ 5 - 169932 * skoXC1) /
+            (14325 * skoXC1 ^ 4 + 406627 * skoXC1 ^ 2 - 16660)) < 0),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (633/512 <= skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (arctan((105247 * skoXC1 ^ 3 + 3890 * skoXC1 ^ 5 - 169932 * skoXC1) /
+            (14325 * skoXC1 ^ 4 + 406627 * skoXC1 ^ 2 - 16660)) < 0),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (skoXC1 *
+     (-169932 + skoXC1 * (skoXC1 * (105247 + skoXC1 * (skoXC1 * 3890)))) /
+     (-16660 + skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325)))) <
+     0), inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (skoXC1 *
+     (-169932 + skoXC1 * (skoXC1 * (105247 + skoXC1 * (skoXC1 * 3890)))) <
+     0 *
+     (-16660 + skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325)))) |
+     0 <=
+     skoXC1 *
+     (-169932 + skoXC1 * (skoXC1 * (105247 + skoXC1 * (skoXC1 * 3890)))) /
+     (-16660 + skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325)))) |
+     -16660 + skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325))) <=
+     0), inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_3, plain,
+    (skoXC1 *
+     (-169932 + skoXC1 * (skoXC1 * (105247 + skoXC1 * (skoXC1 * 3890)))) <
+     0 *
+     (-16660 + skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325)))) |
+     -16660 + skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325))) <=
+     0), inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (0 <
+     skoXC1 *
+     (169932 + skoXC1 * (skoXC1 * (-105247 + skoXC1 * (skoXC1 * -3890)))) |
+     skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325))) <= 16660),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain, (633/512 <= skoXC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_6, plain,
+    (skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325))) <= 16660 |
+     skoXC1 *
+     (169932 +
+      skoXC1 * (skoXC1 * (-105247 + skoXC1 * (skoXC1 * -3890)))) <= 0),
+    inference(decision, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325))) <= 16660),
+    inference(resolve, [], [refute_0_6, refute_0_4])).
+
+cnf(refute_0_8, plain,
+    (16660 < skoXC1 * (skoXC1 * (406627 + skoXC1 * (skoXC1 * 14325)))),
+    inference(decision, [], [refute_0_5])).
+
+cnf(refute_0_9, plain, ($false),
+    inference(resolve, [], [refute_0_7, refute_0_8])).
+% SZS output end CNFRefutation for Nichols-Plot-Inverted-Pendulum-Fails-2-1.tptp

@@ -1,0 +1,209 @@
+% SZS output start CNFRefutation for Nichols-Plot-Inverted-Pendulum-Fails-3-1.tptp
+cnf(leq_left_divide_mul_pos, axiom, (Y * Z < X | X / Z <= Y | Z <= 0)).
+
+fof('Nichols_Plot_Inverted_Pendulum_Fails_3_1', conjecture,
+    (! [X, Y] :
+       ((55/256 <= X & 0 <= Y &
+         Y ^ 2 =
+         15132100 * X ^ 10 + 1024027285 * X ^ 8 + 21404723599 * X ^ 6 +
+         129098541721 * X ^ 4 + 15328072984 * X ^ 2 + 277555600) =>
+        4250 * Y /
+        (3783025 * X ^ 6 + 217230815 * X ^ 4 + 3120782021 * X ^ 2 +
+         69388900) <= 71/100))).
+
+fof(subgoal_0, plain,
+    (! [X, Y] :
+       ((55/256 <= X & 0 <= Y &
+         Y ^ 2 =
+         15132100 * X ^ 10 + 1024027285 * X ^ 8 + 21404723599 * X ^ 6 +
+         129098541721 * X ^ 4 + 15328072984 * X ^ 2 + 277555600) =>
+        4250 * Y /
+        (3783025 * X ^ 6 + 217230815 * X ^ 4 + 3120782021 * X ^ 2 +
+         69388900) <= 71/100)),
+    inference(strip, [], ['Nichols_Plot_Inverted_Pendulum_Fails_3_1'])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, Y] :
+         ((55/256 <= X & 0 <= Y &
+           Y ^ 2 =
+           15132100 * X ^ 10 + 1024027285 * X ^ 8 + 21404723599 * X ^ 6 +
+           129098541721 * X ^ 4 + 15328072984 * X ^ 2 + 277555600) =>
+          4250 * Y /
+          (3783025 * X ^ 6 + 217230815 * X ^ 4 + 3120782021 * X ^ 2 +
+           69388900) <= 71/100)), inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X, Y] :
+       (71/100 <
+        4250 * Y /
+        (3783025 * X ^ 6 + 217230815 * X ^ 4 + 3120782021 * X ^ 2 +
+         69388900) & 0 <= Y & 55/256 <= X &
+        Y ^ 2 =
+        15132100 * X ^ 10 + 1024027285 * X ^ 8 + 21404723599 * X ^ 6 +
+        129098541721 * X ^ 4 + 15328072984 * X ^ 2 + 277555600)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (71/100 <
+     4250 * skoYC1 /
+     (3783025 * skoXC1 ^ 6 + 217230815 * skoXC1 ^ 4 +
+      3120782021 * skoXC1 ^ 2 + 69388900) & 0 <= skoYC1 &
+     55/256 <= skoXC1 &
+     skoYC1 ^ 2 =
+     15132100 * skoXC1 ^ 10 + 1024027285 * skoXC1 ^ 8 +
+     21404723599 * skoXC1 ^ 6 + 129098541721 * skoXC1 ^ 4 +
+     15328072984 * skoXC1 ^ 2 + 277555600),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (71/100 <
+     4250 * skoYC1 /
+     (3783025 * skoXC1 ^ 6 + 217230815 * skoXC1 ^ 4 +
+      3120782021 * skoXC1 ^ 2 + 69388900)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain,
+    (skoYC1 ^ 2 =
+     15132100 * skoXC1 ^ 10 + 1024027285 * skoXC1 ^ 8 +
+     21404723599 * skoXC1 ^ 6 + 129098541721 * skoXC1 ^ 4 +
+     15328072984 * skoXC1 ^ 2 + 277555600),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (55/256 <= skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_5, plain, (0 <= skoYC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (71/100 <
+     4250 * skoYC1 /
+     (3783025 * skoXC1 ^ 6 + 217230815 * skoXC1 ^ 4 +
+      3120782021 * skoXC1 ^ 2 + 69388900)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (71/100 <
+     skoYC1 * 4250 /
+     (69388900 +
+      skoXC1 *
+      (skoXC1 *
+       (3120782021 +
+        skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025))))))),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (71/100 *
+     (69388900 +
+      skoXC1 *
+      (skoXC1 *
+       (3120782021 +
+        skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025)))))) <
+     skoYC1 * 4250 |
+     69388900 +
+     skoXC1 *
+     (skoXC1 *
+      (3120782021 +
+       skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025))))) <=
+     0 |
+     skoYC1 * 4250 /
+     (69388900 +
+      skoXC1 *
+      (skoXC1 *
+       (3120782021 +
+        skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025)))))) <=
+     71/100), inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_3, plain,
+    (71/100 *
+     (69388900 +
+      skoXC1 *
+      (skoXC1 *
+       (3120782021 +
+        skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025)))))) <
+     skoYC1 * 4250 |
+     69388900 +
+     skoXC1 *
+     (skoXC1 *
+      (3120782021 +
+       skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025))))) <=
+     0), inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (2898007/250 +
+     skoXC1 *
+     (skoXC1 *
+      (13033854323/25000 +
+       skoXC1 *
+       (skoXC1 *
+        (3084677573/85000 + skoXC1 * (skoXC1 * 10743791/17000))))) <
+     skoYC1 |
+     skoXC1 *
+     (skoXC1 *
+      (3120782021 +
+       skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025))))) <=
+     -69388900), inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (skoYC1 ^ 2 =
+     15132100 * skoXC1 ^ 10 + 1024027285 * skoXC1 ^ 8 +
+     21404723599 * skoXC1 ^ 6 + 129098541721 * skoXC1 ^ 4 +
+     15328072984 * skoXC1 ^ 2 + 277555600),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_6, plain,
+    (skoYC1 * skoYC1 =
+     277555600 +
+     skoXC1 *
+     (skoXC1 *
+      (15328072984 +
+       skoXC1 *
+       (skoXC1 *
+        (129098541721 +
+         skoXC1 *
+         (skoXC1 *
+          (21404723599 +
+           skoXC1 *
+           (skoXC1 * (1024027285 + skoXC1 * (skoXC1 * 15132100)))))))))),
+    inference(arithmetic, [], [refute_0_5])).
+
+cnf(refute_0_7, plain, (55/256 <= skoXC1),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_8, plain, (0 <= skoYC1),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_9, plain,
+    (skoXC1 *
+     (skoXC1 *
+      (3120782021 +
+       skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025))))) <=
+     -69388900 |
+     skoYC1 <=
+     2898007/250 +
+     skoXC1 *
+     (skoXC1 *
+      (13033854323/25000 +
+       skoXC1 *
+       (skoXC1 *
+        (3084677573/85000 + skoXC1 * (skoXC1 * 10743791/17000)))))),
+    inference(decision, [], [refute_0_6, refute_0_7, refute_0_8])).
+
+cnf(refute_0_10, plain,
+    (skoXC1 *
+     (skoXC1 *
+      (3120782021 +
+       skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025))))) <=
+     -69388900), inference(resolve, [], [refute_0_9, refute_0_4])).
+
+cnf(refute_0_11, plain,
+    (-69388900 <
+     skoXC1 *
+     (skoXC1 *
+      (3120782021 +
+       skoXC1 * (skoXC1 * (217230815 + skoXC1 * (skoXC1 * 3783025)))))),
+    inference(decision, [], [refute_0_6, refute_0_7, refute_0_8])).
+
+cnf(refute_0_12, plain, ($false),
+    inference(resolve, [], [refute_0_10, refute_0_11])).
+% SZS output end CNFRefutation for Nichols-Plot-Inverted-Pendulum-Fails-3-1.tptp

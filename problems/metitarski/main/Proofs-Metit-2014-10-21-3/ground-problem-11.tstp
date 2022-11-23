@@ -1,0 +1,56 @@
+% SZS output start CNFRefutation for ground-problem-11.tptp
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(ln_lower_bound_cf3, axiom,
+    (X <= 0 | ~ lgen(R, Y, 1/2 * (1 + 5 * X) * (X - 1) / (X * (2 + X))) |
+     lgen(R, Y, ln(X)))).
+
+fof(ground_problem_11, conjecture, (1/2 < ln(2))).
+
+fof(subgoal_0, plain, (1/2 < ln(2)),
+    inference(strip, [], [ground_problem_11])).
+
+fof(negate_0_0, plain, (~ ~ ln(2) <= 1/2),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (ln(2) <= 1/2),
+    inference(canonicalize, [], [negate_0_0])).
+
+cnf(refute_0_0, plain, (ln(2) <= 1/2),
+    inference(canonicalize, [], [normalize_0_0])).
+
+cnf(refute_0_1, plain,
+    (X_000041 < ln(X_000040) | ~ lgen(1, X_000041, ln(X_000040))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(1, X_000041,
+            1/2 * (1 + 5 * X_000040) * (X_000040 - 1) /
+            (X_000040 * (2 + X_000040))) | X_000040 <= 0 |
+     lgen(1, X_000041, ln(X_000040))),
+    inference(subst, [], [ln_lower_bound_cf3])).
+
+cnf(refute_0_3, plain,
+    (X_000041 < ln(X_000040) |
+     ~ lgen(1, X_000041,
+            1/2 * (1 + 5 * X_000040) * (X_000040 - 1) /
+            (X_000040 * (2 + X_000040))) | X_000040 <= 0),
+    inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (X_000041 < ln(X_000040) | X_000040 <= 0 |
+     (-1/2 + X_000040 * (-2 + X_000040 * 5/2)) /
+     (X_000040 * (2 + X_000040)) <= X_000041),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (1/2 < ln(2) | 2 <= 0 |
+     (-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) <= 1/2),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (2 <= 0 | (-1/2 + 2 * (-2 + 2 * 5/2)) / (2 * (2 + 2)) <= 1/2),
+    inference(resolve, [], [refute_0_0, refute_0_5])).
+
+cnf(refute_0_7, plain, ($false), inference(arithmetic, [], [refute_0_6])).
+% SZS output end CNFRefutation for ground-problem-11.tptp

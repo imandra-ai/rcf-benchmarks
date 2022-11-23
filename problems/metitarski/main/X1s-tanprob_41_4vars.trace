@@ -1,0 +1,11 @@
+-----[begin problem]-----
+% In Mathematica format:
+Timing[Resolve[Exists[{VZ,VX,pi,VY}, ForAll[{}, And[VY>VX*VZ,0>VZ,Pi>(15707963/5000000),(31415927/10000000)>Pi]]], Reals]]
+
+% In QepcadB format:
+(E VZ) (E VX) (E pi) (E VY) [[(VX VZ)<VY]/\[[VZ<0]/\[[15707963/5000000<pi]/\[pi<31415927/10000000]]]].
+
+% In SMTLib2 format:
+(declare-fun VZ () Real) (declare-fun VX () Real) (declare-fun metit_our_pi () Real) (declare-fun VY () Real) (assert (and (not (<= VY (* VX VZ))) (and (not (<= 0. VZ)) (and (not (<= metit_our_pi (/ 15707963. 5000000.))) (not (<= (/ 31415927. 10000000.) metit_our_pi))))))
+-----[end problem]-----
+

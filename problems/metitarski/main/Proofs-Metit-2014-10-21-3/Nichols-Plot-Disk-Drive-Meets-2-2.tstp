@@ -1,0 +1,145 @@
+% SZS output start CNFRefutation for Nichols-Plot-Disk-Drive-Meets-2-2.tptp
+cnf(leq_right_divide_mul_pos, axiom, (Y < X * Z | X <= Y / Z | Z <= 0)).
+
+cnf(leq_left_divide_mul_neg, axiom, (Y * Z < X | Y <= X / Z | 0 <= Z)).
+
+cnf(interval_elim1, axiom, (~ interval(R, A, S, B, X) | lgen(R, A, X))).
+
+cnf(interval_elim2, axiom, (~ interval(R, A, S, B, X) | lgen(S, X, B))).
+
+fof('Nichols_Plot_Disk_Drive_Meets_2_2', conjecture,
+    (! [X] :
+       (interval(0, 63357/512, 0, 8808/5, X) =>
+        0 <=
+        arctan(1/1140 * (-130660000 * X ^ 2 + 3 * X ^ 4 + 2000000000000) /
+               (X * (29 * X ^ 2 - 90000000)))))).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       (interval(0, 63357/512, 0, 8808/5, X) =>
+        0 <=
+        arctan(1/1140 * (-130660000 * X ^ 2 + 3 * X ^ 4 + 2000000000000) /
+               (X * (29 * X ^ 2 - 90000000))))),
+    inference(strip, [], ['Nichols_Plot_Disk_Drive_Meets_2_2'])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         (interval(0, 63357/512, 0, 8808/5, X) =>
+          0 <=
+          arctan(1/1140 *
+                 (-130660000 * X ^ 2 + 3 * X ^ 4 + 2000000000000) /
+                 (X * (29 * X ^ 2 - 90000000))))),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       (arctan(1/1140 * (-130660000 * X ^ 2 + 3 * X ^ 4 + 2000000000000) /
+               (X * (29 * X ^ 2 - 90000000))) < 0 &
+        interval(0, 63357/512, 0, 8808/5, X))),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (arctan(1/1140 *
+            (-130660000 * skoXC1 ^ 2 + 3 * skoXC1 ^ 4 + 2000000000000) /
+            (skoXC1 * (29 * skoXC1 ^ 2 - 90000000))) < 0 &
+     interval(0, 63357/512, 0, 8808/5, skoXC1)),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (interval(0, 63357/512, 0, 8808/5, skoXC1)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain,
+    (arctan(1/1140 *
+            (-130660000 * skoXC1 ^ 2 + 3 * skoXC1 ^ 4 + 2000000000000) /
+            (skoXC1 * (29 * skoXC1 ^ 2 - 90000000))) < 0),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain, (interval(0, 63357/512, 0, 8808/5, skoXC1)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (~ interval(0, 63357/512, 0, 8808/5, skoXC1) |
+     lgen(0, skoXC1, 8808/5)), inference(subst, [], [interval_elim2])).
+
+cnf(refute_0_2, plain, (lgen(0, skoXC1, 8808/5)),
+    inference(resolve, [], [refute_0_0, refute_0_1])).
+
+cnf(refute_0_3, plain, (skoXC1 <= 8808/5),
+    inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain,
+    (~ interval(0, 63357/512, 0, 8808/5, skoXC1) |
+     lgen(0, 63357/512, skoXC1)), inference(subst, [], [interval_elim1])).
+
+cnf(refute_0_5, plain, (lgen(0, 63357/512, skoXC1)),
+    inference(resolve, [], [refute_0_0, refute_0_4])).
+
+cnf(refute_0_6, plain, (63357/512 <= skoXC1),
+    inference(arithmetic, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (arctan(1/1140 *
+            (-130660000 * skoXC1 ^ 2 + 3 * skoXC1 ^ 4 + 2000000000000) /
+            (skoXC1 * (29 * skoXC1 ^ 2 - 90000000))) < 0),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_8, plain,
+    ((100000000000/57 +
+      skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380)))) /
+     (skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29))) < 0),
+    inference(arithmetic, [], [refute_0_7])).
+
+cnf(refute_0_9, plain,
+    (0 * (skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29))) <
+     100000000000/57 +
+     skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380))) |
+     0 <= skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29)) |
+     0 <=
+     (100000000000/57 +
+      skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380)))) /
+     (skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29)))),
+    inference(subst, [], [leq_left_divide_mul_neg])).
+
+cnf(refute_0_10, plain,
+    (0 * (skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29))) <
+     100000000000/57 +
+     skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380))) |
+     0 <= skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29))),
+    inference(resolve, [], [refute_0_9, refute_0_8])).
+
+cnf(refute_0_11, plain,
+    (-100000000000/57 <
+     skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380))) |
+     skoXC1 * (90000000 + skoXC1 * (skoXC1 * -29)) <= 0),
+    inference(arithmetic, [], [refute_0_10])).
+
+cnf(refute_0_12, plain,
+    (100000000000/57 +
+     skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380))) <
+     0 * (skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29))) |
+     0 <=
+     (100000000000/57 +
+      skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380)))) /
+     (skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29))) |
+     skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29)) <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_13, plain,
+    (100000000000/57 +
+     skoXC1 * (skoXC1 * (-6533000/57 + skoXC1 * (skoXC1 * 1/380))) <
+     0 * (skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29))) |
+     skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29)) <= 0),
+    inference(resolve, [], [refute_0_12, refute_0_8])).
+
+cnf(refute_0_14, plain,
+    (100000000000/57 <
+     skoXC1 * (skoXC1 * (6533000/57 + skoXC1 * (skoXC1 * -1/380))) |
+     skoXC1 * (-90000000 + skoXC1 * (skoXC1 * 29)) <= 0),
+    inference(arithmetic, [], [refute_0_13])).
+
+cnf(refute_0_15, plain, (8808/5 < skoXC1),
+    inference(decision, [], [refute_0_6, refute_0_11, refute_0_14])).
+
+cnf(refute_0_16, plain, ($false),
+    inference(resolve, [], [refute_0_3, refute_0_15])).
+% SZS output end CNFRefutation for Nichols-Plot-Disk-Drive-Meets-2-2.tptp

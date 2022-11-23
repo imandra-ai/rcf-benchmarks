@@ -1,0 +1,318 @@
+% SZS output start CNFRefutation for max-2.tptp
+cnf(max_1, axiom, (X < Y | max(X, Y) = X)).
+
+cnf(max_2, axiom, (Y <= X | max(X, Y) = Y)).
+
+fof(max2, conjecture,
+    (! [X, Y, Z] : max(X, max(Y, Z)) = max(max(X, Y), Z))).
+
+fof(subgoal_0, plain,
+    (! [X, Y, Z] : max(X, max(Y, Z)) = max(max(X, Y), Z)),
+    inference(strip, [], [max2])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, Y, Z] : max(X, max(Y, Z)) = max(max(X, Y), Z)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X, Y, Z] : max(X, max(Y, Z)) != max(max(X, Y), Z)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (max(skoXC1, max(skoYC1, skoZC1)) != max(max(skoXC1, skoYC1), skoZC1)),
+    inference(skolemize, [], [normalize_0_0])).
+
+cnf(refute_0_0, plain,
+    (max(skoXC1, max(skoYC1, skoZC1)) != max(max(skoXC1, skoYC1), skoZC1)),
+    inference(canonicalize, [], [normalize_0_1])).
+
+cnf(refute_0_1, plain,
+    (skoZC1 <= max(skoXC1, skoYC1) |
+     max(max(skoXC1, skoYC1), skoZC1) = skoZC1),
+    inference(subst, [], [max_2])).
+
+cnf(refute_0_2, plain,
+    (max(max(skoXC1, skoYC1), skoZC1) != skoZC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) != skoZC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_3, plain,
+    (max(skoXC1, max(skoYC1, skoZC1)) != skoZC1 |
+     skoZC1 <= max(skoXC1, skoYC1) |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_1, refute_0_2])).
+
+cnf(refute_0_4, plain,
+    (max(skoXC1, max(skoYC1, skoZC1)) != skoZC1 |
+     skoZC1 <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_3, refute_0_0])).
+
+cnf(refute_0_5, plain, (skoZC1 <= skoYC1 | max(skoYC1, skoZC1) = skoZC1),
+    inference(subst, [], [max_2])).
+
+cnf(refute_0_6, plain,
+    (max(skoXC1, skoZC1) != skoZC1 | max(skoYC1, skoZC1) != skoZC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) = skoZC1),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_7, plain,
+    (max(skoXC1, skoZC1) != skoZC1 | skoZC1 <= skoYC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) = skoZC1),
+    inference(resolve, [], [refute_0_5, refute_0_6])).
+
+cnf(refute_0_8, plain,
+    (max(skoXC1, skoZC1) != skoZC1 | skoZC1 <= max(skoXC1, skoYC1) |
+     skoZC1 <= skoYC1), inference(resolve, [], [refute_0_7, refute_0_4])).
+
+cnf(refute_0_9, plain, (skoYC1 <= skoXC1 | max(skoXC1, skoYC1) = skoYC1),
+    inference(subst, [], [max_2])).
+
+cnf(refute_0_10, plain,
+    (skoYC1 < skoZC1 | max(skoXC1, skoYC1) != skoYC1 |
+     skoZC1 <= max(skoXC1, skoYC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_11, plain,
+    (skoYC1 < skoZC1 | skoYC1 <= skoXC1 | skoZC1 <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_9, refute_0_10])).
+
+cnf(refute_0_12, plain, (skoXC1 < skoYC1 | max(skoXC1, skoYC1) = skoXC1),
+    inference(subst, [], [max_1])).
+
+cnf(refute_0_13, plain,
+    (skoXC1 < skoZC1 | max(skoXC1, skoYC1) != skoXC1 |
+     skoZC1 <= max(skoXC1, skoYC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_14, plain,
+    (skoXC1 < skoYC1 | skoXC1 < skoZC1 | skoZC1 <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_12, refute_0_13])).
+
+cnf(refute_0_15, plain,
+    (skoXC1 < max(skoYC1, skoZC1) |
+     max(skoXC1, max(skoYC1, skoZC1)) = skoXC1),
+    inference(subst, [], [max_1])).
+
+cnf(refute_0_16, plain,
+    (max(skoXC1, max(skoYC1, skoZC1)) != skoXC1 |
+     skoXC1 != max(max(skoXC1, skoYC1), skoZC1) |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_17, plain,
+    (skoXC1 < max(skoYC1, skoZC1) |
+     skoXC1 != max(max(skoXC1, skoYC1), skoZC1) |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_15, refute_0_16])).
+
+cnf(refute_0_18, plain,
+    (skoXC1 < max(skoYC1, skoZC1) |
+     skoXC1 != max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_17, refute_0_0])).
+
+cnf(refute_0_19, plain,
+    (max(skoXC1, skoYC1) != skoXC1 | skoXC1 != max(skoXC1, skoZC1) |
+     skoXC1 = max(max(skoXC1, skoYC1), skoZC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_20, plain,
+    (skoXC1 < skoYC1 | skoXC1 != max(skoXC1, skoZC1) |
+     skoXC1 = max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_12, refute_0_19])).
+
+cnf(refute_0_21, plain,
+    (skoXC1 < max(skoYC1, skoZC1) | skoXC1 < skoYC1 |
+     skoXC1 != max(skoXC1, skoZC1)),
+    inference(resolve, [], [refute_0_20, refute_0_18])).
+
+cnf(refute_0_22, plain, (skoYC1 < skoZC1 | max(skoYC1, skoZC1) = skoYC1),
+    inference(subst, [], [max_1])).
+
+cnf(refute_0_23, plain,
+    (skoXC1 < skoYC1 | max(skoYC1, skoZC1) != skoYC1 |
+     max(skoYC1, skoZC1) <= skoXC1), introduced(tautology, [equality])).
+
+cnf(refute_0_24, plain,
+    (skoXC1 < skoYC1 | skoYC1 < skoZC1 | max(skoYC1, skoZC1) <= skoXC1),
+    inference(resolve, [], [refute_0_22, refute_0_23])).
+
+cnf(refute_0_25, plain,
+    (skoXC1 < skoYC1 | skoYC1 < skoZC1 | skoXC1 != max(skoXC1, skoZC1)),
+    inference(resolve, [], [refute_0_24, refute_0_21])).
+
+cnf(refute_0_26, plain, (skoXC1 < skoZC1 | max(skoXC1, skoZC1) = skoXC1),
+    inference(subst, [], [max_1])).
+
+cnf(refute_0_27, plain,
+    (max(skoXC1, skoZC1) != skoXC1 | skoXC1 != skoXC1 |
+     skoXC1 = max(skoXC1, skoZC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_28, plain,
+    (skoXC1 < skoZC1 | skoXC1 != skoXC1 | skoXC1 = max(skoXC1, skoZC1)),
+    inference(resolve, [], [refute_0_26, refute_0_27])).
+
+cnf(refute_0_29, plain,
+    (skoXC1 < skoYC1 | skoXC1 < skoZC1 | skoYC1 < skoZC1 |
+     skoXC1 != skoXC1),
+    inference(resolve, [], [refute_0_28, refute_0_25])).
+
+cnf(refute_0_30, plain, (skoXC1 = skoXC1), introduced(tautology, [refl])).
+
+cnf(refute_0_31, plain,
+    (skoXC1 < skoYC1 | skoXC1 < skoZC1 | skoYC1 < skoZC1),
+    inference(resolve, [], [refute_0_30, refute_0_29])).
+
+cnf(refute_0_32, plain,
+    (skoXC1 < skoYC1 | skoYC1 < skoZC1 | skoZC1 <= skoXC1),
+    introduced(tautology, [decision])).
+
+cnf(refute_0_33, plain, (skoXC1 < skoYC1 | skoYC1 < skoZC1),
+    inference(resolve, [], [refute_0_32, refute_0_31])).
+
+cnf(refute_0_34, plain,
+    (skoXC1 < skoYC1 | skoYC1 < skoZC1 | skoZC1 <= max(skoXC1, skoYC1)),
+    inference(decision, [], [refute_0_14, refute_0_33])).
+
+cnf(refute_0_35, plain, (skoYC1 < skoZC1 | skoZC1 <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_11, refute_0_34])).
+
+cnf(refute_0_36, plain,
+    (max(skoXC1, skoZC1) != skoZC1 | skoZC1 <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_8, refute_0_35])).
+
+cnf(refute_0_37, plain, (skoZC1 <= skoXC1 | max(skoXC1, skoZC1) = skoZC1),
+    inference(subst, [], [max_2])).
+
+cnf(refute_0_38, plain,
+    (max(skoXC1, skoZC1) != skoZC1 | skoZC1 != skoZC1 |
+     max(skoXC1, skoZC1) = skoZC1), introduced(tautology, [equality])).
+
+cnf(refute_0_39, plain,
+    (skoZC1 != skoZC1 | skoZC1 <= skoXC1 | max(skoXC1, skoZC1) = skoZC1),
+    inference(resolve, [], [refute_0_37, refute_0_38])).
+
+cnf(refute_0_40, plain,
+    (skoZC1 != skoZC1 | skoZC1 <= max(skoXC1, skoYC1) | skoZC1 <= skoXC1),
+    inference(resolve, [], [refute_0_39, refute_0_36])).
+
+cnf(refute_0_41, plain, (skoZC1 = skoZC1), introduced(tautology, [refl])).
+
+cnf(refute_0_42, plain, (skoZC1 <= max(skoXC1, skoYC1) | skoZC1 <= skoXC1),
+    inference(resolve, [], [refute_0_41, refute_0_40])).
+
+cnf(refute_0_43, plain,
+    (max(skoXC1, max(skoYC1, skoZC1)) != max(skoXC1, skoZC1) |
+     max(skoXC1, skoYC1) != skoXC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_44, plain,
+    (skoXC1 < skoYC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) != max(skoXC1, skoZC1) |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_12, refute_0_43])).
+
+cnf(refute_0_45, plain,
+    (skoXC1 < skoYC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) != max(skoXC1, skoZC1)),
+    inference(resolve, [], [refute_0_44, refute_0_0])).
+
+cnf(refute_0_46, plain,
+    (max(skoXC1, skoZC1) != max(skoXC1, skoZC1) |
+     max(skoYC1, skoZC1) != skoZC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(skoXC1, skoZC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_47, plain,
+    (max(skoXC1, skoZC1) != max(skoXC1, skoZC1) | skoZC1 <= skoYC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(skoXC1, skoZC1)),
+    inference(resolve, [], [refute_0_5, refute_0_46])).
+
+cnf(refute_0_48, plain,
+    (skoXC1 < skoYC1 | max(skoXC1, skoZC1) != max(skoXC1, skoZC1) |
+     skoZC1 <= skoYC1),
+    inference(resolve, [], [refute_0_47, refute_0_45])).
+
+cnf(refute_0_49, plain, (max(skoXC1, skoZC1) = max(skoXC1, skoZC1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_50, plain, (skoXC1 < skoYC1 | skoZC1 <= skoYC1),
+    inference(resolve, [], [refute_0_49, refute_0_48])).
+
+cnf(refute_0_51, plain, (skoXC1 < skoYC1 | skoZC1 <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_50, refute_0_34])).
+
+cnf(refute_0_52, plain, (skoXC1 < skoZC1 | skoZC1 <= max(skoXC1, skoYC1)),
+    inference(decision, [],
+              [refute_0_51, refute_0_35, refute_0_14, refute_0_33])).
+
+cnf(refute_0_53, plain, (skoZC1 <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_42, refute_0_52])).
+
+cnf(refute_0_54, plain,
+    (max(skoXC1, skoYC1) < skoZC1 | max(skoXC1, skoYC1) != skoYC1 |
+     skoZC1 <= skoYC1), introduced(tautology, [equality])).
+
+cnf(refute_0_55, plain,
+    (max(skoXC1, skoYC1) < skoZC1 | skoYC1 <= skoXC1 | skoZC1 <= skoYC1),
+    inference(resolve, [], [refute_0_9, refute_0_54])).
+
+cnf(refute_0_56, plain, (skoYC1 <= skoXC1 | skoZC1 <= skoYC1),
+    inference(resolve, [], [refute_0_53, refute_0_55])).
+
+cnf(refute_0_57, plain, (skoXC1 < skoYC1),
+    inference(resolve, [], [refute_0_50, refute_0_33])).
+
+cnf(refute_0_58, plain, (skoZC1 <= skoYC1),
+    inference(resolve, [], [refute_0_56, refute_0_57])).
+
+cnf(refute_0_59, plain,
+    (max(skoXC1, skoYC1) != max(max(skoXC1, skoYC1), skoZC1) |
+     max(skoYC1, skoZC1) != skoYC1 |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_60, plain,
+    (skoYC1 < skoZC1 |
+     max(skoXC1, skoYC1) != max(max(skoXC1, skoYC1), skoZC1) |
+     max(skoXC1, max(skoYC1, skoZC1)) = max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_22, refute_0_59])).
+
+cnf(refute_0_61, plain,
+    (skoYC1 < skoZC1 |
+     max(skoXC1, skoYC1) != max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_60, refute_0_0])).
+
+cnf(refute_0_62, plain,
+    (max(skoXC1, skoYC1) < skoZC1 |
+     max(max(skoXC1, skoYC1), skoZC1) = max(skoXC1, skoYC1)),
+    inference(subst, [], [max_1])).
+
+cnf(refute_0_63, plain,
+    (max(max(skoXC1, skoYC1), skoZC1) != max(skoXC1, skoYC1) |
+     max(skoXC1, skoYC1) != max(skoXC1, skoYC1) |
+     max(skoXC1, skoYC1) = max(max(skoXC1, skoYC1), skoZC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_64, plain,
+    (max(skoXC1, skoYC1) < skoZC1 |
+     max(skoXC1, skoYC1) != max(skoXC1, skoYC1) |
+     max(skoXC1, skoYC1) = max(max(skoXC1, skoYC1), skoZC1)),
+    inference(resolve, [], [refute_0_62, refute_0_63])).
+
+cnf(refute_0_65, plain,
+    (max(skoXC1, skoYC1) < skoZC1 | skoYC1 < skoZC1 |
+     max(skoXC1, skoYC1) != max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_64, refute_0_61])).
+
+cnf(refute_0_66, plain, (max(skoXC1, skoYC1) = max(skoXC1, skoYC1)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_67, plain, (max(skoXC1, skoYC1) < skoZC1 | skoYC1 < skoZC1),
+    inference(resolve, [], [refute_0_66, refute_0_65])).
+
+cnf(refute_0_68, plain, (skoYC1 < skoZC1),
+    inference(resolve, [], [refute_0_53, refute_0_67])).
+
+cnf(refute_0_69, plain, ($false),
+    inference(resolve, [], [refute_0_58, refute_0_68])).
+% SZS output end CNFRefutation for max-2.tptp

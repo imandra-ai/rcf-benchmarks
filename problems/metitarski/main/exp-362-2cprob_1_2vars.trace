@@ -1,0 +1,11 @@
+-----[begin problem]-----
+% In Mathematica format:
+Timing[Resolve[Exists[{t,a}, ForAll[{}, And[a!=2,Or[t*t*((-1/4)+t*(-1/4))>-1,t*t*((1/4)+t*(1/4))>1],0<=t,t<=2]]], Reals]]
+
+% In QepcadB format:
+(E t) (E a) [[a /=2]/\[[[-1<(t t (-1/4+(t (-1/4))))]\/[1<(t t (1/4+(t (1/4))))]]/\[[0<=t]/\[t<=2]]]].
+
+% In SMTLib2 format:
+(declare-fun t () Real) (declare-fun a () Real) (assert (and (not (= a 2.)) (and (or (not (<= (* t (* t (+ (/ (- 1.) 4.) (* t (/ (- 1.) 4.))))) (- 1.))) (not (<= (* t (* t (+ (/ 1. 4.) (* t (/ 1. 4.))))) 1.))) (and (<= 0. t) (<= t 2.)))))
+-----[end problem]-----
+

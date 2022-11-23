@@ -1,0 +1,50 @@
+% SZS output start CNFRefutation for Integrator.tptp
+fof('Integrator', conjecture,
+    (! [R, C] :
+       ((9000 <= R & R <= 11000 & 788 <= C & C <= 3/25000000000) =>
+        15 * R * C / (-3/2000 + R * 1001/10000000) <= 3/200000))).
+
+fof(subgoal_0, plain,
+    (! [R, C] :
+       ((9000 <= R & R <= 11000 & 788 <= C & C <= 3/25000000000) =>
+        15 * R * C / (-3/2000 + R * 1001/10000000) <= 3/200000)),
+    inference(strip, [], ['Integrator'])).
+
+fof(negate_0_0, plain,
+    (~ ! [R, C] :
+         ((9000 <= R & R <= 11000 & 788 <= C & C <= 3/25000000000) =>
+          15 * R * C / (-3/2000 + R * 1001/10000000) <= 3/200000)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [C, R] :
+       (3/200000 < 15 * R * C / (-3/2000 + R * 1001/10000000) &
+        C <= 3/25000000000 & R <= 11000 & 788 <= C & 9000 <= R)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (3/200000 < 15 * skoRC1 * skoCC1 / (-3/2000 + skoRC1 * 1001/10000000) &
+     788 <= skoCC1 & 9000 <= skoRC1 & skoCC1 <= 3/25000000000 &
+     skoRC1 <= 11000), inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (skoCC1 <= 3/25000000000),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (9000 <= skoRC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (788 <= skoCC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain, (skoCC1 <= 3/25000000000),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain, (9000 <= skoRC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_2, plain, (788 <= skoCC1),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_3, plain, ($false),
+    inference(decision, [], [refute_0_0, refute_0_1, refute_0_2])).
+% SZS output end CNFRefutation for Integrator.tptp

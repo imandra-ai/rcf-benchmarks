@@ -1,0 +1,93 @@
+% SZS output start CNFRefutation for sqrt-problem-2.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(sqrt_upper_bound_2, axiom,
+    (X < 0 |
+     ~ lgen(R,
+            1/8 * (X ^ 4 + 28 * X ^ 3 + 70 * X ^ 2 + 28 * X + 1) /
+            ((X + 1) * (X ^ 2 + 6 * X + 1)), Y) | lgen(R, sqrt(X), Y))).
+
+fof(sqrt_problem_2, conjecture, (sqrt(2) + sqrt(3) <= 63/20)).
+
+fof(subgoal_0, plain, (sqrt(2) + sqrt(3) <= 63/20),
+    inference(strip, [], [sqrt_problem_2])).
+
+fof(negate_0_0, plain, (63/20 < sqrt(2) + sqrt(3)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (63/20 < sqrt(2) + sqrt(3)),
+    inference(canonicalize, [], [negate_0_0])).
+
+cnf(refute_0_0, plain,
+    (~ lgen(0, sqrt(X_000041), X_000042) | sqrt(X_000041) <= X_000042),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_1, plain,
+    (X_000041 < 0 |
+     ~ lgen(0,
+            1/8 *
+            (X_000041 ^ 4 + 28 * X_000041 ^ 3 + 70 * X_000041 ^ 2 +
+             28 * X_000041 + 1) /
+            ((X_000041 + 1) * (X_000041 ^ 2 + 6 * X_000041 + 1)),
+            X_000042) | lgen(0, sqrt(X_000041), X_000042)),
+    inference(subst, [], [sqrt_upper_bound_2])).
+
+cnf(refute_0_2, plain,
+    (X_000041 < 0 |
+     ~ lgen(0,
+            1/8 *
+            (X_000041 ^ 4 + 28 * X_000041 ^ 3 + 70 * X_000041 ^ 2 +
+             28 * X_000041 + 1) /
+            ((X_000041 + 1) * (X_000041 ^ 2 + 6 * X_000041 + 1)),
+            X_000042) | sqrt(X_000041) <= X_000042),
+    inference(resolve, [], [refute_0_1, refute_0_0])).
+
+cnf(refute_0_3, plain,
+    (X_000041 < 0 |
+     X_000042 <
+     (1/8 +
+      X_000041 *
+      (7/2 + X_000041 * (35/4 + X_000041 * (7/2 + X_000041 * 1/8)))) /
+     (1 + X_000041 * (7 + X_000041 * (7 + X_000041))) |
+     sqrt(X_000041) <= X_000042), inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain,
+    (2 < 0 |
+     397/280 <
+     (1/8 + 2 * (7/2 + 2 * (35/4 + 2 * (7/2 + 2 * 1/8)))) /
+     (1 + 2 * (7 + 2 * (7 + 2))) | sqrt(2) <= 397/280),
+    inference(subst, [], [refute_0_3])).
+
+cnf(refute_0_5, plain, (63/20 < sqrt(2) + sqrt(3)),
+    inference(canonicalize, [], [normalize_0_0])).
+
+cnf(refute_0_6, plain, (63/20 + sqrt(2) * -1 < sqrt(3)),
+    inference(arithmetic, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (3 < 0 |
+     63/20 + sqrt(2) * -1 <
+     (1/8 + 3 * (7/2 + 3 * (35/4 + 3 * (7/2 + 3 * 1/8)))) /
+     (1 + 3 * (7 + 3 * (7 + 3))) | sqrt(3) <= 63/20 + sqrt(2) * -1),
+    inference(subst, [], [refute_0_3])).
+
+cnf(refute_0_8, plain,
+    (3 < 0 |
+     63/20 + sqrt(2) * -1 <
+     (1/8 + 3 * (7/2 + 3 * (35/4 + 3 * (7/2 + 3 * 1/8)))) /
+     (1 + 3 * (7 + 3 * (7 + 3)))),
+    inference(resolve, [], [refute_0_7, refute_0_6])).
+
+cnf(refute_0_9, plain, (397/280 < sqrt(2)),
+    inference(arithmetic, [], [refute_0_8])).
+
+cnf(refute_0_10, plain,
+    (2 < 0 |
+     397/280 <
+     (1/8 + 2 * (7/2 + 2 * (35/4 + 2 * (7/2 + 2 * 1/8)))) /
+     (1 + 2 * (7 + 2 * (7 + 2)))),
+    inference(resolve, [], [refute_0_4, refute_0_9])).
+
+cnf(refute_0_11, plain, ($false),
+    inference(arithmetic, [], [refute_0_10])).
+% SZS output end CNFRefutation for sqrt-problem-2.tptp

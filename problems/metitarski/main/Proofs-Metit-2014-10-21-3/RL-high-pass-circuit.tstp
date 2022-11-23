@@ -1,0 +1,67 @@
+% SZS output start CNFRefutation for RL-high-pass-circuit.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(exp_positive, axiom, (0 < Y | lgen(R, Y, exp(X)))).
+
+fof('Tunnel', conjecture,
+    (! [X] :
+       ((1/100 <= X & X <= 2/5) =>
+        11/100 - 1/10 * exp(-50 * X) - 1/10 * exp(-100 * X) <= 11/100))).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       ((1/100 <= X & X <= 2/5) =>
+        11/100 - 1/10 * exp(-50 * X) - 1/10 * exp(-100 * X) <= 11/100)),
+    inference(strip, [], ['Tunnel'])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         ((1/100 <= X & X <= 2/5) =>
+          11/100 - 1/10 * exp(-50 * X) - 1/10 * exp(-100 * X) <= 11/100)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       (11/100 < 11/100 - 1/10 * exp(-50 * X) - 1/10 * exp(-100 * X) &
+        X <= 2/5 & 1/100 <= X)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (11/100 <
+     11/100 - 1/10 * exp(-50 * skoXC1) - 1/10 * exp(-100 * skoXC1) &
+     1/100 <= skoXC1 & skoXC1 <= 2/5),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (11/100 <
+     11/100 - 1/10 * exp(-50 * skoXC1) - 1/10 * exp(-100 * skoXC1)),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (11/100 <
+     11/100 - 1/10 * exp(-50 * skoXC1) - 1/10 * exp(-100 * skoXC1)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain, (exp(skoXC1 * -50) < exp(skoXC1 * -100) * -1),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(0, X_000010, exp(X_000009)) | X_000010 <= exp(X_000009)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_3, plain, (0 < X_000010 | lgen(0, X_000010, exp(X_000009))),
+    inference(subst, [], [exp_positive])).
+
+cnf(refute_0_4, plain, (0 < X_000010 | X_000010 <= exp(X_000009)),
+    inference(resolve, [], [refute_0_3, refute_0_2])).
+
+cnf(refute_0_5, plain,
+    (0 < exp(skoXC1 * -100) * -1 |
+     exp(skoXC1 * -100) * -1 <= exp(skoXC1 * -50)),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain, (0 < exp(skoXC1 * -100) * -1),
+    inference(resolve, [], [refute_0_5, refute_0_1])).
+
+cnf(refute_0_7, plain, ($false), inference(arithmetic, [], [refute_0_6])).
+% SZS output end CNFRefutation for RL-high-pass-circuit.tptp

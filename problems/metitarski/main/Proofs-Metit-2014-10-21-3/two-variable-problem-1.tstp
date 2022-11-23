@@ -1,0 +1,267 @@
+% SZS output start CNFRefutation for two-variable-problem-1.tptp
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(leq_left_mul_divide_pos, axiom, (Y / Z < X | X * Z <= Y | Z <= 0)).
+
+cnf(leq_right_mul_divide_pos, axiom, (Y < X / Z | X <= Y * Z | Z <= 0)).
+
+cnf(ln_lower_bound_cf3, axiom,
+    (X <= 0 | ~ lgen(R, Y, 1/2 * (1 + 5 * X) * (X - 1) / (X * (2 + X))) |
+     lgen(R, Y, ln(X)))).
+
+fof(two_variable_problem_1, conjecture,
+    (! [X, Y] : ((0 < Y & Y < X) => (X - Y) / (X + Y) < ln(X / Y) / 2))).
+
+fof(subgoal_0, plain,
+    (! [X, Y] : ((0 < Y & Y < X) => (X - Y) / (X + Y) < ln(X / Y) / 2)),
+    inference(strip, [], [two_variable_problem_1])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, Y] : ((0 < Y & Y < X) => (X - Y) / (X + Y) < ln(X / Y) / 2)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X, Y] : (Y < X & 0 < Y & ln(X / Y) / 2 <= (X - Y) / (X + Y))),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (skoYC1 < skoXC1 & 0 < skoYC1 &
+     ln(skoXC1 / skoYC1) / 2 <= (skoXC1 - skoYC1) / (skoXC1 + skoYC1)),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (ln(skoXC1 / skoYC1) / 2 <= (skoXC1 - skoYC1) / (skoXC1 + skoYC1)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (0 < skoYC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (skoYC1 < skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (0 < skoXC1 / skoYC1 | skoXC1 <= 0 * skoYC1 | skoYC1 <= 0),
+    inference(subst, [], [leq_right_mul_divide_pos])).
+
+cnf(refute_0_1, plain,
+    (skoXC1 + skoYC1 * -1 <
+     (skoXC1 * (skoXC1 * (skoXC1 * 5/4)) +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1/4) +
+       skoYC1 * (skoXC1 * -5/4 + skoYC1 * -1/4))) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) |
+     skoXC1 * (skoXC1 * (skoXC1 * 5/4)) +
+     skoYC1 *
+     (skoXC1 * (skoXC1 * 1/4) +
+      skoYC1 * (skoXC1 * -5/4 + skoYC1 * -1/4)) <=
+     (skoXC1 + skoYC1 * -1) * (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) |
+     skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2) <= 0),
+    inference(subst, [], [leq_right_mul_divide_pos])).
+
+cnf(refute_0_2, plain,
+    ((skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) <
+     (skoXC1 * (skoXC1 * 5/2) + skoYC1 * (skoXC1 * -2 + skoYC1 * -1/2)) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) |
+     (skoXC1 * (skoXC1 * 5/2) + skoYC1 * (skoXC1 * -2 + skoYC1 * -1/2)) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) *
+     (skoXC1 * 1/2 + skoYC1 * 1/2) <= skoXC1 + skoYC1 * -1 |
+     skoXC1 * 1/2 + skoYC1 * 1/2 <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_3, plain,
+    (ln(skoXC1 / skoYC1) / 2 <= (skoXC1 - skoYC1) / (skoXC1 + skoYC1)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_4, plain,
+    (ln(skoXC1 / skoYC1) * 1/2 <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 + skoYC1)),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    ((skoXC1 + skoYC1 * -1) / (skoXC1 + skoYC1) <
+     ln(skoXC1 / skoYC1) * 1/2 |
+     ln(skoXC1 / skoYC1) * 1/2 * (skoXC1 + skoYC1) <=
+     skoXC1 + skoYC1 * -1 | skoXC1 + skoYC1 <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_6, plain,
+    (ln(skoXC1 / skoYC1) * 1/2 * (skoXC1 + skoYC1) <=
+     skoXC1 + skoYC1 * -1 | skoXC1 + skoYC1 <= 0),
+    inference(resolve, [], [refute_0_4, refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (ln(skoXC1 / skoYC1) * (skoXC1 * 1/2 + skoYC1 * 1/2) <=
+     skoXC1 + skoYC1 * -1 | skoYC1 <= skoXC1 * -1),
+    inference(arithmetic, [], [refute_0_6])).
+
+cnf(refute_0_8, plain, (0 < skoYC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_9, plain, (skoYC1 < skoXC1),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_10, plain, (skoXC1 * -1 < skoYC1),
+    inference(decision, [], [refute_0_8, refute_0_9])).
+
+cnf(refute_0_11, plain,
+    (ln(skoXC1 / skoYC1) * (skoXC1 * 1/2 + skoYC1 * 1/2) <=
+     skoXC1 + skoYC1 * -1),
+    inference(resolve, [], [refute_0_7, refute_0_10])).
+
+cnf(refute_0_12, plain,
+    (skoXC1 * 1/2 + skoYC1 * 1/2 <= 0 |
+     ln(skoXC1 / skoYC1) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2)),
+    inference(split, [], [refute_0_11])).
+
+cnf(refute_0_13, plain,
+    (ln(skoXC1 / skoYC1) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) |
+     skoYC1 <= skoXC1 * -1), inference(arithmetic, [], [refute_0_12])).
+
+cnf(refute_0_14, plain,
+    (ln(skoXC1 / skoYC1) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2)),
+    inference(resolve, [], [refute_0_13, refute_0_10])).
+
+cnf(refute_0_15, plain,
+    (X_000041 < ln(X_000040) | ~ lgen(1, X_000041, ln(X_000040))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_16, plain,
+    (~ lgen(1, X_000041,
+            1/2 * (1 + 5 * X_000040) * (X_000040 - 1) /
+            (X_000040 * (2 + X_000040))) | X_000040 <= 0 |
+     lgen(1, X_000041, ln(X_000040))),
+    inference(subst, [], [ln_lower_bound_cf3])).
+
+cnf(refute_0_17, plain,
+    (X_000041 < ln(X_000040) |
+     ~ lgen(1, X_000041,
+            1/2 * (1 + 5 * X_000040) * (X_000040 - 1) /
+            (X_000040 * (2 + X_000040))) | X_000040 <= 0),
+    inference(resolve, [], [refute_0_16, refute_0_15])).
+
+cnf(refute_0_18, plain,
+    (X_000041 < ln(X_000040) | X_000040 <= 0 |
+     (-1/2 + X_000040 * (-2 + X_000040 * 5/2)) /
+     (X_000040 * (2 + X_000040)) <= X_000041),
+    inference(arithmetic, [], [refute_0_17])).
+
+cnf(refute_0_19, plain,
+    ((skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) <
+     ln(skoXC1 / skoYC1) |
+     (-1/2 + skoXC1 / skoYC1 * (-2 + skoXC1 / skoYC1 * 5/2)) /
+     (skoXC1 / skoYC1 * (2 + skoXC1 / skoYC1)) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) |
+     skoXC1 / skoYC1 <= 0), inference(subst, [], [refute_0_18])).
+
+cnf(refute_0_20, plain,
+    ((-1/2 + skoXC1 / skoYC1 * (-2 + skoXC1 / skoYC1 * 5/2)) /
+     (skoXC1 / skoYC1 * (2 + skoXC1 / skoYC1)) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) |
+     skoXC1 / skoYC1 <= 0),
+    inference(resolve, [], [refute_0_14, refute_0_19])).
+
+cnf(refute_0_21, plain,
+    ((skoXC1 * (skoXC1 * 5/2) + skoYC1 * (skoXC1 * -2 + skoYC1 * -1/2)) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) |
+     skoXC1 / skoYC1 <= 0 | skoYC1 * skoYC1 = 0 | skoYC1 = 0),
+    inference(arithmetic, [], [refute_0_20])).
+
+cnf(refute_0_22, plain, (skoYC1 * skoYC1 != 0 | skoYC1 = 0),
+    inference(decision, [], [refute_0_8, refute_0_9])).
+
+cnf(refute_0_23, plain,
+    ((skoXC1 * (skoXC1 * 5/2) + skoYC1 * (skoXC1 * -2 + skoYC1 * -1/2)) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) |
+     skoXC1 / skoYC1 <= 0 | skoYC1 = 0),
+    inference(resolve, [], [refute_0_21, refute_0_22])).
+
+cnf(refute_0_24, plain, (skoYC1 != 0),
+    inference(decision, [], [refute_0_8, refute_0_9])).
+
+cnf(refute_0_25, plain,
+    ((skoXC1 * (skoXC1 * 5/2) + skoYC1 * (skoXC1 * -2 + skoYC1 * -1/2)) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) <=
+     (skoXC1 + skoYC1 * -1) / (skoXC1 * 1/2 + skoYC1 * 1/2) |
+     skoXC1 / skoYC1 <= 0),
+    inference(resolve, [], [refute_0_23, refute_0_24])).
+
+cnf(refute_0_26, plain,
+    ((skoXC1 * (skoXC1 * 5/2) + skoYC1 * (skoXC1 * -2 + skoYC1 * -1/2)) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) *
+     (skoXC1 * 1/2 + skoYC1 * 1/2) <= skoXC1 + skoYC1 * -1 |
+     skoXC1 * 1/2 + skoYC1 * 1/2 <= 0 | skoXC1 / skoYC1 <= 0),
+    inference(resolve, [], [refute_0_25, refute_0_2])).
+
+cnf(refute_0_27, plain,
+    ((skoXC1 * (skoXC1 * (skoXC1 * 5/4)) +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1/4) +
+       skoYC1 * (skoXC1 * -5/4 + skoYC1 * -1/4))) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) <= skoXC1 + skoYC1 * -1 |
+     skoXC1 / skoYC1 <= 0 | skoYC1 <= skoXC1 * -1),
+    inference(arithmetic, [], [refute_0_26])).
+
+cnf(refute_0_28, plain,
+    ((skoXC1 * (skoXC1 * (skoXC1 * 5/4)) +
+      skoYC1 *
+      (skoXC1 * (skoXC1 * 1/4) +
+       skoYC1 * (skoXC1 * -5/4 + skoYC1 * -1/4))) /
+     (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) <= skoXC1 + skoYC1 * -1 |
+     skoXC1 / skoYC1 <= 0),
+    inference(resolve, [], [refute_0_27, refute_0_10])).
+
+cnf(refute_0_29, plain,
+    (skoXC1 * (skoXC1 * (skoXC1 * 5/4)) +
+     skoYC1 *
+     (skoXC1 * (skoXC1 * 1/4) +
+      skoYC1 * (skoXC1 * -5/4 + skoYC1 * -1/4)) <=
+     (skoXC1 + skoYC1 * -1) * (skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2)) |
+     skoXC1 * skoXC1 + skoYC1 * (skoXC1 * 2) <= 0 | skoXC1 / skoYC1 <= 0),
+    inference(resolve, [], [refute_0_28, refute_0_1])).
+
+cnf(refute_0_30, plain,
+    (skoYC1 * (skoXC1 * 2) <= skoXC1 * (skoXC1 * -1) |
+     skoYC1 *
+     (skoXC1 * (skoXC1 * -3/4) +
+      skoYC1 * (skoXC1 * 3/4 + skoYC1 * -1/4)) <=
+     skoXC1 * (skoXC1 * (skoXC1 * -1/4)) | skoXC1 / skoYC1 <= 0),
+    inference(arithmetic, [], [refute_0_29])).
+
+cnf(refute_0_31, plain,
+    (skoXC1 * (skoXC1 * (skoXC1 * -1/4)) <
+     skoYC1 *
+     (skoXC1 * (skoXC1 * -3/4) + skoYC1 * (skoXC1 * 3/4 + skoYC1 * -1/4)) |
+     skoYC1 * (skoXC1 * 2) <= skoXC1 * (skoXC1 * -1)),
+    inference(decision, [], [refute_0_8, refute_0_9])).
+
+cnf(refute_0_32, plain,
+    (skoYC1 * (skoXC1 * 2) <= skoXC1 * (skoXC1 * -1) |
+     skoXC1 / skoYC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_31])).
+
+cnf(refute_0_33, plain, (skoXC1 * (skoXC1 * -1) < skoYC1 * (skoXC1 * 2)),
+    inference(decision, [], [refute_0_8, refute_0_9])).
+
+cnf(refute_0_34, plain, (skoXC1 / skoYC1 <= 0),
+    inference(resolve, [], [refute_0_32, refute_0_33])).
+
+cnf(refute_0_35, plain, (skoXC1 <= 0 * skoYC1 | skoYC1 <= 0),
+    inference(resolve, [], [refute_0_34, refute_0_0])).
+
+cnf(refute_0_36, plain, (skoXC1 <= 0 * skoYC1),
+    inference(resolve, [], [refute_0_35, refute_0_8])).
+
+cnf(refute_0_37, plain, (skoXC1 <= 0),
+    inference(arithmetic, [], [refute_0_36])).
+
+cnf(refute_0_38, plain, (0 < skoXC1),
+    inference(decision, [], [refute_0_8, refute_0_9])).
+
+cnf(refute_0_39, plain, ($false),
+    inference(resolve, [], [refute_0_37, refute_0_38])).
+% SZS output end CNFRefutation for two-variable-problem-1.tptp

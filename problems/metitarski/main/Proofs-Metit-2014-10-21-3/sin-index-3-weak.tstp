@@ -1,0 +1,2392 @@
+% SZS output start CNFRefutation for sin-index-3-weak.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(leq_right_divide_mul_pos, axiom, (Y < X * Z | X <= Y / Z | Z <= 0)).
+
+cnf(leq_right_divide_mul_neg, axiom, (Y < X * Z | Y / Z <= X | 0 <= Z)).
+
+cnf(sin_upper_bound_0_pos, axiom,
+    (X < 0 | ~ lgen(R, X, Y) | lgen(R, sin(X), Y))).
+
+cnf(sin_lower_bound_0_neg, axiom,
+    (0 < X | ~ lgen(R, Y, X) | lgen(R, Y, sin(X)))).
+
+cnf(sin_lower_bound_0_pos, axiom,
+    (X < 0 | ~ lgen(R, Y, X - X ^ 3 / 6) | lgen(R, Y, sin(X)))).
+
+cnf(sin_upper_bound_1_pos, axiom,
+    (X < 0 | ~ lgen(R, X - X ^ 3 / 6 + X ^ 5 / 120, Y) |
+     lgen(R, sin(X), Y))).
+
+fof(sin_index, conjecture,
+    (! [X] : ((0 <= X & X <= 12/5) => sin(X) ^ 3 <= 1/100 + sin(X)))).
+
+fof(subgoal_0, plain,
+    (! [X] : ((0 <= X & X <= 12/5) => sin(X) ^ 3 <= 1/100 + sin(X))),
+    inference(strip, [], [sin_index])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] : ((0 <= X & X <= 12/5) => sin(X) ^ 3 <= 1/100 + sin(X))),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] : (1/100 + sin(X) < sin(X) ^ 3 & X <= 12/5 & 0 <= X)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (1/100 + sin(skoXC1) < sin(skoXC1) ^ 3 & 0 <= skoXC1 & skoXC1 <= 12/5),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (1/100 + sin(skoXC1) < sin(skoXC1) ^ 3),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (0 <= skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (skoXC1 <= 12/5),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))) <=
+     0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_1, plain,
+    (~ lgen(0, sin(X_000061), X_000062) | sin(X_000061) <= X_000062),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_2, plain,
+    (X_000061 < 0 |
+     ~ lgen(0, X_000061 - X_000061 ^ 3 / 6 + X_000061 ^ 5 / 120,
+            X_000062) | lgen(0, sin(X_000061), X_000062)),
+    inference(subst, [], [sin_upper_bound_1_pos])).
+
+cnf(refute_0_3, plain,
+    (X_000061 < 0 |
+     ~ lgen(0, X_000061 - X_000061 ^ 3 / 6 + X_000061 ^ 5 / 120,
+            X_000062) | sin(X_000061) <= X_000062),
+    inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (X_000061 < 0 |
+     X_000062 <
+     X_000061 *
+     (1 + X_000061 * (X_000061 * (-1/6 + X_000061 * (X_000061 * 1/120)))) |
+     sin(X_000061) <= X_000062), inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_7, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_8, plain,
+    (1/100 <
+     skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) *
+     (-1 + sin(skoXC1) * sin(skoXC1)) |
+     0 <= -1 + sin(skoXC1) * sin(skoXC1) |
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) <=
+     skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_9, plain,
+    (~ lgen(0, X_000055, sin(X_000054)) | X_000055 <= sin(X_000054)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_10, plain,
+    (X_000054 < 0 | ~ lgen(0, X_000055, X_000054 - X_000054 ^ 3 / 6) |
+     lgen(0, X_000055, sin(X_000054))),
+    inference(subst, [], [sin_lower_bound_0_pos])).
+
+cnf(refute_0_11, plain,
+    (X_000054 < 0 | ~ lgen(0, X_000055, X_000054 - X_000054 ^ 3 / 6) |
+     X_000055 <= sin(X_000054)),
+    inference(resolve, [], [refute_0_10, refute_0_9])).
+
+cnf(refute_0_12, plain,
+    (X_000054 * (1 + X_000054 * (X_000054 * -1/6)) < X_000055 |
+     X_000054 < 0 | X_000055 <= sin(X_000054)),
+    inference(arithmetic, [], [refute_0_11])).
+
+cnf(refute_0_13, plain,
+    (skoXC1 < 0 |
+     skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) |
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) <= sin(skoXC1)),
+    inference(subst, [], [refute_0_12])).
+
+cnf(refute_0_14, plain, (1/100 + sin(skoXC1) < sin(skoXC1) ^ 3),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_15, plain,
+    (1/100 < sin(skoXC1) * (-1 + sin(skoXC1) * sin(skoXC1))),
+    inference(arithmetic, [], [refute_0_14])).
+
+cnf(refute_0_16, plain,
+    (sin(skoXC1) < 1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) |
+     0 <= -1 + sin(skoXC1) * sin(skoXC1)),
+    inference(split, [], [refute_0_15])).
+
+cnf(refute_0_17, plain,
+    (sin(skoXC1) < 1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) |
+     sin(skoXC1) * (sin(skoXC1) * -1) <= -1),
+    inference(arithmetic, [], [refute_0_16])).
+
+cnf(refute_0_18, plain,
+    (1/100 < 0 | -1 + sin(skoXC1) * sin(skoXC1) < 0 |
+     0 < -1 + sin(skoXC1) * sin(skoXC1)),
+    inference(split, [], [refute_0_15])).
+
+cnf(refute_0_19, plain,
+    (-1 < sin(skoXC1) * (sin(skoXC1) * -1) |
+     1 < sin(skoXC1) * sin(skoXC1)),
+    inference(arithmetic, [], [refute_0_18])).
+
+cnf(refute_0_20, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 | skoXC1 < 0 |
+     0 <= sin(skoXC1)), inference(subst, [], [refute_0_12])).
+
+cnf(refute_0_21, plain,
+    (1/100 < skoXC1 * (-1 + sin(skoXC1) * sin(skoXC1)) |
+     -1 + sin(skoXC1) * sin(skoXC1) <= 0 |
+     skoXC1 <= 1/100 / (-1 + sin(skoXC1) * sin(skoXC1))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_22, plain,
+    (~ lgen(0, sin(X_000033), X_000034) | sin(X_000033) <= X_000034),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_23, plain,
+    (X_000033 < 0 | ~ lgen(0, X_000033, X_000034) |
+     lgen(0, sin(X_000033), X_000034)),
+    inference(subst, [], [sin_upper_bound_0_pos])).
+
+cnf(refute_0_24, plain,
+    (X_000033 < 0 | ~ lgen(0, X_000033, X_000034) |
+     sin(X_000033) <= X_000034),
+    inference(resolve, [], [refute_0_23, refute_0_22])).
+
+cnf(refute_0_25, plain,
+    (X_000034 < X_000033 | X_000033 < 0 | sin(X_000033) <= X_000034),
+    inference(arithmetic, [], [refute_0_24])).
+
+cnf(refute_0_26, plain,
+    (skoXC1 < 0 | 1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) < skoXC1 |
+     sin(skoXC1) <= 1/100 / (-1 + sin(skoXC1) * sin(skoXC1))),
+    inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_27, plain,
+    (1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) < sin(skoXC1) |
+     -1 + sin(skoXC1) * sin(skoXC1) <= 0),
+    inference(split, [], [refute_0_15])).
+
+cnf(refute_0_28, plain,
+    (1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) < sin(skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_27])).
+
+cnf(refute_0_29, plain,
+    (skoXC1 < 0 | 1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) < skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_26, refute_0_28])).
+
+cnf(refute_0_30, plain, (0 <= skoXC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_31, plain,
+    (1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) < skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_29])).
+
+cnf(refute_0_32, plain,
+    (1/100 < skoXC1 * (-1 + sin(skoXC1) * sin(skoXC1)) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | -1 + sin(skoXC1) * sin(skoXC1) <= 0),
+    inference(resolve, [], [refute_0_21, refute_0_31])).
+
+cnf(refute_0_33, plain,
+    (1/100 + skoXC1 < sin(skoXC1) * (sin(skoXC1) * skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_32])).
+
+cnf(refute_0_34, plain,
+    (sin(skoXC1) * skoXC1 < 0 | 1/100 + skoXC1 < 0 |
+     0 < sin(skoXC1) * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(split, [], [refute_0_33])).
+
+cnf(refute_0_35, plain,
+    (skoXC1 < -1/100 | 0 < sin(skoXC1) * (skoXC1 * -1) |
+     0 < sin(skoXC1) * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_34])).
+
+cnf(refute_0_36, plain,
+    (1 < skoXC1 * skoXC1 | skoXC1 <= 0 | skoXC1 <= 1 / skoXC1),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_37, plain,
+    (skoXC1 < 0 | 1 / skoXC1 < skoXC1 | sin(skoXC1) <= 1 / skoXC1),
+    inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_38, plain,
+    (1 < skoXC1 * sin(skoXC1) | sin(skoXC1) <= 0 |
+     skoXC1 <= 1 / sin(skoXC1)),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_39, plain,
+    (skoXC1 < 0 | 1 / sin(skoXC1) < skoXC1 |
+     sin(skoXC1) <= 1 / sin(skoXC1)), inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_40, plain,
+    (1 < sin(skoXC1) * sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_41, plain,
+    (1 / sin(skoXC1) < sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) <= 0), inference(split, [], [refute_0_40])).
+
+cnf(refute_0_42, plain,
+    (1 < 0 | sin(skoXC1) < 0 | 0 < sin(skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1), inference(split, [], [refute_0_40])).
+
+cnf(refute_0_43, plain,
+    (sin(skoXC1) < 0 | 0 < sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_42])).
+
+cnf(refute_0_44, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 | 0 <= sin(skoXC1)),
+    inference(resolve, [], [refute_0_30, refute_0_20])).
+
+cnf(refute_0_45, plain,
+    (0 < skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) | 0 <= sin(skoXC1)),
+    inference(arithmetic, [], [refute_0_44])).
+
+cnf(refute_0_46, plain,
+    (~ lgen(0, X_000041, sin(X_000040)) | X_000041 <= sin(X_000040)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_47, plain,
+    (0 < X_000040 | ~ lgen(0, X_000041, X_000040) |
+     lgen(0, X_000041, sin(X_000040))),
+    inference(subst, [], [sin_lower_bound_0_neg])).
+
+cnf(refute_0_48, plain,
+    (0 < X_000040 | ~ lgen(0, X_000041, X_000040) |
+     X_000041 <= sin(X_000040)),
+    inference(resolve, [], [refute_0_47, refute_0_46])).
+
+cnf(refute_0_49, plain,
+    (0 < X_000040 | X_000040 < X_000041 | X_000041 <= sin(X_000040)),
+    inference(arithmetic, [], [refute_0_48])).
+
+cnf(refute_0_50, plain, (skoXC1 < 0 | 0 < skoXC1 | 0 <= sin(skoXC1)),
+    inference(subst, [], [refute_0_49])).
+
+cnf(refute_0_51, plain, (0 < skoXC1 | 0 <= sin(skoXC1)),
+    inference(resolve, [], [refute_0_30, refute_0_50])).
+
+cnf(refute_0_52, plain, (skoXC1 <= 12/5),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_53, plain, (0 <= sin(skoXC1)),
+    inference(decision, [],
+              [refute_0_45, refute_0_51, refute_0_52, refute_0_30])).
+
+cnf(refute_0_54, plain, (0 < sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_53, refute_0_43])).
+
+cnf(refute_0_55, plain,
+    (1 / sin(skoXC1) < sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_41, refute_0_54])).
+
+cnf(refute_0_56, plain,
+    (skoXC1 < 0 | 1 / sin(skoXC1) < skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_39, refute_0_55])).
+
+cnf(refute_0_57, plain,
+    (1 / sin(skoXC1) < skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_56])).
+
+cnf(refute_0_58, plain,
+    (1 < skoXC1 * sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) <= 0),
+    inference(resolve, [], [refute_0_38, refute_0_57])).
+
+cnf(refute_0_59, plain,
+    (1 < sin(skoXC1) * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) <= 0), inference(arithmetic, [], [refute_0_58])).
+
+cnf(refute_0_60, plain,
+    (1 < sin(skoXC1) * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_59, refute_0_54])).
+
+cnf(refute_0_61, plain,
+    (1 / skoXC1 < sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     skoXC1 <= 0), inference(split, [], [refute_0_60])).
+
+cnf(refute_0_62, plain, (skoXC1 < 0 | 0 < skoXC1 | sin(skoXC1) <= 0),
+    inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_63, plain,
+    (skoXC1 < 0 | 0 < skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_62, refute_0_54])).
+
+cnf(refute_0_64, plain, (0 < skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_63])).
+
+cnf(refute_0_65, plain,
+    (1 / skoXC1 < sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_61, refute_0_64])).
+
+cnf(refute_0_66, plain,
+    (skoXC1 < 0 | 1 / skoXC1 < skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_37, refute_0_65])).
+
+cnf(refute_0_67, plain,
+    (1 / skoXC1 < skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_66])).
+
+cnf(refute_0_68, plain,
+    (1 < skoXC1 * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1 | skoXC1 <= 0),
+    inference(resolve, [], [refute_0_36, refute_0_67])).
+
+cnf(refute_0_69, plain,
+    (1 < skoXC1 * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_68, refute_0_64])).
+
+cnf(refute_0_70, plain,
+    (-1/100 <= skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(decision, [],
+              [refute_0_69, refute_0_64, refute_0_30, refute_0_52])).
+
+cnf(refute_0_71, plain,
+    (0 < sin(skoXC1) * (skoXC1 * -1) | 0 < sin(skoXC1) * skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_70, refute_0_35])).
+
+cnf(refute_0_72, plain,
+    (1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_73, plain,
+    (skoXC1 < 0 |
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <=
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_74, plain,
+    (1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_75, plain,
+    (skoXC1 < 0 |
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <=
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_76, plain,
+    (1/100 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (-1 + sin(skoXC1) * sin(skoXC1)) |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) |
+     -1 + sin(skoXC1) * sin(skoXC1) <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_77, plain,
+    (skoXC1 < 0 |
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <= 1/100 / (-1 + sin(skoXC1) * sin(skoXC1))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_78, plain,
+    (skoXC1 < 0 |
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_77, refute_0_28])).
+
+cnf(refute_0_79, plain,
+    (1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_78])).
+
+cnf(refute_0_80, plain,
+    (1/100 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (-1 + sin(skoXC1) * sin(skoXC1)) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     -1 + sin(skoXC1) * sin(skoXC1) <= 0),
+    inference(resolve, [], [refute_0_76, refute_0_79])).
+
+cnf(refute_0_81, plain,
+    (1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <
+     sin(skoXC1) *
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_80])).
+
+cnf(refute_0_82, plain,
+    ((1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     sin(skoXC1) |
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1), inference(split, [], [refute_0_81])).
+
+cnf(refute_0_83, plain,
+    (sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) < 0 |
+     1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) < 0 |
+     0 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1), inference(split, [], [refute_0_81])).
+
+cnf(refute_0_84, plain,
+    (0 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) |
+     0 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     1/100 <
+     skoXC1 *
+     (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_83])).
+
+cnf(refute_0_85, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     1 /
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_86, plain,
+    (skoXC1 < 0 |
+     1 /
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <=
+     1 /
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_87, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     sin(skoXC1) |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     1 / sin(skoXC1) | sin(skoXC1) <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_88, plain,
+    (skoXC1 < 0 |
+     1 / sin(skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <= 1 / sin(skoXC1)), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_89, plain,
+    (skoXC1 < 0 |
+     1 / sin(skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_88, refute_0_55])).
+
+cnf(refute_0_90, plain,
+    (1 / sin(skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_89])).
+
+cnf(refute_0_91, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) <= 0),
+    inference(resolve, [], [refute_0_87, refute_0_90])).
+
+cnf(refute_0_92, plain,
+    (1 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) <= 0),
+    inference(arithmetic, [], [refute_0_91])).
+
+cnf(refute_0_93, plain,
+    (1 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_92, refute_0_54])).
+
+cnf(refute_0_94, plain,
+    (1 /
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <= 0),
+    inference(split, [], [refute_0_93])).
+
+cnf(refute_0_95, plain,
+    (skoXC1 < 0 |
+     0 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <= 0), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_96, plain,
+    (skoXC1 < 0 |
+     0 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_95, refute_0_54])).
+
+cnf(refute_0_97, plain,
+    (0 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_96])).
+
+cnf(refute_0_98, plain,
+    (1 /
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_94, refute_0_97])).
+
+cnf(refute_0_99, plain,
+    (skoXC1 < 0 |
+     1 /
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_86, refute_0_98])).
+
+cnf(refute_0_100, plain,
+    (1 /
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_99])).
+
+cnf(refute_0_101, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <= 0),
+    inference(resolve, [], [refute_0_85, refute_0_100])).
+
+cnf(refute_0_102, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_101, refute_0_97])).
+
+cnf(refute_0_103, plain,
+    (1 <
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_102])).
+
+cnf(refute_0_104, plain,
+    (1/100 + skoXC1 < skoXC1 * (skoXC1 * skoXC1) | skoXC1 * skoXC1 <= 0 |
+     skoXC1 <= (1/100 + skoXC1) / (skoXC1 * skoXC1)),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_105, plain,
+    (skoXC1 < 0 | (1/100 + skoXC1) / (skoXC1 * skoXC1) < skoXC1 |
+     sin(skoXC1) <= (1/100 + skoXC1) / (skoXC1 * skoXC1)),
+    inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_106, plain,
+    (1/100 + skoXC1 < skoXC1 * (sin(skoXC1) * skoXC1) |
+     sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 <= (1/100 + skoXC1) / (sin(skoXC1) * skoXC1)),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_107, plain,
+    (skoXC1 < 0 | (1/100 + skoXC1) / (sin(skoXC1) * skoXC1) < skoXC1 |
+     sin(skoXC1) <= (1/100 + skoXC1) / (sin(skoXC1) * skoXC1)),
+    inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_108, plain,
+    ((1/100 + skoXC1) / (sin(skoXC1) * skoXC1) < sin(skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(split, [], [refute_0_33])).
+
+cnf(refute_0_109, plain,
+    (skoXC1 < 0 | (1/100 + skoXC1) / (sin(skoXC1) * skoXC1) < skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_107, refute_0_108])).
+
+cnf(refute_0_110, plain,
+    ((1/100 + skoXC1) / (sin(skoXC1) * skoXC1) < skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_109])).
+
+cnf(refute_0_111, plain,
+    (1/100 + skoXC1 < skoXC1 * (sin(skoXC1) * skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_106, refute_0_110])).
+
+cnf(refute_0_112, plain,
+    (1/100 + skoXC1 < sin(skoXC1) * (skoXC1 * skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(arithmetic, [], [refute_0_111])).
+
+cnf(refute_0_113, plain,
+    ((1/100 + skoXC1) / (skoXC1 * skoXC1) < sin(skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 * skoXC1 <= 0), inference(split, [], [refute_0_112])).
+
+cnf(refute_0_114, plain,
+    (0 < skoXC1 * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(decision, [],
+              [refute_0_69, refute_0_64, refute_0_30, refute_0_52])).
+
+cnf(refute_0_115, plain,
+    ((1/100 + skoXC1) / (skoXC1 * skoXC1) < sin(skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_113, refute_0_114])).
+
+cnf(refute_0_116, plain,
+    (skoXC1 < 0 | (1/100 + skoXC1) / (skoXC1 * skoXC1) < skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_105, refute_0_115])).
+
+cnf(refute_0_117, plain,
+    ((1/100 + skoXC1) / (skoXC1 * skoXC1) < skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_116])).
+
+cnf(refute_0_118, plain,
+    (1/100 + skoXC1 < skoXC1 * (skoXC1 * skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_104, refute_0_117])).
+
+cnf(refute_0_119, plain,
+    (1/100 < skoXC1 * (-1 + skoXC1 * skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 * skoXC1 <= 0), inference(arithmetic, [], [refute_0_118])).
+
+cnf(refute_0_120, plain,
+    (1/100 < skoXC1 * (-1 + skoXC1 * skoXC1) | 0 < skoXC1 * skoXC1 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(decision, [],
+              [refute_0_69, refute_0_64, refute_0_30, refute_0_52])).
+
+cnf(refute_0_121, plain,
+    (1/100 < skoXC1 * (-1 + skoXC1 * skoXC1) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_119, refute_0_120])).
+
+cnf(refute_0_122, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     skoXC1 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     1 / skoXC1 | skoXC1 <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_123, plain,
+    (skoXC1 < 0 |
+     1 / skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <= 1 / skoXC1), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_124, plain,
+    (skoXC1 < 0 |
+     1 / skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_123, refute_0_65])).
+
+cnf(refute_0_125, plain,
+    (1 / skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_124])).
+
+cnf(refute_0_126, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1 | skoXC1 <= 0),
+    inference(resolve, [], [refute_0_122, refute_0_125])).
+
+cnf(refute_0_127, plain,
+    (1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_126, refute_0_64])).
+
+cnf(refute_0_128, plain,
+    (1 <
+     skoXC1 *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_127])).
+
+cnf(refute_0_129, plain,
+    (1/100 + skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 * skoXC1) |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 + skoXC1) / (skoXC1 * skoXC1) | skoXC1 * skoXC1 <= 0),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_130, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1) / (skoXC1 * skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <= (1/100 + skoXC1) / (skoXC1 * skoXC1)),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_131, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1) / (skoXC1 * skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_130, refute_0_115])).
+
+cnf(refute_0_132, plain,
+    ((1/100 + skoXC1) / (skoXC1 * skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_131])).
+
+cnf(refute_0_133, plain,
+    (1/100 + skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 * skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0 | skoXC1 * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_129, refute_0_132])).
+
+cnf(refute_0_134, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 * skoXC1 <= 0), inference(arithmetic, [], [refute_0_133])).
+
+cnf(refute_0_135, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     0 < skoXC1 * skoXC1 | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0),
+    inference(decision, [],
+              [refute_0_128, refute_0_121, refute_0_69, refute_0_64,
+               refute_0_30, refute_0_52])).
+
+cnf(refute_0_136, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_134, refute_0_135])).
+
+cnf(refute_0_137, plain,
+    (1/100 + skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     skoXC1 *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 + skoXC1) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_138, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <=
+     (1/100 + skoXC1) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_139, plain,
+    (1/100 + skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (sin(skoXC1) * skoXC1) | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 + skoXC1) / (sin(skoXC1) * skoXC1)),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_140, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1) / (sin(skoXC1) * skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <= (1/100 + skoXC1) / (sin(skoXC1) * skoXC1)),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_141, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1) / (sin(skoXC1) * skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_140, refute_0_108])).
+
+cnf(refute_0_142, plain,
+    ((1/100 + skoXC1) / (sin(skoXC1) * skoXC1) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_141])).
+
+cnf(refute_0_143, plain,
+    (1/100 + skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (sin(skoXC1) * skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_139, refute_0_142])).
+
+cnf(refute_0_144, plain,
+    (1/100 + skoXC1 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(arithmetic, [], [refute_0_143])).
+
+cnf(refute_0_145, plain,
+    ((1/100 + skoXC1) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0),
+    inference(split, [], [refute_0_144])).
+
+cnf(refute_0_146, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(decision, [],
+              [refute_0_136, refute_0_128, refute_0_121, refute_0_69,
+               refute_0_64, refute_0_30, refute_0_52, refute_0_103])).
+
+cnf(refute_0_147, plain,
+    ((1/100 + skoXC1) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_145, refute_0_146])).
+
+cnf(refute_0_148, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_138, refute_0_147])).
+
+cnf(refute_0_149, plain,
+    ((1/100 + skoXC1) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_148])).
+
+cnf(refute_0_150, plain,
+    (1/100 + skoXC1 <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0),
+    inference(resolve, [], [refute_0_137, refute_0_149])).
+
+cnf(refute_0_151, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0),
+    inference(arithmetic, [], [refute_0_150])).
+
+cnf(refute_0_152, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(decision, [],
+              [refute_0_136, refute_0_128, refute_0_121, refute_0_69,
+               refute_0_64, refute_0_30, refute_0_52, refute_0_103])).
+
+cnf(refute_0_153, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_151, refute_0_152])).
+
+cnf(refute_0_154, plain,
+    (sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120)))) <=
+     1/100),
+    inference(decision, [],
+              [refute_0_103, refute_0_52, refute_0_30, refute_0_64,
+               refute_0_69, refute_0_121, refute_0_128, refute_0_136,
+               refute_0_153])).
+
+cnf(refute_0_155, plain,
+    (0 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) |
+     0 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_154, refute_0_84])).
+
+cnf(refute_0_156, plain,
+    (0 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) |
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_157, plain,
+    (sin(skoXC1) <
+     0 /
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) |
+     0 <=
+     skoXC1 *
+     (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120)))) |
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0),
+    inference(split, [], [refute_0_156])).
+
+cnf(refute_0_158, plain,
+    (sin(skoXC1) < 0 |
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <= 0),
+    inference(arithmetic, [], [refute_0_157])).
+
+cnf(refute_0_159, plain,
+    (sin(skoXC1) < 0 |
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_158, refute_0_97])).
+
+cnf(refute_0_160, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 | skoXC1 < 0 |
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_20, refute_0_159])).
+
+cnf(refute_0_161, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 |
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_160])).
+
+cnf(refute_0_162, plain,
+    (0 < skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) |
+     sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_161])).
+
+cnf(refute_0_163, plain,
+    (sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) <= 0),
+    inference(decision, [],
+              [refute_0_103, refute_0_52, refute_0_30, refute_0_64,
+               refute_0_69, refute_0_121, refute_0_128, refute_0_136,
+               refute_0_153])).
+
+cnf(refute_0_164, plain,
+    (sin(skoXC1) *
+     (skoXC1 *
+      (-1 + skoXC1 * (skoXC1 * (1/6 + skoXC1 * (skoXC1 * -1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_163, refute_0_162])).
+
+cnf(refute_0_165, plain,
+    (0 <
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_164, refute_0_155])).
+
+cnf(refute_0_166, plain,
+    ((1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_82, refute_0_165])).
+
+cnf(refute_0_167, plain,
+    (skoXC1 < 0 |
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_75, refute_0_166])).
+
+cnf(refute_0_168, plain,
+    ((1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_167])).
+
+cnf(refute_0_169, plain,
+    (1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (sin(skoXC1) *
+      (skoXC1 *
+       (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))))) |
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_74, refute_0_168])).
+
+cnf(refute_0_170, plain,
+    (1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <
+     sin(skoXC1) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) |
+     sin(skoXC1) *
+     (skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) <= 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(arithmetic, [], [refute_0_169])).
+
+cnf(refute_0_171, plain,
+    (1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <
+     sin(skoXC1) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_170, refute_0_165])).
+
+cnf(refute_0_172, plain,
+    ((1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) <
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) <= 0),
+    inference(split, [], [refute_0_171])).
+
+cnf(refute_0_173, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(decision, [],
+              [refute_0_103, refute_0_52, refute_0_30, refute_0_64,
+               refute_0_69, refute_0_121, refute_0_128, refute_0_136,
+               refute_0_153])).
+
+cnf(refute_0_174, plain,
+    ((1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) <
+     sin(skoXC1) | sin(skoXC1) * sin(skoXC1) <= 1 |
+     sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_172, refute_0_173])).
+
+cnf(refute_0_175, plain,
+    (skoXC1 < 0 |
+     (1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_73, refute_0_174])).
+
+cnf(refute_0_176, plain,
+    ((1/100 +
+      skoXC1 *
+      (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_175])).
+
+cnf(refute_0_177, plain,
+    (1/100 +
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 *
+          (skoXC1 *
+           (2/45 +
+            skoXC1 *
+            (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400)))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) <= 0),
+    inference(resolve, [], [refute_0_72, refute_0_176])).
+
+cnf(refute_0_178, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (7/6 +
+        skoXC1 *
+        (skoXC1 *
+         (-61/120 +
+          skoXC1 *
+          (skoXC1 *
+           (13/120 +
+            skoXC1 *
+            (skoXC1 *
+             (-7/540 +
+              skoXC1 *
+              (skoXC1 *
+               (13/14400 +
+                skoXC1 *
+                (skoXC1 *
+                 (-1/28800 + skoXC1 * (skoXC1 * 1/1728000)))))))))))))) |
+     sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) <= 0),
+    inference(arithmetic, [], [refute_0_177])).
+
+cnf(refute_0_179, plain,
+    (sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) <= 0 |
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (7/6 +
+        skoXC1 *
+        (skoXC1 *
+         (-61/120 +
+          skoXC1 *
+          (skoXC1 *
+           (13/120 +
+            skoXC1 *
+            (skoXC1 *
+             (-7/540 +
+              skoXC1 *
+              (skoXC1 *
+               (13/14400 +
+                skoXC1 *
+                (skoXC1 *
+                 (-1/28800 + skoXC1 * (skoXC1 * 1/1728000)))))))))))))) <=
+     1/100),
+    inference(decision, [],
+              [refute_0_103, refute_0_52, refute_0_30, refute_0_64,
+               refute_0_69, refute_0_121, refute_0_128, refute_0_136,
+               refute_0_153])).
+
+cnf(refute_0_180, plain,
+    (sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0 |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 *
+         (skoXC1 *
+          (2/45 +
+           skoXC1 *
+           (skoXC1 * (-1/360 + skoXC1 * (skoXC1 * 1/14400))))))))) <= 0),
+    inference(resolve, [], [refute_0_179, refute_0_178])).
+
+cnf(refute_0_181, plain,
+    (sin(skoXC1) * sin(skoXC1) <= 1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_180, refute_0_173])).
+
+cnf(refute_0_182, plain,
+    (0 < sin(skoXC1) * (skoXC1 * -1) | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_181, refute_0_71])).
+
+cnf(refute_0_183, plain,
+    (sin(skoXC1) < 0 / (skoXC1 * -1) | 0 <= skoXC1 * -1 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(split, [], [refute_0_182])).
+
+cnf(refute_0_184, plain,
+    (sin(skoXC1) < 0 | sin(skoXC1) * sin(skoXC1) <= 1 | skoXC1 <= 0),
+    inference(arithmetic, [], [refute_0_183])).
+
+cnf(refute_0_185, plain,
+    (sin(skoXC1) < 0 | sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_184, refute_0_64])).
+
+cnf(refute_0_186, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 | skoXC1 < 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_20, refute_0_185])).
+
+cnf(refute_0_187, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_30, refute_0_186])).
+
+cnf(refute_0_188, plain,
+    (0 < skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) |
+     sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(arithmetic, [], [refute_0_187])).
+
+cnf(refute_0_189, plain,
+    (sin(skoXC1) * sin(skoXC1) <= 1 |
+     skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) <= 0),
+    inference(decision, [],
+              [refute_0_128, refute_0_69, refute_0_64, refute_0_30,
+               refute_0_52])).
+
+cnf(refute_0_190, plain, (sin(skoXC1) * sin(skoXC1) <= 1),
+    inference(resolve, [], [refute_0_189, refute_0_188])).
+
+cnf(refute_0_191, plain, (-1 < sin(skoXC1) * (sin(skoXC1) * -1)),
+    inference(resolve, [], [refute_0_190, refute_0_19])).
+
+cnf(refute_0_192, plain,
+    (sin(skoXC1) < 1/100 / (-1 + sin(skoXC1) * sin(skoXC1))),
+    inference(resolve, [], [refute_0_17, refute_0_191])).
+
+cnf(refute_0_193, plain,
+    (skoXC1 < 0 |
+     skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1))),
+    inference(resolve, [], [refute_0_13, refute_0_192])).
+
+cnf(refute_0_194, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1))),
+    inference(resolve, [], [refute_0_30, refute_0_193])).
+
+cnf(refute_0_195, plain,
+    (1/100 <
+     skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) *
+     (-1 + sin(skoXC1) * sin(skoXC1)) |
+     0 <= -1 + sin(skoXC1) * sin(skoXC1)),
+    inference(resolve, [], [refute_0_8, refute_0_194])).
+
+cnf(refute_0_196, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     sin(skoXC1) *
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     sin(skoXC1) * (sin(skoXC1) * -1) <= -1),
+    inference(arithmetic, [], [refute_0_195])).
+
+cnf(refute_0_197, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     sin(skoXC1) *
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(resolve, [], [refute_0_196, refute_0_191])).
+
+cnf(refute_0_198, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     sin(skoXC1) |
+     sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(split, [], [refute_0_197])).
+
+cnf(refute_0_199, plain,
+    (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) < 0 |
+     1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 |
+     0 < sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))),
+    inference(split, [], [refute_0_197])).
+
+cnf(refute_0_200, plain,
+    (0 < sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) |
+     0 < sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) |
+     1/100 < skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))),
+    inference(arithmetic, [], [refute_0_199])).
+
+cnf(refute_0_201, plain,
+    (1/100 < skoXC1 * (-1 + sin(skoXC1) * sin(skoXC1)) |
+     0 <= -1 + sin(skoXC1) * sin(skoXC1) |
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) <= skoXC1),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_202, plain,
+    (skoXC1 < 1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) | 0 < skoXC1 |
+     1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) <= sin(skoXC1)),
+    inference(subst, [], [refute_0_49])).
+
+cnf(refute_0_203, plain,
+    (skoXC1 < 1/100 / (-1 + sin(skoXC1) * sin(skoXC1)) | 0 < skoXC1),
+    inference(resolve, [], [refute_0_202, refute_0_192])).
+
+cnf(refute_0_204, plain,
+    (1/100 < skoXC1 * (-1 + sin(skoXC1) * sin(skoXC1)) | 0 < skoXC1 |
+     0 <= -1 + sin(skoXC1) * sin(skoXC1)),
+    inference(resolve, [], [refute_0_201, refute_0_203])).
+
+cnf(refute_0_205, plain,
+    (1/100 + skoXC1 < sin(skoXC1) * (sin(skoXC1) * skoXC1) | 0 < skoXC1 |
+     sin(skoXC1) * (sin(skoXC1) * -1) <= -1),
+    inference(arithmetic, [], [refute_0_204])).
+
+cnf(refute_0_206, plain,
+    (X_000055 < sin(X_000054) | ~ lgen(1, X_000055, sin(X_000054))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_207, plain,
+    (X_000054 < 0 | ~ lgen(1, X_000055, X_000054 - X_000054 ^ 3 / 6) |
+     lgen(1, X_000055, sin(X_000054))),
+    inference(subst, [], [sin_lower_bound_0_pos])).
+
+cnf(refute_0_208, plain,
+    (X_000054 < 0 | X_000055 < sin(X_000054) |
+     ~ lgen(1, X_000055, X_000054 - X_000054 ^ 3 / 6)),
+    inference(resolve, [], [refute_0_207, refute_0_206])).
+
+cnf(refute_0_209, plain,
+    (X_000054 < 0 | X_000055 < sin(X_000054) |
+     X_000054 * (1 + X_000054 * (X_000054 * -1/6)) <= X_000055),
+    inference(arithmetic, [], [refute_0_208])).
+
+cnf(refute_0_210, plain,
+    (skoXC1 < 0 | 0 < sin(skoXC1) |
+     skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <= 0),
+    inference(subst, [], [refute_0_209])).
+
+cnf(refute_0_211, plain,
+    (0 < sin(skoXC1) | skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_210])).
+
+cnf(refute_0_212, plain, (0 < sin(skoXC1) | skoXC1 <= 0),
+    inference(decision, [], [refute_0_211, refute_0_30, refute_0_52])).
+
+cnf(refute_0_213, plain,
+    (1/100 + skoXC1 < sin(skoXC1) * (sin(skoXC1) * skoXC1) |
+     0 < sin(skoXC1) | sin(skoXC1) * (sin(skoXC1) * -1) <= -1),
+    inference(resolve, [], [refute_0_212, refute_0_205])).
+
+cnf(refute_0_214, plain,
+    (1/100 + skoXC1 < sin(skoXC1) * (sin(skoXC1) * skoXC1) |
+     0 < sin(skoXC1)),
+    inference(resolve, [], [refute_0_213, refute_0_191])).
+
+cnf(refute_0_215, plain,
+    (sin(skoXC1) * skoXC1 < 0 | 1/100 + skoXC1 < 0 |
+     0 < sin(skoXC1) * skoXC1 | 0 < sin(skoXC1)),
+    inference(split, [], [refute_0_214])).
+
+cnf(refute_0_216, plain,
+    (skoXC1 < -1/100 | 0 < sin(skoXC1) * (skoXC1 * -1) |
+     0 < sin(skoXC1) * skoXC1 | 0 < sin(skoXC1)),
+    inference(arithmetic, [], [refute_0_215])).
+
+cnf(refute_0_217, plain, (0 < sin(skoXC1) | -1/100 <= skoXC1),
+    inference(decision, [], [refute_0_52, refute_0_30, refute_0_211])).
+
+cnf(refute_0_218, plain,
+    (0 < sin(skoXC1) * (skoXC1 * -1) | 0 < sin(skoXC1) * skoXC1 |
+     0 < sin(skoXC1)),
+    inference(resolve, [], [refute_0_217, refute_0_216])).
+
+cnf(refute_0_219, plain,
+    (0 < sin(skoXC1) * skoXC1 | sin(skoXC1) * skoXC1 <= 0),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_220, plain,
+    (0 < 0 | skoXC1 < 0 | 0 < skoXC1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(split, [], [refute_0_219])).
+
+cnf(refute_0_221, plain,
+    (skoXC1 < 0 | 0 < skoXC1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(arithmetic, [], [refute_0_220])).
+
+cnf(refute_0_222, plain, (0 < skoXC1 | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_221])).
+
+cnf(refute_0_223, plain, (0 < sin(skoXC1) | sin(skoXC1) * skoXC1 <= 0),
+    inference(resolve, [], [refute_0_212, refute_0_222])).
+
+cnf(refute_0_224, plain,
+    (0 < sin(skoXC1) * (skoXC1 * -1) | 0 < sin(skoXC1)),
+    inference(resolve, [], [refute_0_223, refute_0_218])).
+
+cnf(refute_0_225, plain,
+    (0 < 0 | skoXC1 * -1 < 0 | 0 < skoXC1 * -1 | 0 < sin(skoXC1)),
+    inference(split, [], [refute_0_224])).
+
+cnf(refute_0_226, plain, (skoXC1 < 0 | 0 < sin(skoXC1) | 0 < skoXC1),
+    inference(arithmetic, [], [refute_0_225])).
+
+cnf(refute_0_227, plain, (0 < sin(skoXC1) | 0 < skoXC1),
+    inference(resolve, [], [refute_0_30, refute_0_226])).
+
+cnf(refute_0_228, plain, (0 < sin(skoXC1)),
+    inference(resolve, [], [refute_0_212, refute_0_227])).
+
+cnf(refute_0_229, plain, (skoXC1 < 0 | 0 < skoXC1),
+    inference(resolve, [], [refute_0_62, refute_0_228])).
+
+cnf(refute_0_230, plain, (0 < skoXC1),
+    inference(resolve, [], [refute_0_30, refute_0_229])).
+
+cnf(refute_0_231, plain,
+    (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) <= 1/100),
+    inference(decision, [], [refute_0_230, refute_0_52, refute_0_30])).
+
+cnf(refute_0_232, plain,
+    (0 < sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) |
+     0 < sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))),
+    inference(resolve, [], [refute_0_231, refute_0_200])).
+
+cnf(refute_0_233, plain,
+    (0 < sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) |
+     sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_234, plain,
+    (sin(skoXC1) < 0 / (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) |
+     0 <= skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) |
+     sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0),
+    inference(split, [], [refute_0_233])).
+
+cnf(refute_0_235, plain,
+    (sin(skoXC1) < 0 |
+     sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0 |
+     skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <= 0),
+    inference(arithmetic, [], [refute_0_234])).
+
+cnf(refute_0_236, plain, (0 < skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))),
+    inference(decision, [], [refute_0_230, refute_0_52, refute_0_30])).
+
+cnf(refute_0_237, plain,
+    (sin(skoXC1) < 0 |
+     sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0),
+    inference(resolve, [], [refute_0_235, refute_0_236])).
+
+cnf(refute_0_238, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 | skoXC1 < 0 |
+     sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0),
+    inference(resolve, [], [refute_0_20, refute_0_237])).
+
+cnf(refute_0_239, plain,
+    (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) < 0 |
+     sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0),
+    inference(resolve, [], [refute_0_30, refute_0_238])).
+
+cnf(refute_0_240, plain,
+    (0 < skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) |
+     sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0),
+    inference(arithmetic, [], [refute_0_239])).
+
+cnf(refute_0_241, plain, (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6)) <= 0),
+    inference(decision, [], [refute_0_230, refute_0_52, refute_0_30])).
+
+cnf(refute_0_242, plain,
+    (sin(skoXC1) * (skoXC1 * (-1 + skoXC1 * (skoXC1 * 1/6))) <= 0),
+    inference(resolve, [], [refute_0_241, refute_0_240])).
+
+cnf(refute_0_243, plain,
+    (0 < sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))),
+    inference(resolve, [], [refute_0_242, refute_0_232])).
+
+cnf(refute_0_244, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     sin(skoXC1)), inference(resolve, [], [refute_0_198, refute_0_243])).
+
+cnf(refute_0_245, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))),
+    inference(resolve, [], [refute_0_7, refute_0_244])).
+
+cnf(refute_0_246, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))),
+    inference(resolve, [], [refute_0_30, refute_0_245])).
+
+cnf(refute_0_247, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(resolve, [], [refute_0_6, refute_0_246])).
+
+cnf(refute_0_248, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     sin(skoXC1) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) |
+     sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(arithmetic, [], [refute_0_247])).
+
+cnf(refute_0_249, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     sin(skoXC1) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))))),
+    inference(resolve, [], [refute_0_248, refute_0_243])).
+
+cnf(refute_0_250, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) <
+     sin(skoXC1) |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))) <=
+     0), inference(split, [], [refute_0_249])).
+
+cnf(refute_0_251, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 * (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0 |
+     skoXC1 <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_252, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < skoXC1 |
+     sin(skoXC1) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_253, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 * (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0 |
+     skoXC1 <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_254, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < skoXC1 |
+     sin(skoXC1) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [refute_0_25])).
+
+cnf(refute_0_255, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < skoXC1),
+    inference(resolve, [], [refute_0_254, refute_0_244])).
+
+cnf(refute_0_256, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < skoXC1),
+    inference(resolve, [], [refute_0_30, refute_0_255])).
+
+cnf(refute_0_257, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 * (sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(resolve, [], [refute_0_253, refute_0_256])).
+
+cnf(refute_0_258, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     sin(skoXC1) * (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     sin(skoXC1) * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(arithmetic, [], [refute_0_257])).
+
+cnf(refute_0_259, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     sin(skoXC1) * (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(resolve, [], [refute_0_258, refute_0_243])).
+
+cnf(refute_0_260, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < sin(skoXC1) |
+     skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(split, [], [refute_0_259])).
+
+cnf(refute_0_261, plain,
+    (0 < skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))),
+    inference(decision, [], [refute_0_30, refute_0_52, refute_0_230])).
+
+cnf(refute_0_262, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < sin(skoXC1)),
+    inference(resolve, [], [refute_0_260, refute_0_261])).
+
+cnf(refute_0_263, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < skoXC1),
+    inference(resolve, [], [refute_0_252, refute_0_262])).
+
+cnf(refute_0_264, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) < skoXC1),
+    inference(resolve, [], [refute_0_30, refute_0_263])).
+
+cnf(refute_0_265, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 * (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(resolve, [], [refute_0_251, refute_0_264])).
+
+cnf(refute_0_266, plain,
+    (1/100 <
+     skoXC1 * (-1 + skoXC1 * (skoXC1 * (7/6 + skoXC1 * (skoXC1 * -1/6)))) |
+     skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(arithmetic, [], [refute_0_265])).
+
+cnf(refute_0_267, plain,
+    (0 < skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) |
+     1/100 <
+     skoXC1 * (-1 + skoXC1 * (skoXC1 * (7/6 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(decision, [], [refute_0_30, refute_0_52, refute_0_230])).
+
+cnf(refute_0_268, plain,
+    (1/100 <
+     skoXC1 * (-1 + skoXC1 * (skoXC1 * (7/6 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(resolve, [], [refute_0_266, refute_0_267])).
+
+cnf(refute_0_269, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0 |
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [leq_right_divide_mul_pos])).
+
+cnf(refute_0_270, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) |
+     sin(skoXC1) <=
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_271, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))),
+    inference(resolve, [], [refute_0_270, refute_0_262])).
+
+cnf(refute_0_272, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))),
+    inference(resolve, [], [refute_0_30, refute_0_271])).
+
+cnf(refute_0_273, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)))) |
+     skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(resolve, [], [refute_0_269, refute_0_272])).
+
+cnf(refute_0_274, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (7/6 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) |
+     skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) <= 0),
+    inference(arithmetic, [], [refute_0_273])).
+
+cnf(refute_0_275, plain,
+    (0 < skoXC1 * (skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) |
+     1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (7/6 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))))),
+    inference(decision, [],
+              [refute_0_268, refute_0_30, refute_0_52, refute_0_230])).
+
+cnf(refute_0_276, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (7/6 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))))),
+    inference(resolve, [], [refute_0_274, refute_0_275])).
+
+cnf(refute_0_277, plain,
+    (0 <
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))),
+    inference(decision, [],
+              [refute_0_230, refute_0_52, refute_0_30, refute_0_268,
+               refute_0_276])).
+
+cnf(refute_0_278, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) <
+     sin(skoXC1)), inference(resolve, [], [refute_0_250, refute_0_277])).
+
+cnf(refute_0_279, plain,
+    (skoXC1 < 0 |
+     (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))),
+    inference(resolve, [], [refute_0_5, refute_0_278])).
+
+cnf(refute_0_280, plain,
+    ((1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6))) /
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120))))),
+    inference(resolve, [], [refute_0_30, refute_0_279])).
+
+cnf(refute_0_281, plain,
+    (1/100 + skoXC1 * (1 + skoXC1 * (skoXC1 * -1/6)) <
+     skoXC1 *
+     (1 + skoXC1 * (skoXC1 * (-1/6 + skoXC1 * (skoXC1 * 1/120)))) *
+     (skoXC1 *
+      (skoXC1 *
+       (1 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/3 +
+          skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720)))))))) |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))) <=
+     0), inference(resolve, [], [refute_0_0, refute_0_280])).
+
+cnf(refute_0_282, plain,
+    (1/100 <
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (7/6 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/2 +
+          skoXC1 *
+          (skoXC1 *
+           (1/10 +
+            skoXC1 *
+            (skoXC1 *
+             (-11/1080 +
+              skoXC1 *
+              (skoXC1 *
+               (23/43200 + skoXC1 * (skoXC1 * -1/86400)))))))))))) |
+     skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))) <=
+     0), inference(arithmetic, [], [refute_0_281])).
+
+cnf(refute_0_283, plain,
+    (skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))) <=
+     0 |
+     skoXC1 *
+     (-1 +
+      skoXC1 *
+      (skoXC1 *
+       (7/6 +
+        skoXC1 *
+        (skoXC1 *
+         (-1/2 +
+          skoXC1 *
+          (skoXC1 *
+           (1/10 +
+            skoXC1 *
+            (skoXC1 *
+             (-11/1080 +
+              skoXC1 *
+              (skoXC1 *
+               (23/43200 + skoXC1 * (skoXC1 * -1/86400)))))))))))) <=
+     1/100),
+    inference(decision, [],
+              [refute_0_230, refute_0_52, refute_0_30, refute_0_268,
+               refute_0_276])).
+
+cnf(refute_0_284, plain,
+    (skoXC1 *
+     (skoXC1 *
+      (1 +
+       skoXC1 *
+       (skoXC1 *
+        (-1/3 +
+         skoXC1 * (skoXC1 * (13/360 + skoXC1 * (skoXC1 * -1/720))))))) <=
+     0), inference(resolve, [], [refute_0_283, refute_0_282])).
+
+cnf(refute_0_285, plain, ($false),
+    inference(resolve, [], [refute_0_284, refute_0_277])).
+% SZS output end CNFRefutation for sin-index-3-weak.tptp

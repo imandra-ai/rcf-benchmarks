@@ -1,0 +1,133 @@
+% SZS output start CNFRefutation for Nichols-Plot-Inverted-Pendulum-Meets-1-2.tptp
+cnf(leq_left_divide_mul_pos, axiom, (Y * Z < X | X / Z <= Y | Z <= 0)).
+
+fof(pi_upper_bound, axiom, (pi < 31415927/10000000)).
+
+fof(pi_lower_bound, axiom, (15707963/5000000 < pi)).
+
+fof('Nichols_Plot_Inverted_Pendulum_Meets_1_2', conjecture,
+    (! [X] :
+       ((1/5 <= X & X <= 157/128) =>
+        -pi <=
+        -pi -
+        arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+               (81 * X ^ 4 + 2495 * X ^ 2 - 98))))).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       ((1/5 <= X & X <= 157/128) =>
+        -pi <=
+        -pi -
+        arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+               (81 * X ^ 4 + 2495 * X ^ 2 - 98)))),
+    inference(strip, [], ['Nichols_Plot_Inverted_Pendulum_Meets_1_2'])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         ((1/5 <= X & X <= 157/128) =>
+          -pi <=
+          -pi -
+          arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+                 (81 * X ^ 4 + 2495 * X ^ 2 - 98)))),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       (-pi -
+        arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+               (81 * X ^ 4 + 2495 * X ^ 2 - 98)) < -pi & X <= 157/128 &
+        1/5 <= X)), inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (-pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) < -pi &
+     1/5 <= skoXC1 & skoXC1 <= 157/128),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (-pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) < -pi),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [pi_lower_bound])).
+
+fof(normalize_0_4, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [pi_upper_bound])).
+
+fof(normalize_0_5, plain, (skoXC1 <= 157/128),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_6, plain, (1/5 <= skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (-pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) < -pi),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (0 <
+     skoXC1 *
+     (-1029 + skoXC1 * (skoXC1 * (650 + skoXC1 * (skoXC1 * 22)))) /
+     (-98 + skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81))))),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (0 * (-98 + skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81)))) <
+     skoXC1 *
+     (-1029 + skoXC1 * (skoXC1 * (650 + skoXC1 * (skoXC1 * 22)))) |
+     -98 + skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81))) <= 0 |
+     skoXC1 *
+     (-1029 + skoXC1 * (skoXC1 * (650 + skoXC1 * (skoXC1 * 22)))) /
+     (-98 + skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81)))) <= 0),
+    inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_3, plain,
+    (0 * (-98 + skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81)))) <
+     skoXC1 *
+     (-1029 + skoXC1 * (skoXC1 * (650 + skoXC1 * (skoXC1 * 22)))) |
+     -98 + skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81))) <= 0),
+    inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (0 <
+     skoXC1 *
+     (-1029 + skoXC1 * (skoXC1 * (650 + skoXC1 * (skoXC1 * 22)))) |
+     skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81))) <= 98),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_6, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_7, plain, (skoXC1 <= 157/128),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_8, plain, (1/5 <= skoXC1),
+    inference(canonicalize, [], [normalize_0_6])).
+
+cnf(refute_0_9, plain,
+    (skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81))) <= 98 |
+     skoXC1 *
+     (-1029 + skoXC1 * (skoXC1 * (650 + skoXC1 * (skoXC1 * 22)))) <= 0),
+    inference(decision, [],
+              [refute_0_5, refute_0_6, refute_0_7, refute_0_8])).
+
+cnf(refute_0_10, plain,
+    (skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81))) <= 98),
+    inference(resolve, [], [refute_0_9, refute_0_4])).
+
+cnf(refute_0_11, plain,
+    (98 < skoXC1 * (skoXC1 * (2495 + skoXC1 * (skoXC1 * 81)))),
+    inference(decision, [],
+              [refute_0_5, refute_0_6, refute_0_7, refute_0_8])).
+
+cnf(refute_0_12, plain, ($false),
+    inference(resolve, [], [refute_0_10, refute_0_11])).
+% SZS output end CNFRefutation for Nichols-Plot-Inverted-Pendulum-Meets-1-2.tptp

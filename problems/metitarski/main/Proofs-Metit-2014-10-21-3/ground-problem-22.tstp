@@ -1,0 +1,61 @@
+% SZS output start CNFRefutation for ground-problem-22.tptp
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(ln_lower_bound_cf5, axiom,
+    (X <= 0 |
+     ~ lgen(R, Y,
+            1/3 * (10 * X ^ 2 + 19 * X + 1) * (X - 1) /
+            (X * (X ^ 2 + 6 * X + 3))) | lgen(R, Y, ln(X)))).
+
+fof(ground_problem_22, conjecture, (2 < ln(8))).
+
+fof(subgoal_0, plain, (2 < ln(8)),
+    inference(strip, [], [ground_problem_22])).
+
+fof(negate_0_0, plain, (~ ~ ln(8) <= 2),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (ln(8) <= 2),
+    inference(canonicalize, [], [negate_0_0])).
+
+cnf(refute_0_0, plain, (ln(8) <= 2),
+    inference(canonicalize, [], [normalize_0_0])).
+
+cnf(refute_0_1, plain,
+    (X_000048 < ln(X_000047) | ~ lgen(1, X_000048, ln(X_000047))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(1, X_000048,
+            1/3 * (10 * X_000047 ^ 2 + 19 * X_000047 + 1) *
+            (X_000047 - 1) /
+            (X_000047 * (X_000047 ^ 2 + 6 * X_000047 + 3))) |
+     X_000047 <= 0 | lgen(1, X_000048, ln(X_000047))),
+    inference(subst, [], [ln_lower_bound_cf5])).
+
+cnf(refute_0_3, plain,
+    (X_000048 < ln(X_000047) |
+     ~ lgen(1, X_000048,
+            1/3 * (10 * X_000047 ^ 2 + 19 * X_000047 + 1) *
+            (X_000047 - 1) /
+            (X_000047 * (X_000047 ^ 2 + 6 * X_000047 + 3))) |
+     X_000047 <= 0), inference(resolve, [], [refute_0_2, refute_0_1])).
+
+cnf(refute_0_4, plain,
+    (X_000048 < ln(X_000047) | X_000047 <= 0 |
+     (-1/3 + X_000047 * (-6 + X_000047 * (3 + X_000047 * 10/3))) /
+     (X_000047 * (3 + X_000047 * (6 + X_000047))) <= X_000048),
+    inference(arithmetic, [], [refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (2 < ln(8) | 8 <= 0 |
+     (-1/3 + 8 * (-6 + 8 * (3 + 8 * 10/3))) / (8 * (3 + 8 * (6 + 8))) <=
+     2), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (8 <= 0 |
+     (-1/3 + 8 * (-6 + 8 * (3 + 8 * 10/3))) / (8 * (3 + 8 * (6 + 8))) <=
+     2), inference(resolve, [], [refute_0_0, refute_0_5])).
+
+cnf(refute_0_7, plain, ($false), inference(arithmetic, [], [refute_0_6])).
+% SZS output end CNFRefutation for ground-problem-22.tptp

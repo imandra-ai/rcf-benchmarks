@@ -1,0 +1,3942 @@
+% SZS output start CNFRefutation for Nichols-Plot-Inverted-Pendulum-Meets-2-5.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(lgen_less_neg, axiom, (X < Y | ~ lgen(1, X, Y))).
+
+cnf(leq_left_mul_divide_pos, axiom, (Y / Z < X | X * Z <= Y | Z <= 0)).
+
+cnf(leq_right_mul_divide_pos, axiom, (Y < X / Z | X <= Y * Z | Z <= 0)).
+
+cnf(leq_right_divide_mul_neg, axiom, (Y < X * Z | Y / Z <= X | 0 <= Z)).
+
+cnf(leq_right_mul_divide_neg, axiom, (Y < X / Z | Y * Z <= X | 0 <= Z)).
+
+cnf(atan_lower_bound_case_13, axiom,
+    (X < 0 | ~ lgen(R, Y, 3 * X / (X ^ 2 + 3)) | lgen(R, Y, arctan(X)))).
+
+cnf(atan_upper_bound_case_13, axiom,
+    (X < 0 | ~ lgen(R, X, Y) | lgen(R, arctan(X), Y))).
+
+cnf(ln_upper_bound_cf3, axiom,
+    (X <= 0 | ~ lgen(R, 1/2 * (X + 5) * (X - 1) / (2 * X + 1), Y) |
+     lgen(R, ln(X), Y))).
+
+cnf(ln_upper_bound_cf7, axiom,
+    (X <= 0 |
+     ~ lgen(R,
+            1/12 * (3 * X ^ 3 + 131 * X ^ 2 + 239 * X + 47) * (X - 1) /
+            (4 * X ^ 3 + 18 * X ^ 2 + 12 * X + 1), Y) |
+     lgen(R, ln(X), Y))).
+
+fof(pi_upper_bound, axiom, (pi < 31415927/10000000)).
+
+fof(pi_lower_bound, axiom, (15707963/5000000 < pi)).
+
+fof('Nichols_Plot_Inverted_Pendulum_Meets_2_5', conjecture,
+    (! [X] :
+       (X = 629/512 =>
+        20 / ln(10) *
+        ln(25 *
+           sqrt(484 * X ^ 10 + 35161 * X ^ 8 + 781414 * X ^ 6 +
+                4871449 * X ^ 4 + 569821 * X ^ 2 + 9604) /
+           (121 * X ^ 6 + 7550 * X ^ 4 + 117845 * X ^ 2 + 2401)) <
+        12 / pi *
+        (-pi -
+         arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+                (81 * X ^ 4 + 2495 * X ^ 2 - 98))) + 6))).
+
+cnf(sqrt_upper_bound_1_scaled, axiom,
+    (X < 0 |
+     ~ lgen(R,
+            1/15600 * (X ^ 2 + 91260000 * X + 231344100000000) /
+            (X + 15210000), Y) | lgen(R, sqrt(X), Y))).
+
+cnf(sqrt_lower_bound_1_scaled, axiom,
+    (X < 0 |
+     ~ lgen(R, Y,
+            15600 * X * (X + 15210000) /
+            (X ^ 2 + 91260000 * X + 231344100000000)) |
+     lgen(R, Y, sqrt(X)))).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       (X = 629/512 =>
+        20 / ln(10) *
+        ln(25 *
+           sqrt(484 * X ^ 10 + 35161 * X ^ 8 + 781414 * X ^ 6 +
+                4871449 * X ^ 4 + 569821 * X ^ 2 + 9604) /
+           (121 * X ^ 6 + 7550 * X ^ 4 + 117845 * X ^ 2 + 2401)) <
+        12 / pi *
+        (-pi -
+         arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+                (81 * X ^ 4 + 2495 * X ^ 2 - 98))) + 6)),
+    inference(strip, [], ['Nichols_Plot_Inverted_Pendulum_Meets_2_5'])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         (X = 629/512 =>
+          20 / ln(10) *
+          ln(25 *
+             sqrt(484 * X ^ 10 + 35161 * X ^ 8 + 781414 * X ^ 6 +
+                  4871449 * X ^ 4 + 569821 * X ^ 2 + 9604) /
+             (121 * X ^ 6 + 7550 * X ^ 4 + 117845 * X ^ 2 + 2401)) <
+          12 / pi *
+          (-pi -
+           arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+                  (81 * X ^ 4 + 2495 * X ^ 2 - 98))) + 6)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       (12 / pi *
+        (-pi -
+         arctan((22 * X ^ 5 + 650 * X ^ 3 - 1029 * X) /
+                (81 * X ^ 4 + 2495 * X ^ 2 - 98))) + 6 <=
+        20 / ln(10) *
+        ln(25 *
+           sqrt(484 * X ^ 10 + 35161 * X ^ 8 + 781414 * X ^ 6 +
+                4871449 * X ^ 4 + 569821 * X ^ 2 + 9604) /
+           (121 * X ^ 6 + 7550 * X ^ 4 + 117845 * X ^ 2 + 2401)) &
+        X = 629/512)), inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) & skoXC1 = 629/512),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401))), inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (skoXC1 = 629/512),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [pi_lower_bound])).
+
+fof(normalize_0_5, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [pi_upper_bound])).
+
+cnf(refute_0_0, plain,
+    (55611/23684 <
+     (pi * -50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * 3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) |
+     0 <=
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * -360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      -720575940379279360/237636688170903370383) |
+     55611/23684 *
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) <=
+     pi * -50 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 3602879701896396800/712910064512710111149 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201))),
+    inference(subst, [], [leq_right_mul_divide_neg])).
+
+cnf(refute_0_1, plain,
+    ((-5/2 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (180143985094819840/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       4056481920730334084789450257203200/
+       508240760083516492568233065146419934100201)) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      180143985094819840/712910064512710111149) <
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) | 0 <= pi * -20 |
+     (-5/2 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (180143985094819840/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       4056481920730334084789450257203200/
+       508240760083516492568233065146419934100201)) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      180143985094819840/712910064512710111149) * (pi * -20) <=
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12)),
+    inference(subst, [], [leq_right_mul_divide_neg])).
+
+cnf(refute_0_2, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401))), inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_3, plain, (skoXC1 = 629/512),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_4, plain, (skoXC1 ^ 2 = skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_5, plain,
+    (skoXC1 ^ 2 != skoXC1 ^ 2 | skoXC1 != 629/512 |
+     skoXC1 ^ 2 = 629/512 ^ 2), introduced(tautology, [equality])).
+
+cnf(refute_0_6, plain, (skoXC1 != 629/512 | skoXC1 ^ 2 = 629/512 ^ 2),
+    inference(resolve, [], [refute_0_4, refute_0_5])).
+
+cnf(refute_0_7, plain, (skoXC1 ^ 2 = 629/512 ^ 2),
+    inference(resolve, [], [refute_0_3, refute_0_6])).
+
+cnf(refute_0_8, plain, (2495 * skoXC1 ^ 2 = 2495 * skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_9, plain,
+    (2495 * skoXC1 ^ 2 != 2495 * skoXC1 ^ 2 | skoXC1 ^ 2 != 629/512 ^ 2 |
+     2495 * skoXC1 ^ 2 = 2495 * 629/512 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_10, plain,
+    (skoXC1 ^ 2 != 629/512 ^ 2 | 2495 * skoXC1 ^ 2 = 2495 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_8, refute_0_9])).
+
+cnf(refute_0_11, plain, (2495 * skoXC1 ^ 2 = 2495 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_7, refute_0_10])).
+
+cnf(refute_0_12, plain,
+    (81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2), introduced(tautology, [refl])).
+
+cnf(refute_0_13, plain,
+    (2495 * skoXC1 ^ 2 != 2495 * 629/512 ^ 2 |
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 !=
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 |
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_14, plain,
+    (2495 * skoXC1 ^ 2 != 2495 * 629/512 ^ 2 |
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_12, refute_0_13])).
+
+cnf(refute_0_15, plain,
+    (81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_11, refute_0_14])).
+
+cnf(refute_0_16, plain, (skoXC1 ^ 4 = skoXC1 ^ 4),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_17, plain,
+    (skoXC1 ^ 4 != skoXC1 ^ 4 | skoXC1 != 629/512 |
+     skoXC1 ^ 4 = 629/512 ^ 4), introduced(tautology, [equality])).
+
+cnf(refute_0_18, plain, (skoXC1 != 629/512 | skoXC1 ^ 4 = 629/512 ^ 4),
+    inference(resolve, [], [refute_0_16, refute_0_17])).
+
+cnf(refute_0_19, plain, (skoXC1 ^ 4 = 629/512 ^ 4),
+    inference(resolve, [], [refute_0_3, refute_0_18])).
+
+cnf(refute_0_20, plain, (81 * skoXC1 ^ 4 = 81 * skoXC1 ^ 4),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_21, plain,
+    (81 * skoXC1 ^ 4 != 81 * skoXC1 ^ 4 | skoXC1 ^ 4 != 629/512 ^ 4 |
+     81 * skoXC1 ^ 4 = 81 * 629/512 ^ 4),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_22, plain,
+    (skoXC1 ^ 4 != 629/512 ^ 4 | 81 * skoXC1 ^ 4 = 81 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_20, refute_0_21])).
+
+cnf(refute_0_23, plain, (81 * skoXC1 ^ 4 = 81 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_19, refute_0_22])).
+
+cnf(refute_0_24, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2), introduced(tautology, [refl])).
+
+cnf(refute_0_25, plain,
+    (81 * skoXC1 ^ 4 != 81 * 629/512 ^ 4 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 !=
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_26, plain,
+    (81 * skoXC1 ^ 4 != 81 * 629/512 ^ 4 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2),
+    inference(resolve, [], [refute_0_24, refute_0_25])).
+
+cnf(refute_0_27, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2),
+    inference(resolve, [], [refute_0_23, refute_0_26])).
+
+cnf(refute_0_28, plain, (X0 = X0), introduced(tautology, [refl])).
+
+cnf(refute_0_29, plain, (X0 != X0 | X0 != Y0 | Y0 = X0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_30, plain, (X0 != Y0 | Y0 = X0),
+    inference(resolve, [], [refute_0_28, refute_0_29])).
+
+cnf(refute_0_31, plain, (Y0 != X0 | Y0 != Z0 | X0 = Z0),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_32, plain, (X0 != Y0 | Y0 != Z0 | X0 = Z0),
+    inference(resolve, [], [refute_0_30, refute_0_31])).
+
+cnf(refute_0_33, plain,
+    (81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 !=
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 !=
+     81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_34, plain,
+    (81 * 629/512 ^ 4 + 2495 * skoXC1 ^ 2 !=
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_27, refute_0_33])).
+
+cnf(refute_0_35, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_15, refute_0_34])).
+
+cnf(refute_0_36, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 =
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_37, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 !=
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 !=
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_38, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 !=
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 |
+     81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98),
+    inference(resolve, [], [refute_0_36, refute_0_37])).
+
+cnf(refute_0_39, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 =
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98),
+    inference(resolve, [], [refute_0_35, refute_0_38])).
+
+cnf(refute_0_40, plain,
+    ((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_41, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 !=
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98 |
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) !=
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) |
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_42, plain,
+    (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98 !=
+     81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98 |
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)),
+    inference(resolve, [], [refute_0_40, refute_0_41])).
+
+cnf(refute_0_43, plain,
+    ((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)),
+    inference(resolve, [], [refute_0_39, refute_0_42])).
+
+cnf(refute_0_44, plain, (1029 * skoXC1 = 1029 * skoXC1),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_45, plain,
+    (1029 * skoXC1 != 1029 * skoXC1 | skoXC1 != 629/512 |
+     1029 * skoXC1 = 1029 * 629/512), introduced(tautology, [equality])).
+
+cnf(refute_0_46, plain,
+    (skoXC1 != 629/512 | 1029 * skoXC1 = 1029 * 629/512),
+    inference(resolve, [], [refute_0_44, refute_0_45])).
+
+cnf(refute_0_47, plain, (1029 * skoXC1 = 1029 * 629/512),
+    inference(resolve, [], [refute_0_3, refute_0_46])).
+
+cnf(refute_0_48, plain,
+    (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_49, plain,
+    (1029 * skoXC1 != 1029 * 629/512 |
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 |
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_50, plain,
+    (1029 * skoXC1 != 1029 * 629/512 |
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512),
+    inference(resolve, [], [refute_0_48, refute_0_49])).
+
+cnf(refute_0_51, plain,
+    (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512),
+    inference(resolve, [], [refute_0_47, refute_0_50])).
+
+cnf(refute_0_52, plain, (skoXC1 ^ 3 = skoXC1 ^ 3),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_53, plain,
+    (skoXC1 ^ 3 != skoXC1 ^ 3 | skoXC1 != 629/512 |
+     skoXC1 ^ 3 = 629/512 ^ 3), introduced(tautology, [equality])).
+
+cnf(refute_0_54, plain, (skoXC1 != 629/512 | skoXC1 ^ 3 = 629/512 ^ 3),
+    inference(resolve, [], [refute_0_52, refute_0_53])).
+
+cnf(refute_0_55, plain, (skoXC1 ^ 3 = 629/512 ^ 3),
+    inference(resolve, [], [refute_0_3, refute_0_54])).
+
+cnf(refute_0_56, plain, (650 * skoXC1 ^ 3 = 650 * skoXC1 ^ 3),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_57, plain,
+    (650 * skoXC1 ^ 3 != 650 * skoXC1 ^ 3 | skoXC1 ^ 3 != 629/512 ^ 3 |
+     650 * skoXC1 ^ 3 = 650 * 629/512 ^ 3),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_58, plain,
+    (skoXC1 ^ 3 != 629/512 ^ 3 | 650 * skoXC1 ^ 3 = 650 * 629/512 ^ 3),
+    inference(resolve, [], [refute_0_56, refute_0_57])).
+
+cnf(refute_0_59, plain, (650 * skoXC1 ^ 3 = 650 * 629/512 ^ 3),
+    inference(resolve, [], [refute_0_55, refute_0_58])).
+
+cnf(refute_0_60, plain,
+    (22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3), introduced(tautology, [refl])).
+
+cnf(refute_0_61, plain,
+    (650 * skoXC1 ^ 3 != 650 * 629/512 ^ 3 |
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 !=
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 |
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_62, plain,
+    (650 * skoXC1 ^ 3 != 650 * 629/512 ^ 3 |
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3),
+    inference(resolve, [], [refute_0_60, refute_0_61])).
+
+cnf(refute_0_63, plain,
+    (22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3),
+    inference(resolve, [], [refute_0_59, refute_0_62])).
+
+cnf(refute_0_64, plain, (skoXC1 ^ 5 = skoXC1 ^ 5),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_65, plain,
+    (skoXC1 ^ 5 != skoXC1 ^ 5 | skoXC1 != 629/512 |
+     skoXC1 ^ 5 = 629/512 ^ 5), introduced(tautology, [equality])).
+
+cnf(refute_0_66, plain, (skoXC1 != 629/512 | skoXC1 ^ 5 = 629/512 ^ 5),
+    inference(resolve, [], [refute_0_64, refute_0_65])).
+
+cnf(refute_0_67, plain, (skoXC1 ^ 5 = 629/512 ^ 5),
+    inference(resolve, [], [refute_0_3, refute_0_66])).
+
+cnf(refute_0_68, plain, (22 * skoXC1 ^ 5 = 22 * skoXC1 ^ 5),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_69, plain,
+    (22 * skoXC1 ^ 5 != 22 * skoXC1 ^ 5 | skoXC1 ^ 5 != 629/512 ^ 5 |
+     22 * skoXC1 ^ 5 = 22 * 629/512 ^ 5),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_70, plain,
+    (skoXC1 ^ 5 != 629/512 ^ 5 | 22 * skoXC1 ^ 5 = 22 * 629/512 ^ 5),
+    inference(resolve, [], [refute_0_68, refute_0_69])).
+
+cnf(refute_0_71, plain, (22 * skoXC1 ^ 5 = 22 * 629/512 ^ 5),
+    inference(resolve, [], [refute_0_67, refute_0_70])).
+
+cnf(refute_0_72, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3), introduced(tautology, [refl])).
+
+cnf(refute_0_73, plain,
+    (22 * skoXC1 ^ 5 != 22 * 629/512 ^ 5 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 !=
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_74, plain,
+    (22 * skoXC1 ^ 5 != 22 * 629/512 ^ 5 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3),
+    inference(resolve, [], [refute_0_72, refute_0_73])).
+
+cnf(refute_0_75, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3),
+    inference(resolve, [], [refute_0_71, refute_0_74])).
+
+cnf(refute_0_76, plain,
+    (22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 !=
+     22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_77, plain,
+    (22 * 629/512 ^ 5 + 650 * skoXC1 ^ 3 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3),
+    inference(resolve, [], [refute_0_75, refute_0_76])).
+
+cnf(refute_0_78, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3),
+    inference(resolve, [], [refute_0_63, refute_0_77])).
+
+cnf(refute_0_79, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 =
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_80, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 !=
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_81, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1),
+    inference(resolve, [], [refute_0_79, refute_0_80])).
+
+cnf(refute_0_82, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1),
+    inference(resolve, [], [refute_0_78, refute_0_81])).
+
+cnf(refute_0_83, plain,
+    (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_84, plain,
+    (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * skoXC1 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512 |
+     22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512),
+    inference(resolve, [], [refute_0_82, refute_0_83])).
+
+cnf(refute_0_85, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 =
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512),
+    inference(resolve, [], [refute_0_51, refute_0_84])).
+
+cnf(refute_0_86, plain,
+    ((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_87, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512 |
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) !=
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) |
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_88, plain,
+    (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1 !=
+     22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512 |
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)),
+    inference(resolve, [], [refute_0_86, refute_0_87])).
+
+cnf(refute_0_89, plain,
+    ((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)),
+    inference(resolve, [], [refute_0_85, refute_0_88])).
+
+cnf(refute_0_90, plain,
+    ((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) !=
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98) |
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) !=
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) |
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_91, plain,
+    ((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) !=
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98) |
+     (22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)),
+    inference(resolve, [], [refute_0_89, refute_0_90])).
+
+cnf(refute_0_92, plain,
+    ((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) =
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)),
+    inference(resolve, [], [refute_0_43, refute_0_91])).
+
+cnf(refute_0_93, plain,
+    (arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_94, plain,
+    ((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) !=
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98) |
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) !=
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) |
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_95, plain,
+    ((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+     (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98) !=
+     (22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+     (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98) |
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))),
+    inference(resolve, [], [refute_0_93, refute_0_94])).
+
+cnf(refute_0_96, plain,
+    (arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))),
+    inference(resolve, [], [refute_0_92, refute_0_95])).
+
+cnf(refute_0_97, plain,
+    (-pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     -pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_98, plain,
+    (-pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) !=
+     -pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) |
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) !=
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)) |
+     -pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     -pi -
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_99, plain,
+    (arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) !=
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)) |
+     -pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     -pi -
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))),
+    inference(resolve, [], [refute_0_97, refute_0_98])).
+
+cnf(refute_0_100, plain,
+    (-pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) =
+     -pi -
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))),
+    inference(resolve, [], [refute_0_96, refute_0_99])).
+
+cnf(refute_0_101, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) =
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)))),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_102, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) !=
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) |
+     -pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) !=
+     -pi -
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)) |
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) =
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)))),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_103, plain,
+    (-pi -
+     arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+            (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98)) !=
+     -pi -
+     arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+            (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)) |
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) =
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)))),
+    inference(resolve, [], [refute_0_101, refute_0_102])).
+
+cnf(refute_0_104, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) =
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98)))),
+    inference(resolve, [], [refute_0_100, refute_0_103])).
+
+cnf(refute_0_105, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 =
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_106, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) !=
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) |
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 !=
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 |
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 =
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_107, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) !=
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) |
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 =
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6),
+    inference(resolve, [], [refute_0_105, refute_0_106])).
+
+cnf(refute_0_108, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 =
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6),
+    inference(resolve, [], [refute_0_104, refute_0_107])).
+
+cnf(refute_0_109, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) <
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 |
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 !=
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 |
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401))), introduced(tautology, [equality])).
+
+cnf(refute_0_110, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) <
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 |
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_108, refute_0_109])).
+
+cnf(refute_0_111, plain, (117845 * skoXC1 ^ 2 = 117845 * skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_112, plain,
+    (117845 * skoXC1 ^ 2 != 117845 * skoXC1 ^ 2 |
+     skoXC1 ^ 2 != 629/512 ^ 2 |
+     117845 * skoXC1 ^ 2 = 117845 * 629/512 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_113, plain,
+    (skoXC1 ^ 2 != 629/512 ^ 2 |
+     117845 * skoXC1 ^ 2 = 117845 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_111, refute_0_112])).
+
+cnf(refute_0_114, plain, (117845 * skoXC1 ^ 2 = 117845 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_7, refute_0_113])).
+
+cnf(refute_0_115, plain,
+    (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_116, plain,
+    (117845 * skoXC1 ^ 2 != 117845 * 629/512 ^ 2 |
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 |
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_117, plain,
+    (117845 * skoXC1 ^ 2 != 117845 * 629/512 ^ 2 |
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_115, refute_0_116])).
+
+cnf(refute_0_118, plain,
+    (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_114, refute_0_117])).
+
+cnf(refute_0_119, plain, (7550 * skoXC1 ^ 4 = 7550 * skoXC1 ^ 4),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_120, plain,
+    (7550 * skoXC1 ^ 4 != 7550 * skoXC1 ^ 4 | skoXC1 ^ 4 != 629/512 ^ 4 |
+     7550 * skoXC1 ^ 4 = 7550 * 629/512 ^ 4),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_121, plain,
+    (skoXC1 ^ 4 != 629/512 ^ 4 | 7550 * skoXC1 ^ 4 = 7550 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_119, refute_0_120])).
+
+cnf(refute_0_122, plain, (7550 * skoXC1 ^ 4 = 7550 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_19, refute_0_121])).
+
+cnf(refute_0_123, plain,
+    (121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_124, plain,
+    (7550 * skoXC1 ^ 4 != 7550 * 629/512 ^ 4 |
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 !=
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 |
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_125, plain,
+    (7550 * skoXC1 ^ 4 != 7550 * 629/512 ^ 4 |
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_123, refute_0_124])).
+
+cnf(refute_0_126, plain,
+    (121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_122, refute_0_125])).
+
+cnf(refute_0_127, plain, (skoXC1 ^ 6 = skoXC1 ^ 6),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_128, plain,
+    (skoXC1 ^ 6 != skoXC1 ^ 6 | skoXC1 != 629/512 |
+     skoXC1 ^ 6 = 629/512 ^ 6), introduced(tautology, [equality])).
+
+cnf(refute_0_129, plain, (skoXC1 != 629/512 | skoXC1 ^ 6 = 629/512 ^ 6),
+    inference(resolve, [], [refute_0_127, refute_0_128])).
+
+cnf(refute_0_130, plain, (skoXC1 ^ 6 = 629/512 ^ 6),
+    inference(resolve, [], [refute_0_3, refute_0_129])).
+
+cnf(refute_0_131, plain, (121 * skoXC1 ^ 6 = 121 * skoXC1 ^ 6),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_132, plain,
+    (121 * skoXC1 ^ 6 != 121 * skoXC1 ^ 6 | skoXC1 ^ 6 != 629/512 ^ 6 |
+     121 * skoXC1 ^ 6 = 121 * 629/512 ^ 6),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_133, plain,
+    (skoXC1 ^ 6 != 629/512 ^ 6 | 121 * skoXC1 ^ 6 = 121 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_131, refute_0_132])).
+
+cnf(refute_0_134, plain, (121 * skoXC1 ^ 6 = 121 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_130, refute_0_133])).
+
+cnf(refute_0_135, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4), introduced(tautology, [refl])).
+
+cnf(refute_0_136, plain,
+    (121 * skoXC1 ^ 6 != 121 * 629/512 ^ 6 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 !=
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_137, plain,
+    (121 * skoXC1 ^ 6 != 121 * 629/512 ^ 6 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4),
+    inference(resolve, [], [refute_0_135, refute_0_136])).
+
+cnf(refute_0_138, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4),
+    inference(resolve, [], [refute_0_134, refute_0_137])).
+
+cnf(refute_0_139, plain,
+    (121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 !=
+     121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_140, plain,
+    (121 * 629/512 ^ 6 + 7550 * skoXC1 ^ 4 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_138, refute_0_139])).
+
+cnf(refute_0_141, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_126, refute_0_140])).
+
+cnf(refute_0_142, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_143, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 !=
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_144, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2),
+    inference(resolve, [], [refute_0_142, refute_0_143])).
+
+cnf(refute_0_145, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2),
+    inference(resolve, [], [refute_0_141, refute_0_144])).
+
+cnf(refute_0_146, plain,
+    (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_147, plain,
+    (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * skoXC1 ^ 2 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_145, refute_0_146])).
+
+cnf(refute_0_148, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_118, refute_0_147])).
+
+cnf(refute_0_149, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 =
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_150, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 !=
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 + 2401),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_151, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 |
+     121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 + 2401),
+    inference(resolve, [], [refute_0_149, refute_0_150])).
+
+cnf(refute_0_152, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 =
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 + 2401),
+    inference(resolve, [], [refute_0_148, refute_0_151])).
+
+cnf(refute_0_153, plain,
+    (25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_154, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 + 2401 |
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) |
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401)), introduced(tautology, [equality])).
+
+cnf(refute_0_155, plain,
+    (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401 !=
+     121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 + 2401 |
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401)), inference(resolve, [], [refute_0_153, refute_0_154])).
+
+cnf(refute_0_156, plain,
+    (25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401)), inference(resolve, [], [refute_0_152, refute_0_155])).
+
+cnf(refute_0_157, plain, (569821 * skoXC1 ^ 2 = 569821 * skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_158, plain,
+    (569821 * skoXC1 ^ 2 != 569821 * skoXC1 ^ 2 |
+     skoXC1 ^ 2 != 629/512 ^ 2 |
+     569821 * skoXC1 ^ 2 = 569821 * 629/512 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_159, plain,
+    (skoXC1 ^ 2 != 629/512 ^ 2 |
+     569821 * skoXC1 ^ 2 = 569821 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_157, refute_0_158])).
+
+cnf(refute_0_160, plain, (569821 * skoXC1 ^ 2 = 569821 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_7, refute_0_159])).
+
+cnf(refute_0_161, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_162, plain,
+    (569821 * skoXC1 ^ 2 != 569821 * 629/512 ^ 2 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_163, plain,
+    (569821 * skoXC1 ^ 2 != 569821 * 629/512 ^ 2 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_161, refute_0_162])).
+
+cnf(refute_0_164, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_160, refute_0_163])).
+
+cnf(refute_0_165, plain, (4871449 * skoXC1 ^ 4 = 4871449 * skoXC1 ^ 4),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_166, plain,
+    (4871449 * skoXC1 ^ 4 != 4871449 * skoXC1 ^ 4 |
+     skoXC1 ^ 4 != 629/512 ^ 4 |
+     4871449 * skoXC1 ^ 4 = 4871449 * 629/512 ^ 4),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_167, plain,
+    (skoXC1 ^ 4 != 629/512 ^ 4 |
+     4871449 * skoXC1 ^ 4 = 4871449 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_165, refute_0_166])).
+
+cnf(refute_0_168, plain, (4871449 * skoXC1 ^ 4 = 4871449 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_19, refute_0_167])).
+
+cnf(refute_0_169, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4), introduced(tautology, [refl])).
+
+cnf(refute_0_170, plain,
+    (4871449 * skoXC1 ^ 4 != 4871449 * 629/512 ^ 4 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4), introduced(tautology, [equality])).
+
+cnf(refute_0_171, plain,
+    (4871449 * skoXC1 ^ 4 != 4871449 * 629/512 ^ 4 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_169, refute_0_170])).
+
+cnf(refute_0_172, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_168, refute_0_171])).
+
+cnf(refute_0_173, plain, (781414 * skoXC1 ^ 6 = 781414 * skoXC1 ^ 6),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_174, plain,
+    (781414 * skoXC1 ^ 6 != 781414 * skoXC1 ^ 6 |
+     skoXC1 ^ 6 != 629/512 ^ 6 |
+     781414 * skoXC1 ^ 6 = 781414 * 629/512 ^ 6),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_175, plain,
+    (skoXC1 ^ 6 != 629/512 ^ 6 |
+     781414 * skoXC1 ^ 6 = 781414 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_173, refute_0_174])).
+
+cnf(refute_0_176, plain, (781414 * skoXC1 ^ 6 = 781414 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_130, refute_0_175])).
+
+cnf(refute_0_177, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_178, plain,
+    (781414 * skoXC1 ^ 6 != 781414 * 629/512 ^ 6 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_179, plain,
+    (781414 * skoXC1 ^ 6 != 781414 * 629/512 ^ 6 |
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_177, refute_0_178])).
+
+cnf(refute_0_180, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_176, refute_0_179])).
+
+cnf(refute_0_181, plain, (skoXC1 ^ 8 = skoXC1 ^ 8),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_182, plain,
+    (skoXC1 ^ 8 != skoXC1 ^ 8 | skoXC1 != 629/512 |
+     skoXC1 ^ 8 = 629/512 ^ 8), introduced(tautology, [equality])).
+
+cnf(refute_0_183, plain, (skoXC1 != 629/512 | skoXC1 ^ 8 = 629/512 ^ 8),
+    inference(resolve, [], [refute_0_181, refute_0_182])).
+
+cnf(refute_0_184, plain, (skoXC1 ^ 8 = 629/512 ^ 8),
+    inference(resolve, [], [refute_0_3, refute_0_183])).
+
+cnf(refute_0_185, plain, (35161 * skoXC1 ^ 8 = 35161 * skoXC1 ^ 8),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_186, plain,
+    (35161 * skoXC1 ^ 8 != 35161 * skoXC1 ^ 8 | skoXC1 ^ 8 != 629/512 ^ 8 |
+     35161 * skoXC1 ^ 8 = 35161 * 629/512 ^ 8),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_187, plain,
+    (skoXC1 ^ 8 != 629/512 ^ 8 | 35161 * skoXC1 ^ 8 = 35161 * 629/512 ^ 8),
+    inference(resolve, [], [refute_0_185, refute_0_186])).
+
+cnf(refute_0_188, plain, (35161 * skoXC1 ^ 8 = 35161 * 629/512 ^ 8),
+    inference(resolve, [], [refute_0_184, refute_0_187])).
+
+cnf(refute_0_189, plain,
+    (484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_190, plain,
+    (35161 * skoXC1 ^ 8 != 35161 * 629/512 ^ 8 |
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 !=
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 |
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_191, plain,
+    (35161 * skoXC1 ^ 8 != 35161 * 629/512 ^ 8 |
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8),
+    inference(resolve, [], [refute_0_189, refute_0_190])).
+
+cnf(refute_0_192, plain,
+    (484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8),
+    inference(resolve, [], [refute_0_188, refute_0_191])).
+
+cnf(refute_0_193, plain, (skoXC1 ^ 10 = skoXC1 ^ 10),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_194, plain,
+    (skoXC1 ^ 10 != skoXC1 ^ 10 | skoXC1 != 629/512 |
+     skoXC1 ^ 10 = 629/512 ^ 10), introduced(tautology, [equality])).
+
+cnf(refute_0_195, plain, (skoXC1 != 629/512 | skoXC1 ^ 10 = 629/512 ^ 10),
+    inference(resolve, [], [refute_0_193, refute_0_194])).
+
+cnf(refute_0_196, plain, (skoXC1 ^ 10 = 629/512 ^ 10),
+    inference(resolve, [], [refute_0_3, refute_0_195])).
+
+cnf(refute_0_197, plain, (484 * skoXC1 ^ 10 = 484 * skoXC1 ^ 10),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_198, plain,
+    (484 * skoXC1 ^ 10 != 484 * skoXC1 ^ 10 | skoXC1 ^ 10 != 629/512 ^ 10 |
+     484 * skoXC1 ^ 10 = 484 * 629/512 ^ 10),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_199, plain,
+    (skoXC1 ^ 10 != 629/512 ^ 10 | 484 * skoXC1 ^ 10 = 484 * 629/512 ^ 10),
+    inference(resolve, [], [refute_0_197, refute_0_198])).
+
+cnf(refute_0_200, plain, (484 * skoXC1 ^ 10 = 484 * 629/512 ^ 10),
+    inference(resolve, [], [refute_0_196, refute_0_199])).
+
+cnf(refute_0_201, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_202, plain,
+    (484 * skoXC1 ^ 10 != 484 * 629/512 ^ 10 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 !=
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_203, plain,
+    (484 * skoXC1 ^ 10 != 484 * 629/512 ^ 10 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8),
+    inference(resolve, [], [refute_0_201, refute_0_202])).
+
+cnf(refute_0_204, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8),
+    inference(resolve, [], [refute_0_200, refute_0_203])).
+
+cnf(refute_0_205, plain,
+    (484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 !=
+     484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_206, plain,
+    (484 * 629/512 ^ 10 + 35161 * skoXC1 ^ 8 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8),
+    inference(resolve, [], [refute_0_204, refute_0_205])).
+
+cnf(refute_0_207, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8),
+    inference(resolve, [], [refute_0_192, refute_0_206])).
+
+cnf(refute_0_208, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_209, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 !=
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_210, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6),
+    inference(resolve, [], [refute_0_208, refute_0_209])).
+
+cnf(refute_0_211, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6),
+    inference(resolve, [], [refute_0_207, refute_0_210])).
+
+cnf(refute_0_212, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_213, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * skoXC1 ^ 6 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_211, refute_0_212])).
+
+cnf(refute_0_214, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6),
+    inference(resolve, [], [refute_0_180, refute_0_213])).
+
+cnf(refute_0_215, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4), introduced(tautology, [refl])).
+
+cnf(refute_0_216, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 !=
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4), introduced(tautology, [equality])).
+
+cnf(refute_0_217, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4),
+    inference(resolve, [], [refute_0_215, refute_0_216])).
+
+cnf(refute_0_218, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4),
+    inference(resolve, [], [refute_0_214, refute_0_217])).
+
+cnf(refute_0_219, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4), inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_220, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * skoXC1 ^ 4 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_218, refute_0_219])).
+
+cnf(refute_0_221, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4),
+    inference(resolve, [], [refute_0_172, refute_0_220])).
+
+cnf(refute_0_222, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_223, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 !=
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_224, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2),
+    inference(resolve, [], [refute_0_222, refute_0_223])).
+
+cnf(refute_0_225, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2),
+    inference(resolve, [], [refute_0_221, refute_0_224])).
+
+cnf(refute_0_226, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2),
+    inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_227, plain,
+    (484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * skoXC1 ^ 2 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_225, refute_0_226])).
+
+cnf(refute_0_228, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2),
+    inference(resolve, [], [refute_0_164, refute_0_227])).
+
+cnf(refute_0_229, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 =
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_230, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 !=
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_231, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 |
+     484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604),
+    inference(resolve, [], [refute_0_229, refute_0_230])).
+
+cnf(refute_0_232, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 =
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604),
+    inference(resolve, [], [refute_0_228, refute_0_231])).
+
+cnf(refute_0_233, plain,
+    (sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_234, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604 |
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) !=
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) |
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_235, plain,
+    (484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+     4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604 !=
+     484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+     4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604 |
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604)),
+    inference(resolve, [], [refute_0_233, refute_0_234])).
+
+cnf(refute_0_236, plain,
+    (sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604)),
+    inference(resolve, [], [refute_0_232, refute_0_235])).
+
+cnf(refute_0_237, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_238, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) !=
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) |
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) !=
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_239, plain,
+    (sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) !=
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604)),
+    inference(resolve, [], [refute_0_237, refute_0_238])).
+
+cnf(refute_0_240, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604)),
+    inference(resolve, [], [refute_0_236, refute_0_239])).
+
+cnf(refute_0_241, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401)),
+    introduced(tautology, [refl])).
+
+cnf(refute_0_242, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) !=
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_243, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401)),
+    inference(resolve, [], [refute_0_241, refute_0_242])).
+
+cnf(refute_0_244, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401)),
+    inference(resolve, [], [refute_0_240, refute_0_243])).
+
+cnf(refute_0_245, plain,
+    (25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401)), inference(subst, [], [refute_0_32])).
+
+cnf(refute_0_246, plain,
+    (25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401) |
+     25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401)), inference(resolve, [], [refute_0_244, refute_0_245])).
+
+cnf(refute_0_247, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) =
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401)), inference(resolve, [], [refute_0_156, refute_0_246])).
+
+cnf(refute_0_248, plain,
+    (ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401))), introduced(tautology, [refl])).
+
+cnf(refute_0_249, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401) |
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) !=
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) |
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), introduced(tautology, [equality])).
+
+cnf(refute_0_250, plain,
+    (25 *
+     sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+          4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+     (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 + 2401) !=
+     25 *
+     sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 + 781414 * 629/512 ^ 6 +
+          4871449 * 629/512 ^ 4 + 569821 * 629/512 ^ 2 + 9604) /
+     (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+      2401) |
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_248, refute_0_249])).
+
+cnf(refute_0_251, plain,
+    (ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_247, refute_0_250])).
+
+cnf(refute_0_252, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401))), introduced(tautology, [refl])).
+
+cnf(refute_0_253, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) !=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) |
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) !=
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401)) |
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), introduced(tautology, [equality])).
+
+cnf(refute_0_254, plain,
+    (ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) !=
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401)) |
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_252, refute_0_253])).
+
+cnf(refute_0_255, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) =
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_251, refute_0_254])).
+
+cnf(refute_0_256, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) <
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 |
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) !=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401)) |
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), introduced(tautology, [equality])).
+
+cnf(refute_0_257, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) <
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 |
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_255, refute_0_256])).
+
+cnf(refute_0_258, plain,
+    (20 / ln(10) *
+     ln(25 *
+        sqrt(484 * skoXC1 ^ 10 + 35161 * skoXC1 ^ 8 + 781414 * skoXC1 ^ 6 +
+             4871449 * skoXC1 ^ 4 + 569821 * skoXC1 ^ 2 + 9604) /
+        (121 * skoXC1 ^ 6 + 7550 * skoXC1 ^ 4 + 117845 * skoXC1 ^ 2 +
+         2401)) <
+     12 / pi *
+     (-pi -
+      arctan((22 * skoXC1 ^ 5 + 650 * skoXC1 ^ 3 - 1029 * skoXC1) /
+             (81 * skoXC1 ^ 4 + 2495 * skoXC1 ^ 2 - 98))) + 6 |
+     12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_110, refute_0_257])).
+
+cnf(refute_0_259, plain,
+    (12 / pi *
+     (-pi -
+      arctan((22 * 629/512 ^ 5 + 650 * 629/512 ^ 3 - 1029 * 629/512) /
+             (81 * 629/512 ^ 4 + 2495 * 629/512 ^ 2 - 98))) + 6 <=
+     20 / ln(10) *
+     ln(25 *
+        sqrt(484 * 629/512 ^ 10 + 35161 * 629/512 ^ 8 +
+             781414 * 629/512 ^ 6 + 4871449 * 629/512 ^ 4 +
+             569821 * 629/512 ^ 2 + 9604) /
+        (121 * 629/512 ^ 6 + 7550 * 629/512 ^ 4 + 117845 * 629/512 ^ 2 +
+         2401))), inference(resolve, [], [refute_0_2, refute_0_258])).
+
+cnf(refute_0_260, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * -20 / ln(10) <=
+     (pi * 6 + arctan(2187307897531/3226980916903168) * 12) / pi | pi = 0),
+    inference(arithmetic, [], [refute_0_259])).
+
+cnf(refute_0_261, plain,
+    ((pi * 6 + arctan(2187307897531/3226980916903168) * 12) / pi <
+     ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * -20 / ln(10) |
+     ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * -20 / ln(10) * pi <=
+     pi * 6 + arctan(2187307897531/3226980916903168) * 12 | pi <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_262, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * -20 / ln(10) * pi <=
+     pi * 6 + arctan(2187307897531/3226980916903168) * 12 | pi <= 0 |
+     pi = 0), inference(resolve, [], [refute_0_260, refute_0_261])).
+
+cnf(refute_0_263, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * (pi * -20) / ln(10) <=
+     pi * 6 + arctan(2187307897531/3226980916903168) * 12 | pi <= 0 |
+     pi = 0), inference(arithmetic, [], [refute_0_262])).
+
+cnf(refute_0_264, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_265, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_266, plain, (0 < pi | pi = 0),
+    inference(decision, [], [refute_0_3, refute_0_264, refute_0_265])).
+
+cnf(refute_0_267, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * (pi * -20) / ln(10) <=
+     pi * 6 + arctan(2187307897531/3226980916903168) * 12 | pi = 0),
+    inference(resolve, [], [refute_0_263, refute_0_266])).
+
+cnf(refute_0_268, plain, (pi != 0),
+    inference(decision, [], [refute_0_3, refute_0_264, refute_0_265])).
+
+cnf(refute_0_269, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * (pi * -20) / ln(10) <=
+     pi * 6 + arctan(2187307897531/3226980916903168) * 12),
+    inference(resolve, [], [refute_0_267, refute_0_268])).
+
+cnf(refute_0_270, plain,
+    (pi * 6 + arctan(2187307897531/3226980916903168) * 12 <
+     ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * (pi * -20) / ln(10) |
+     ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * (pi * -20) <=
+     (pi * 6 + arctan(2187307897531/3226980916903168) * 12) * ln(10) |
+     ln(10) <= 0), inference(subst, [], [leq_right_mul_divide_pos])).
+
+cnf(refute_0_271, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * (pi * -20) <=
+     (pi * 6 + arctan(2187307897531/3226980916903168) * 12) * ln(10) |
+     ln(10) <= 0), inference(resolve, [], [refute_0_269, refute_0_270])).
+
+cnf(refute_0_272, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) * (pi * -20) <=
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12)),
+    inference(arithmetic, [], [refute_0_271])).
+
+cnf(refute_0_273, plain,
+    (0 <= pi * -20 |
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) <=
+     ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149)),
+    inference(split, [], [refute_0_272])).
+
+cnf(refute_0_274, plain,
+    (ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) <=
+     ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) | pi <= 0),
+    inference(arithmetic, [], [refute_0_273])).
+
+cnf(refute_0_275, plain, (0 < pi),
+    inference(decision, [], [refute_0_3, refute_0_264, refute_0_265])).
+
+cnf(refute_0_276, plain,
+    (ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) <=
+     ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149)),
+    inference(resolve, [], [refute_0_274, refute_0_275])).
+
+cnf(refute_0_277, plain,
+    (ln(X_000110) < X_000111 | ~ lgen(1, ln(X_000110), X_000111)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_278, plain,
+    (~ lgen(1, 1/2 * (X_000110 + 5) * (X_000110 - 1) / (2 * X_000110 + 1),
+            X_000111) | X_000110 <= 0 | lgen(1, ln(X_000110), X_000111)),
+    inference(subst, [], [ln_upper_bound_cf3])).
+
+cnf(refute_0_279, plain,
+    (ln(X_000110) < X_000111 |
+     ~ lgen(1, 1/2 * (X_000110 + 5) * (X_000110 - 1) / (2 * X_000110 + 1),
+            X_000111) | X_000110 <= 0),
+    inference(resolve, [], [refute_0_278, refute_0_277])).
+
+cnf(refute_0_280, plain,
+    (ln(X_000110) < X_000111 | X_000110 <= 0 |
+     X_000111 <=
+     (-5/2 + X_000110 * (2 + X_000110 * 1/2)) / (1 + X_000110 * 2)),
+    inference(arithmetic, [], [refute_0_279])).
+
+cnf(refute_0_281, plain,
+    (ln(sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        90071992547409920/712910064512710111149) <
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     90071992547409920/712910064512710111149 <= 0 |
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) <=
+     (-5/2 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      90071992547409920/712910064512710111149 *
+      (2 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       90071992547409920/712910064512710111149 * 1/2)) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      90071992547409920/712910064512710111149 * 2)),
+    inference(subst, [], [refute_0_280])).
+
+cnf(refute_0_282, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     90071992547409920/712910064512710111149 <= 0 |
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) <=
+     (-5/2 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      90071992547409920/712910064512710111149 *
+      (2 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       90071992547409920/712910064512710111149 * 1/2)) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      90071992547409920/712910064512710111149 * 2)),
+    inference(resolve, [], [refute_0_276, refute_0_281])).
+
+cnf(refute_0_283, plain,
+    (ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) /
+     (pi * -20) <=
+     (-5/2 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (180143985094819840/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       4056481920730334084789450257203200/
+       508240760083516492568233065146419934100201)) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      180143985094819840/712910064512710111149)),
+    inference(arithmetic, [], [refute_0_282])).
+
+cnf(refute_0_284, plain,
+    (0 <= pi * -20 |
+     (-5/2 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (180143985094819840/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       4056481920730334084789450257203200/
+       508240760083516492568233065146419934100201)) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      180143985094819840/712910064512710111149) * (pi * -20) <=
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12)),
+    inference(resolve, [], [refute_0_283, refute_0_1])).
+
+cnf(refute_0_285, plain,
+    ((pi * 50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        -81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      180143985094819840/712910064512710111149) <=
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12) |
+     pi <= 0), inference(arithmetic, [], [refute_0_284])).
+
+cnf(refute_0_286, plain,
+    ((pi * 50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        -81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (1 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      180143985094819840/712910064512710111149) <=
+     ln(10) * (pi * 6 + arctan(2187307897531/3226980916903168) * 12)),
+    inference(resolve, [], [refute_0_285, refute_0_275])).
+
+cnf(refute_0_287, plain,
+    (0 <= pi * -6 + arctan(2187307897531/3226980916903168) * -12 |
+     -((pi * 50 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi * -3602879701896396800/712910064512710111149 +
+        sqrt(4592314084466514811058740190493585/
+             309485009821345068724781056) *
+        (pi *
+         -81129638414606681695789005144064000/
+         508240760083516492568233065146419934100201))) /
+      (1 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       180143985094819840/712910064512710111149)) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) <= ln(10)),
+    inference(split, [], [refute_0_286])).
+
+cnf(refute_0_288, plain,
+    ((pi * -50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * 3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) <= ln(10) |
+     arctan(2187307897531/3226980916903168) <= pi * -1/2),
+    inference(arithmetic, [], [refute_0_287])).
+
+cnf(refute_0_289, plain,
+    (X_000076 < arctan(X_000075) | ~ lgen(1, X_000076, arctan(X_000075))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_290, plain,
+    (X_000075 < 0 |
+     ~ lgen(1, X_000076, 3 * X_000075 / (X_000075 ^ 2 + 3)) |
+     lgen(1, X_000076, arctan(X_000075))),
+    inference(subst, [], [atan_lower_bound_case_13])).
+
+cnf(refute_0_291, plain,
+    (X_000075 < 0 | X_000076 < arctan(X_000075) |
+     ~ lgen(1, X_000076, 3 * X_000075 / (X_000075 ^ 2 + 3))),
+    inference(resolve, [], [refute_0_290, refute_0_289])).
+
+cnf(refute_0_292, plain,
+    (X_000075 < 0 | X_000076 < arctan(X_000075) |
+     X_000075 * 3 / (3 + X_000075 * X_000075) <= X_000076),
+    inference(arithmetic, [], [refute_0_291])).
+
+cnf(refute_0_293, plain,
+    (2187307897531/3226980916903168 < 0 |
+     pi * -1/2 < arctan(2187307897531/3226980916903168) |
+     2187307897531/3226980916903168 * 3 /
+     (3 +
+      2187307897531/3226980916903168 * 2187307897531/3226980916903168) <=
+     pi * -1/2), inference(subst, [], [refute_0_292])).
+
+cnf(refute_0_294, plain,
+    (pi * -1/2 < arctan(2187307897531/3226980916903168) |
+     pi <=
+     -42350405068344762105559669248/31240222298487471171582061204633),
+    inference(arithmetic, [], [refute_0_293])).
+
+cnf(refute_0_295, plain,
+    (-42350405068344762105559669248/31240222298487471171582061204633 < pi),
+    inference(decision, [], [refute_0_3, refute_0_264, refute_0_265])).
+
+cnf(refute_0_296, plain,
+    (pi * -1/2 < arctan(2187307897531/3226980916903168)),
+    inference(resolve, [], [refute_0_294, refute_0_295])).
+
+cnf(refute_0_297, plain,
+    ((pi * -50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * 3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) <= ln(10)),
+    inference(resolve, [], [refute_0_288, refute_0_296])).
+
+cnf(refute_0_298, plain,
+    (ln(X_000201) < X_000202 | ~ lgen(1, ln(X_000201), X_000202)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_299, plain,
+    (~ lgen(1,
+            1/12 *
+            (3 * X_000201 ^ 3 + 131 * X_000201 ^ 2 + 239 * X_000201 + 47) *
+            (X_000201 - 1) /
+            (4 * X_000201 ^ 3 + 18 * X_000201 ^ 2 + 12 * X_000201 + 1),
+            X_000202) | X_000201 <= 0 | lgen(1, ln(X_000201), X_000202)),
+    inference(subst, [], [ln_upper_bound_cf7])).
+
+cnf(refute_0_300, plain,
+    (ln(X_000201) < X_000202 |
+     ~ lgen(1,
+            1/12 *
+            (3 * X_000201 ^ 3 + 131 * X_000201 ^ 2 + 239 * X_000201 + 47) *
+            (X_000201 - 1) /
+            (4 * X_000201 ^ 3 + 18 * X_000201 ^ 2 + 12 * X_000201 + 1),
+            X_000202) | X_000201 <= 0),
+    inference(resolve, [], [refute_0_299, refute_0_298])).
+
+cnf(refute_0_301, plain,
+    (ln(X_000201) < X_000202 | X_000201 <= 0 |
+     X_000202 <=
+     (-47/12 +
+      X_000201 *
+      (-16 + X_000201 * (9 + X_000201 * (32/3 + X_000201 * 1/4)))) /
+     (1 + X_000201 * (12 + X_000201 * (18 + X_000201 * 4)))),
+    inference(arithmetic, [], [refute_0_300])).
+
+cnf(refute_0_302, plain,
+    (ln(10) <
+     (pi * -50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * 3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) | 10 <= 0 |
+     (pi * -50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * 3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) <=
+     (-47/12 + 10 * (-16 + 10 * (9 + 10 * (32/3 + 10 * 1/4)))) /
+     (1 + 10 * (12 + 10 * (18 + 10 * 4)))),
+    inference(subst, [], [refute_0_301])).
+
+cnf(refute_0_303, plain,
+    (10 <= 0 |
+     (pi * -50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * 3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) <=
+     (-47/12 + 10 * (-16 + 10 * (9 + 10 * (32/3 + 10 * 1/4)))) /
+     (1 + 10 * (12 + 10 * (18 + 10 * 4)))),
+    inference(resolve, [], [refute_0_297, refute_0_302])).
+
+cnf(refute_0_304, plain,
+    ((pi * -50 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * 3602879701896396800/712910064512710111149 +
+       sqrt(4592314084466514811058740190493585/
+            309485009821345068724781056) *
+       (pi *
+        81129638414606681695789005144064000/
+        508240760083516492568233065146419934100201))) /
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) <= 55611/23684),
+    inference(arithmetic, [], [refute_0_303])).
+
+cnf(refute_0_305, plain,
+    (0 <=
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * -360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      -720575940379279360/237636688170903370383) |
+     55611/23684 *
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi * -360287970189639680/237636688170903370383 +
+       arctan(2187307897531/3226980916903168) *
+       -720575940379279360/237636688170903370383)) <=
+     pi * -50 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 3602879701896396800/712910064512710111149 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201))),
+    inference(resolve, [], [refute_0_304, refute_0_0])).
+
+cnf(refute_0_306, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) <=
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     pi * -425267/11842 +
+     arctan(2187307897531/3226980916903168) * 166833/5921),
+    inference(arithmetic, [], [refute_0_305])).
+
+cnf(refute_0_307, plain,
+    ((pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) <
+     328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569 |
+     328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569 *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) <=
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12 |
+     pi * 360287970189639680/237636688170903370383 +
+     arctan(2187307897531/3226980916903168) *
+     720575940379279360/237636688170903370383 <= 0),
+    inference(subst, [], [leq_left_mul_divide_pos])).
+
+cnf(refute_0_308, plain,
+    (X_000118 < sqrt(X_000117) | ~ lgen(1, X_000118, sqrt(X_000117))),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_309, plain,
+    (X_000117 < 0 |
+     ~ lgen(1, X_000118,
+            15600 * X_000117 * (X_000117 + 15210000) /
+            (X_000117 ^ 2 + 91260000 * X_000117 + 231344100000000)) |
+     lgen(1, X_000118, sqrt(X_000117))),
+    inference(subst, [], [sqrt_lower_bound_1_scaled])).
+
+cnf(refute_0_310, plain,
+    (X_000117 < 0 | X_000118 < sqrt(X_000117) |
+     ~ lgen(1, X_000118,
+            15600 * X_000117 * (X_000117 + 15210000) /
+            (X_000117 ^ 2 + 91260000 * X_000117 + 231344100000000))),
+    inference(resolve, [], [refute_0_309, refute_0_308])).
+
+cnf(refute_0_311, plain,
+    (X_000117 < 0 | X_000118 < sqrt(X_000117) |
+     X_000117 * (237276000000 + X_000117 * 15600) /
+     (231344100000000 + X_000117 * (91260000 + X_000117)) <= X_000118),
+    inference(arithmetic, [], [refute_0_310])).
+
+cnf(refute_0_312, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) |
+     4592314084466514811058740190493585/309485009821345068724781056 *
+     (237276000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      15600) /
+     (231344100000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (91260000 +
+       4592314084466514811058740190493585/309485009821345068724781056)) <=
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383)),
+    inference(subst, [], [refute_0_311])).
+
+cnf(refute_0_313, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) <=
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_314, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     pi * 360287970189639680/237636688170903370383 +
+     arctan(2187307897531/3226980916903168) *
+     720575940379279360/237636688170903370383 <= 0 |
+     sqrt(4592314084466514811058740190493585/
+          309485009821345068724781056) <=
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383)),
+    inference(split, [], [refute_0_313])).
+
+cnf(refute_0_315, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     arctan(2187307897531/3226980916903168) <= pi * -1/2 |
+     sqrt(4592314084466514811058740190493585/
+          309485009821345068724781056) <=
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383)),
+    inference(arithmetic, [], [refute_0_314])).
+
+cnf(refute_0_316, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     sqrt(4592314084466514811058740190493585/
+          309485009821345068724781056) <=
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383)),
+    inference(resolve, [], [refute_0_315, refute_0_296])).
+
+cnf(refute_0_317, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     4592314084466514811058740190493585/309485009821345068724781056 *
+     (237276000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      15600) /
+     (231344100000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (91260000 +
+       4592314084466514811058740190493585/309485009821345068724781056)) <=
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383)),
+    inference(resolve, [], [refute_0_316, refute_0_312])).
+
+cnf(refute_0_318, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569 <=
+     (pi * -6 + arctan(2187307897531/3226980916903168) * -12) /
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383)),
+    inference(arithmetic, [], [refute_0_317])).
+
+cnf(refute_0_319, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569 *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) <=
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12 |
+     pi * 360287970189639680/237636688170903370383 +
+     arctan(2187307897531/3226980916903168) *
+     720575940379279360/237636688170903370383 <= 0),
+    inference(resolve, [], [refute_0_318, refute_0_307])).
+
+cnf(refute_0_320, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     arctan(2187307897531/3226980916903168) <= pi * -1/2),
+    inference(arithmetic, [], [refute_0_319])).
+
+cnf(refute_0_321, plain,
+    (2187307897531/3226980916903168 < 0 |
+     pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     2187307897531/3226980916903168 * 3 /
+     (3 +
+      2187307897531/3226980916903168 * 2187307897531/3226980916903168) <=
+     pi * -1/2), inference(resolve, [], [refute_0_320, refute_0_293])).
+
+cnf(refute_0_322, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383) |
+     pi <=
+     -42350405068344762105559669248/31240222298487471171582061204633),
+    inference(arithmetic, [], [refute_0_321])).
+
+cnf(refute_0_323, plain,
+    (pi * -6 + arctan(2187307897531/3226980916903168) * -12 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * 360287970189639680/237636688170903370383 +
+      arctan(2187307897531/3226980916903168) *
+      720575940379279360/237636688170903370383)),
+    inference(resolve, [], [refute_0_322, refute_0_295])).
+
+cnf(refute_0_324, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     pi * -425267/11842 +
+     arctan(2187307897531/3226980916903168) * 166833/5921),
+    inference(resolve, [], [refute_0_306, refute_0_323])).
+
+cnf(refute_0_325, plain,
+    (pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) < 0 |
+     0 <
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     0 <=
+     pi * -425267/11842 +
+     arctan(2187307897531/3226980916903168) * 166833/5921),
+    inference(split, [], [refute_0_324])).
+
+cnf(refute_0_326, plain,
+    (pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     pi * 425267/333666 <= arctan(2187307897531/3226980916903168)),
+    inference(arithmetic, [], [refute_0_325])).
+
+cnf(refute_0_327, plain,
+    (arctan(X_000040) < X_000041 | ~ lgen(1, arctan(X_000040), X_000041)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_328, plain,
+    (X_000040 < 0 | ~ lgen(1, X_000040, X_000041) |
+     lgen(1, arctan(X_000040), X_000041)),
+    inference(subst, [], [atan_upper_bound_case_13])).
+
+cnf(refute_0_329, plain,
+    (arctan(X_000040) < X_000041 | X_000040 < 0 |
+     ~ lgen(1, X_000040, X_000041)),
+    inference(resolve, [], [refute_0_328, refute_0_327])).
+
+cnf(refute_0_330, plain,
+    (arctan(X_000040) < X_000041 | X_000040 < 0 | X_000041 <= X_000040),
+    inference(arithmetic, [], [refute_0_329])).
+
+cnf(refute_0_331, plain,
+    (2187307897531/3226980916903168 < 0 |
+     arctan(2187307897531/3226980916903168) < pi * 425267/333666 |
+     pi * 425267/333666 <= 2187307897531/3226980916903168),
+    inference(subst, [], [refute_0_330])).
+
+cnf(refute_0_332, plain,
+    (arctan(2187307897531/3226980916903168) < pi * 425267/333666 |
+     pi <= 364915138468789323/686164246794329772928),
+    inference(arithmetic, [], [refute_0_331])).
+
+cnf(refute_0_333, plain, (364915138468789323/686164246794329772928 < pi),
+    inference(decision, [], [refute_0_3, refute_0_264, refute_0_265])).
+
+cnf(refute_0_334, plain,
+    (arctan(2187307897531/3226980916903168) < pi * 425267/333666),
+    inference(resolve, [], [refute_0_332, refute_0_333])).
+
+cnf(refute_0_335, plain,
+    (pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201)),
+    inference(resolve, [], [refute_0_326, refute_0_334])).
+
+cnf(refute_0_336, plain,
+    (~ lgen(0, X_000076, arctan(X_000075)) | X_000076 <= arctan(X_000075)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_337, plain,
+    (X_000075 < 0 |
+     ~ lgen(0, X_000076, 3 * X_000075 / (X_000075 ^ 2 + 3)) |
+     lgen(0, X_000076, arctan(X_000075))),
+    inference(subst, [], [atan_lower_bound_case_13])).
+
+cnf(refute_0_338, plain,
+    (X_000075 < 0 |
+     ~ lgen(0, X_000076, 3 * X_000075 / (X_000075 ^ 2 + 3)) |
+     X_000076 <= arctan(X_000075)),
+    inference(resolve, [], [refute_0_337, refute_0_336])).
+
+cnf(refute_0_339, plain,
+    (X_000075 * 3 / (3 + X_000075 * X_000075) < X_000076 | X_000075 < 0 |
+     X_000076 <= arctan(X_000075)),
+    inference(arithmetic, [], [refute_0_338])).
+
+cnf(refute_0_340, plain,
+    (2187307897531/3226980916903168 < 0 |
+     2187307897531/3226980916903168 * 3 /
+     (3 +
+      2187307897531/3226980916903168 * 2187307897531/3226980916903168) <
+     pi *
+     -36938091152394857936878679251243207748920623065909414879479976658241937/
+     28497746139525191710307103904605899149012341756855842652916399658799954 |
+     pi *
+     -36938091152394857936878679251243207748920623065909414879479976658241937/
+     28497746139525191710307103904605899149012341756855842652916399658799954 <=
+     arctan(2187307897531/3226980916903168)),
+    inference(subst, [], [refute_0_339])).
+
+cnf(refute_0_341, plain,
+    (pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581 <
+     328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569 *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     0 <=
+     pi *
+     -81129638414606681695789005144064000/
+     508240760083516492568233065146419934100201 |
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569),
+    inference(subst, [], [leq_right_divide_mul_neg])).
+
+cnf(refute_0_342, plain,
+    (~ lgen(0, X_000118, sqrt(X_000117)) | X_000118 <= sqrt(X_000117)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_343, plain,
+    (X_000117 < 0 |
+     ~ lgen(0, X_000118,
+            15600 * X_000117 * (X_000117 + 15210000) /
+            (X_000117 ^ 2 + 91260000 * X_000117 + 231344100000000)) |
+     lgen(0, X_000118, sqrt(X_000117))),
+    inference(subst, [], [sqrt_lower_bound_1_scaled])).
+
+cnf(refute_0_344, plain,
+    (X_000117 < 0 |
+     ~ lgen(0, X_000118,
+            15600 * X_000117 * (X_000117 + 15210000) /
+            (X_000117 ^ 2 + 91260000 * X_000117 + 231344100000000)) |
+     X_000118 <= sqrt(X_000117)),
+    inference(resolve, [], [refute_0_343, refute_0_342])).
+
+cnf(refute_0_345, plain,
+    (X_000117 * (237276000000 + X_000117 * 15600) /
+     (231344100000000 + X_000117 * (91260000 + X_000117)) < X_000118 |
+     X_000117 < 0 | X_000118 <= sqrt(X_000117)),
+    inference(arithmetic, [], [refute_0_344])).
+
+cnf(refute_0_346, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     4592314084466514811058740190493585/309485009821345068724781056 *
+     (237276000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      15600) /
+     (231344100000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (91260000 +
+       4592314084466514811058740190493585/309485009821345068724781056)) <
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(subst, [], [refute_0_345])).
+
+cnf(refute_0_347, plain,
+    (pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_348, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) <
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     0 <=
+     pi *
+     -81129638414606681695789005144064000/
+     508240760083516492568233065146419934100201 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(split, [], [refute_0_347])).
+
+cnf(refute_0_349, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) <
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581 | pi <= 0),
+    inference(arithmetic, [], [refute_0_348])).
+
+cnf(refute_0_350, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) <
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(resolve, [], [refute_0_349, refute_0_275])).
+
+cnf(refute_0_351, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     4592314084466514811058740190493585/309485009821345068724781056 *
+     (237276000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      15600) /
+     (231344100000000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (91260000 +
+       4592314084466514811058740190493585/309485009821345068724781056)) <
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(resolve, [], [refute_0_346, refute_0_350])).
+
+cnf(refute_0_352, plain,
+    (328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569 <
+     (pi * 36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      3339329051702675374080/469015610219972952012581) /
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(arithmetic, [], [refute_0_351])).
+
+cnf(refute_0_353, plain,
+    (pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581 <
+     328998970952880690752417472966154836465556072985399729154752927276400/
+     85408001233344697123192365732816346732997493771783288237088584569 *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     0 <=
+     pi *
+     -81129638414606681695789005144064000/
+     508240760083516492568233065146419934100201 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(resolve, [], [refute_0_341, refute_0_352])).
+
+cnf(refute_0_354, plain,
+    (arctan(2187307897531/3226980916903168) <
+     pi *
+     -36938091152394857936878679251243207748920623065909414879479976658241937/
+     28497746139525191710307103904605899149012341756855842652916399658799954 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581 | pi <= 0),
+    inference(arithmetic, [], [refute_0_353])).
+
+cnf(refute_0_355, plain,
+    (arctan(2187307897531/3226980916903168) <
+     pi *
+     -36938091152394857936878679251243207748920623065909414879479976658241937/
+     28497746139525191710307103904605899149012341756855842652916399658799954 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(resolve, [], [refute_0_354, refute_0_275])).
+
+cnf(refute_0_356, plain,
+    (2187307897531/3226980916903168 < 0 |
+     2187307897531/3226980916903168 * 3 /
+     (3 +
+      2187307897531/3226980916903168 * 2187307897531/3226980916903168) <
+     pi *
+     -36938091152394857936878679251243207748920623065909414879479976658241937/
+     28497746139525191710307103904605899149012341756855842652916399658799954 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(resolve, [], [refute_0_340, refute_0_355])).
+
+cnf(refute_0_357, plain,
+    (pi <
+     -603445546271875028542314600992100627161599112605737776680822926419350896658560036159425598418807296/
+     1153954178882608611590282482751353406992027868943791680443247640161794373619163379556997250598179294121 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(arithmetic, [], [refute_0_356])).
+
+cnf(refute_0_358, plain,
+    (-603445546271875028542314600992100627161599112605737776680822926419350896658560036159425598418807296/
+     1153954178882608611590282482751353406992027868943791680443247640161794373619163379556997250598179294121 <=
+     pi),
+    inference(decision, [], [refute_0_265, refute_0_264, refute_0_3])).
+
+cnf(refute_0_359, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * 36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     3339329051702675374080/469015610219972952012581),
+    inference(resolve, [], [refute_0_358, refute_0_357])).
+
+cnf(refute_0_360, plain,
+    (pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201)),
+    inference(resolve, [], [refute_0_359, refute_0_335])).
+
+cnf(refute_0_361, plain,
+    (85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040 <
+     (pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) |
+     0 <=
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040 *
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     pi * -425267/11842 +
+     arctan(2187307897531/3226980916903168) * 166833/5921),
+    inference(subst, [], [leq_right_mul_divide_neg])).
+
+cnf(refute_0_362, plain,
+    (sqrt(X_000103) < X_000104 | ~ lgen(1, sqrt(X_000103), X_000104)),
+    inference(subst, [], [lgen_less_neg])).
+
+cnf(refute_0_363, plain,
+    (X_000103 < 0 |
+     ~ lgen(1,
+            1/15600 *
+            (X_000103 ^ 2 + 91260000 * X_000103 + 231344100000000) /
+            (X_000103 + 15210000), X_000104) |
+     lgen(1, sqrt(X_000103), X_000104)),
+    inference(subst, [], [sqrt_upper_bound_1_scaled])).
+
+cnf(refute_0_364, plain,
+    (sqrt(X_000103) < X_000104 | X_000103 < 0 |
+     ~ lgen(1,
+            1/15600 *
+            (X_000103 ^ 2 + 91260000 * X_000103 + 231344100000000) /
+            (X_000103 + 15210000), X_000104)),
+    inference(resolve, [], [refute_0_363, refute_0_362])).
+
+cnf(refute_0_365, plain,
+    (sqrt(X_000103) < X_000104 | X_000103 < 0 |
+     X_000104 <=
+     (14829750000 + X_000103 * (5850 + X_000103 * 1/15600)) /
+     (15210000 + X_000103)), inference(arithmetic, [], [refute_0_364])).
+
+cnf(refute_0_366, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) <
+     (pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) |
+     (pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     (14829750000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (5850 +
+       4592314084466514811058740190493585/309485009821345068724781056 *
+       1/15600)) /
+     (15210000 +
+      4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(subst, [], [refute_0_365])).
+
+cnf(refute_0_367, plain,
+    (0 <=
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     (pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(split, [], [refute_0_324])).
+
+cnf(refute_0_368, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 |
+     (pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(arithmetic, [], [refute_0_367])).
+
+cnf(refute_0_369, plain,
+    ((pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(resolve, [], [refute_0_368, refute_0_360])).
+
+cnf(refute_0_370, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     (pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     (14829750000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (5850 +
+       4592314084466514811058740190493585/309485009821345068724781056 *
+       1/15600)) /
+     (15210000 +
+      4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(resolve, [], [refute_0_369, refute_0_366])).
+
+cnf(refute_0_371, plain,
+    ((pi * -425267/11842 +
+      arctan(2187307897531/3226980916903168) * 166833/5921) /
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040),
+    inference(arithmetic, [], [refute_0_370])).
+
+cnf(refute_0_372, plain,
+    (0 <=
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581 +
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) |
+     85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040 *
+     (pi * -36359631447590604636160/4221140491979756568113229 +
+      arctan(2187307897531/3226980916903168) *
+      -3339329051702675374080/469015610219972952012581 +
+      sqrt(4592314084466514811058740190493585/
+           309485009821345068724781056) *
+      (pi *
+       -81129638414606681695789005144064000/
+       508240760083516492568233065146419934100201)) <=
+     pi * -425267/11842 +
+     arctan(2187307897531/3226980916903168) * 166833/5921),
+    inference(resolve, [], [refute_0_371, refute_0_361])).
+
+cnf(refute_0_373, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581),
+    inference(arithmetic, [], [refute_0_372])).
+
+cnf(refute_0_374, plain,
+    (2187307897531/3226980916903168 < 0 |
+     arctan(2187307897531/3226980916903168) <
+     pi *
+     33039776090536185202615998521322663437820667938120611171757476843842477049390086768727266569710298952658562654286516273309142881423979/
+     5069406168213677010988332084818993594174566406606140596673148390419041838723082755204791625880357295854623100091719176919128911435005952 |
+     pi *
+     33039776090536185202615998521322663437820667938120611171757476843842477049390086768727266569710298952658562654286516273309142881423979/
+     5069406168213677010988332084818993594174566406606140596673148390419041838723082755204791625880357295854623100091719176919128911435005952 <=
+     2187307897531/3226980916903168),
+    inference(subst, [], [refute_0_330])).
+
+cnf(refute_0_375, plain,
+    (85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040 <
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     0 <=
+     pi *
+     -279864938441423903533276744033292604974686187591379478895291873915699200/
+     455137333782809981436798066141011441050523410149707756557522909401261252723 |
+     85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040 *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536),
+    inference(subst, [], [leq_right_mul_divide_neg])).
+
+cnf(refute_0_376, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) <
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     (14829750000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (5850 +
+       4592314084466514811058740190493585/309485009821345068724781056 *
+       1/15600)) /
+     (15210000 +
+      4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(subst, [], [refute_0_365])).
+
+cnf(refute_0_377, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536),
+    introduced(tautology, [assume])).
+
+cnf(refute_0_378, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     0 <=
+     pi *
+     -279864938441423903533276744033292604974686187591379478895291873915699200/
+     455137333782809981436798066141011441050523410149707756557522909401261252723 |
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(split, [], [refute_0_377])).
+
+cnf(refute_0_379, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) |
+     pi <= 0), inference(arithmetic, [], [refute_0_378])).
+
+cnf(refute_0_380, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(resolve, [], [refute_0_379, refute_0_275])).
+
+cnf(refute_0_381, plain,
+    (4592314084466514811058740190493585/309485009821345068724781056 < 0 |
+     pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     (14829750000 +
+      4592314084466514811058740190493585/309485009821345068724781056 *
+      (5850 +
+       4592314084466514811058740190493585/309485009821345068724781056 *
+       1/15600)) /
+     (15210000 +
+      4592314084466514811058740190493585/309485009821345068724781056)),
+    inference(resolve, [], [refute_0_380, refute_0_376])).
+
+cnf(refute_0_382, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     (pi *
+      -2837734387376519061425289857120614598027301776444261996903402861196911/
+      1039064749328758283778138008556721340549679345688169071238336005275648 +
+      arctan(2187307897531/3226980916903168) *
+      3209719118550670784536081185617247652134837675895004175437926337029281/
+      57725819407153237987674333808706741141648852538231615068796444737536) /
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040),
+    inference(arithmetic, [], [refute_0_381])).
+
+cnf(refute_0_383, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     0 <=
+     pi *
+     -279864938441423903533276744033292604974686187591379478895291873915699200/
+     455137333782809981436798066141011441050523410149707756557522909401261252723 |
+     85408001233344697123192365732816346732997493771783288237088584569/
+     22171882820683218285774073948295119918806414670952255235031040 *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) <=
+     pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536),
+    inference(resolve, [], [refute_0_382, refute_0_375])).
+
+cnf(refute_0_384, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     pi *
+     33039776090536185202615998521322663437820667938120611171757476843842477049390086768727266569710298952658562654286516273309142881423979/
+     5069406168213677010988332084818993594174566406606140596673148390419041838723082755204791625880357295854623100091719176919128911435005952 <=
+     arctan(2187307897531/3226980916903168) | pi <= 0),
+    inference(arithmetic, [], [refute_0_383])).
+
+cnf(refute_0_385, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     pi *
+     33039776090536185202615998521322663437820667938120611171757476843842477049390086768727266569710298952658562654286516273309142881423979/
+     5069406168213677010988332084818993594174566406606140596673148390419041838723082755204791625880357295854623100091719176919128911435005952 <=
+     arctan(2187307897531/3226980916903168)),
+    inference(resolve, [], [refute_0_384, refute_0_275])).
+
+cnf(refute_0_386, plain,
+    (2187307897531/3226980916903168 < 0 |
+     pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     pi *
+     33039776090536185202615998521322663437820667938120611171757476843842477049390086768727266569710298952658562654286516273309142881423979/
+     5069406168213677010988332084818993594174566406606140596673148390419041838723082755204791625880357295854623100091719176919128911435005952 <=
+     2187307897531/3226980916903168),
+    inference(resolve, [], [refute_0_385, refute_0_374])).
+
+cnf(refute_0_387, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723) |
+     pi <=
+     43313875576273987440873425925069776723317687094637574444153633043163481048144181730491857494302029077136141386281420492696303442526795207123402752/
+     416479402120757134173518772740893516190016388119132414757243328539708759354098913101603674672022602586390939194717274708744877250798840217635532287),
+    inference(arithmetic, [], [refute_0_386])).
+
+cnf(refute_0_388, plain,
+    (43313875576273987440873425925069776723317687094637574444153633043163481048144181730491857494302029077136141386281420492696303442526795207123402752/
+     416479402120757134173518772740893516190016388119132414757243328539708759354098913101603674672022602586390939194717274708744877250798840217635532287 <
+     pi),
+    inference(decision, [], [refute_0_265, refute_0_264, refute_0_3])).
+
+cnf(refute_0_389, plain,
+    (pi *
+     -2837734387376519061425289857120614598027301776444261996903402861196911/
+     1039064749328758283778138008556721340549679345688169071238336005275648 +
+     arctan(2187307897531/3226980916903168) *
+     3209719118550670784536081185617247652134837675895004175437926337029281/
+     57725819407153237987674333808706741141648852538231615068796444737536 <
+     sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      -279864938441423903533276744033292604974686187591379478895291873915699200/
+      455137333782809981436798066141011441050523410149707756557522909401261252723)),
+    inference(resolve, [], [refute_0_387, refute_0_388])).
+
+cnf(refute_0_390, plain,
+    (sqrt(4592314084466514811058740190493585/309485009821345068724781056) *
+     (pi *
+      81129638414606681695789005144064000/
+      508240760083516492568233065146419934100201) <=
+     pi * -36359631447590604636160/4221140491979756568113229 +
+     arctan(2187307897531/3226980916903168) *
+     -3339329051702675374080/469015610219972952012581),
+    inference(resolve, [], [refute_0_373, refute_0_389])).
+
+cnf(refute_0_391, plain, ($false),
+    inference(resolve, [], [refute_0_390, refute_0_360])).
+% SZS output end CNFRefutation for Nichols-Plot-Inverted-Pendulum-Meets-2-5.tptp

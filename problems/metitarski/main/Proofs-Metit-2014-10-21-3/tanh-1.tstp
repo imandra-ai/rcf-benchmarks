@@ -1,0 +1,161 @@
+% SZS output start CNFRefutation for tanh-1.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(tanh_lower_bound_neg0, axiom,
+    (0 <= X | ~ lgen(R, Y, X) | lgen(R, Y, tanh(X)))).
+
+cnf(tanh_upper_bound_pos0, axiom,
+    (X < 0 | ~ lgen(R, X, Y) | lgen(R, tanh(X), Y))).
+
+cnf(abs_nonnegative, axiom, (X < 0 | abs(X) = X)).
+
+cnf(abs_negative, axiom, (0 <= X | abs(X) = -X)).
+
+fof(tanh_1, conjecture, (! [X] : abs(tanh(X)) <= abs(X))).
+
+fof(subgoal_0, plain, (! [X] : abs(tanh(X)) <= abs(X)),
+    inference(strip, [], [tanh_1])).
+
+fof(negate_0_0, plain, (~ ! [X] : abs(tanh(X)) <= abs(X)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (? [X] : abs(X) < abs(tanh(X))),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain, (abs(skoXC1) < abs(tanh(skoXC1))),
+    inference(skolemize, [], [normalize_0_0])).
+
+cnf(refute_0_0, plain, (abs(skoXC1) < abs(tanh(skoXC1))),
+    inference(canonicalize, [], [normalize_0_1])).
+
+cnf(refute_0_1, plain, (skoXC1 < 0 | abs(skoXC1) = skoXC1),
+    inference(subst, [], [abs_nonnegative])).
+
+cnf(refute_0_2, plain,
+    (skoXC1 < abs(tanh(skoXC1)) | abs(skoXC1) != skoXC1 |
+     abs(tanh(skoXC1)) <= abs(skoXC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_3, plain,
+    (skoXC1 < 0 | skoXC1 < abs(tanh(skoXC1)) |
+     abs(tanh(skoXC1)) <= abs(skoXC1)),
+    inference(resolve, [], [refute_0_1, refute_0_2])).
+
+cnf(refute_0_4, plain, (skoXC1 < 0 | skoXC1 < abs(tanh(skoXC1))),
+    inference(resolve, [], [refute_0_3, refute_0_0])).
+
+cnf(refute_0_5, plain,
+    (tanh(skoXC1) < 0 | abs(tanh(skoXC1)) = tanh(skoXC1)),
+    inference(subst, [], [abs_nonnegative])).
+
+cnf(refute_0_6, plain,
+    (skoXC1 < tanh(skoXC1) | abs(tanh(skoXC1)) != tanh(skoXC1) |
+     abs(tanh(skoXC1)) <= skoXC1), introduced(tautology, [equality])).
+
+cnf(refute_0_7, plain,
+    (tanh(skoXC1) < 0 | skoXC1 < tanh(skoXC1) |
+     abs(tanh(skoXC1)) <= skoXC1),
+    inference(resolve, [], [refute_0_5, refute_0_6])).
+
+cnf(refute_0_8, plain,
+    (skoXC1 < 0 | tanh(skoXC1) < 0 | skoXC1 < tanh(skoXC1)),
+    inference(resolve, [], [refute_0_7, refute_0_4])).
+
+cnf(refute_0_9, plain, (skoXC1 < 0 | skoXC1 < tanh(skoXC1)),
+    inference(arithmetic, [], [refute_0_8])).
+
+cnf(refute_0_10, plain,
+    (~ lgen(0, tanh(X_000042), X_000043) | tanh(X_000042) <= X_000043),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_11, plain,
+    (X_000042 < 0 | ~ lgen(0, X_000042, X_000043) |
+     lgen(0, tanh(X_000042), X_000043)),
+    inference(subst, [], [tanh_upper_bound_pos0])).
+
+cnf(refute_0_12, plain,
+    (X_000042 < 0 | ~ lgen(0, X_000042, X_000043) |
+     tanh(X_000042) <= X_000043),
+    inference(resolve, [], [refute_0_11, refute_0_10])).
+
+cnf(refute_0_13, plain,
+    (X_000043 < X_000042 | X_000042 < 0 | tanh(X_000042) <= X_000043),
+    inference(arithmetic, [], [refute_0_12])).
+
+cnf(refute_0_14, plain,
+    (skoXC1 < 0 | skoXC1 < skoXC1 | tanh(skoXC1) <= skoXC1),
+    inference(subst, [], [refute_0_13])).
+
+cnf(refute_0_15, plain, (skoXC1 < 0 | skoXC1 < skoXC1),
+    inference(resolve, [], [refute_0_14, refute_0_9])).
+
+cnf(refute_0_16, plain, (skoXC1 < 0),
+    inference(arithmetic, [], [refute_0_15])).
+
+cnf(refute_0_17, plain, (0 <= skoXC1 | abs(skoXC1) = -skoXC1),
+    inference(subst, [], [abs_negative])).
+
+cnf(refute_0_18, plain,
+    (-skoXC1 < abs(tanh(skoXC1)) | abs(skoXC1) != -skoXC1 |
+     abs(tanh(skoXC1)) <= abs(skoXC1)), introduced(tautology, [equality])).
+
+cnf(refute_0_19, plain,
+    (-skoXC1 < abs(tanh(skoXC1)) | 0 <= skoXC1 |
+     abs(tanh(skoXC1)) <= abs(skoXC1)),
+    inference(resolve, [], [refute_0_17, refute_0_18])).
+
+cnf(refute_0_20, plain, (-skoXC1 < abs(tanh(skoXC1)) | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_19, refute_0_0])).
+
+cnf(refute_0_21, plain, (skoXC1 * -1 < abs(tanh(skoXC1)) | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_20])).
+
+cnf(refute_0_22, plain,
+    (0 <= tanh(skoXC1) | abs(tanh(skoXC1)) = -tanh(skoXC1)),
+    inference(subst, [], [abs_negative])).
+
+cnf(refute_0_23, plain,
+    (skoXC1 * -1 < -tanh(skoXC1) | abs(tanh(skoXC1)) != -tanh(skoXC1) |
+     abs(tanh(skoXC1)) <= skoXC1 * -1), introduced(tautology, [equality])).
+
+cnf(refute_0_24, plain,
+    (skoXC1 * -1 < -tanh(skoXC1) | 0 <= tanh(skoXC1) |
+     abs(tanh(skoXC1)) <= skoXC1 * -1),
+    inference(resolve, [], [refute_0_22, refute_0_23])).
+
+cnf(refute_0_25, plain,
+    (skoXC1 * -1 < -tanh(skoXC1) | 0 <= skoXC1 | 0 <= tanh(skoXC1)),
+    inference(resolve, [], [refute_0_24, refute_0_21])).
+
+cnf(refute_0_26, plain, (tanh(skoXC1) < skoXC1 | 0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_25])).
+
+cnf(refute_0_27, plain,
+    (~ lgen(0, X_000036, tanh(X_000035)) | X_000036 <= tanh(X_000035)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_28, plain,
+    (~ lgen(0, X_000036, X_000035) | 0 <= X_000035 |
+     lgen(0, X_000036, tanh(X_000035))),
+    inference(subst, [], [tanh_lower_bound_neg0])).
+
+cnf(refute_0_29, plain,
+    (~ lgen(0, X_000036, X_000035) | X_000036 <= tanh(X_000035) |
+     0 <= X_000035), inference(resolve, [], [refute_0_28, refute_0_27])).
+
+cnf(refute_0_30, plain,
+    (X_000035 < X_000036 | X_000036 <= tanh(X_000035) | 0 <= X_000035),
+    inference(arithmetic, [], [refute_0_29])).
+
+cnf(refute_0_31, plain,
+    (skoXC1 < skoXC1 | 0 <= skoXC1 | skoXC1 <= tanh(skoXC1)),
+    inference(subst, [], [refute_0_30])).
+
+cnf(refute_0_32, plain, (skoXC1 < skoXC1 | 0 <= skoXC1),
+    inference(resolve, [], [refute_0_31, refute_0_26])).
+
+cnf(refute_0_33, plain, (0 <= skoXC1),
+    inference(arithmetic, [], [refute_0_32])).
+
+cnf(refute_0_34, plain, ($false),
+    inference(resolve, [], [refute_0_33, refute_0_16])).
+% SZS output end CNFRefutation for tanh-1.tptp

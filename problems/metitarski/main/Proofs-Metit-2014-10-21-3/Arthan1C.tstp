@@ -1,0 +1,84 @@
+% SZS output start CNFRefutation for Arthan1C.tptp
+fof('Rob_Arthan_problem_1', conjecture,
+    (! [S, COSS, SINS] :
+       ((217/100 <= S & SINS ^ 2 + COSS ^ 2 = 1) =>
+        (1 + S + S ^ 2 + SINS) *
+        ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+        2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 < 0))).
+
+fof(subgoal_0, plain,
+    (! [S, COSS, SINS] :
+       ((217/100 <= S & SINS ^ 2 + COSS ^ 2 = 1) =>
+        (1 + S + S ^ 2 + SINS) *
+        ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+        2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 < 0)),
+    inference(strip, [], ['Rob_Arthan_problem_1'])).
+
+fof(negate_0_0, plain,
+    (~ ! [S, COSS, SINS] :
+         ((217/100 <= S & SINS ^ 2 + COSS ^ 2 = 1) =>
+          (1 + S + S ^ 2 + SINS) *
+          ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+          2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 < 0)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [COSS, S, SINS] :
+       (0 <=
+        (1 + S + S ^ 2 + SINS) *
+        ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+        2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 & 217/100 <= S &
+        SINS ^ 2 + COSS ^ 2 = 1)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (0 <=
+     (1 + skoSC1 + skoSC1 ^ 2 + skoSINSC1) *
+     ((1 + skoSC1) * (2 - skoSINSC1) + 2 + 4 * skoSC1 + 2 * skoCOSSC1) -
+     2 * (1 + skoSC1) * (1 + 2 * skoSC1 + skoCOSSC1) ^ 2 &
+     217/100 <= skoSC1 & skoSINSC1 ^ 2 + skoCOSSC1 ^ 2 = 1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (skoSINSC1 ^ 2 + skoCOSSC1 ^ 2 = 1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain,
+    (0 <=
+     (1 + skoSC1 + skoSC1 ^ 2 + skoSINSC1) *
+     ((1 + skoSC1) * (2 - skoSINSC1) + 2 + 4 * skoSC1 + 2 * skoCOSSC1) -
+     2 * (1 + skoSC1) * (1 + 2 * skoSC1 + skoCOSSC1) ^ 2),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (217/100 <= skoSC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain, (skoSINSC1 ^ 2 + skoCOSSC1 ^ 2 = 1),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (skoSINSC1 * skoSINSC1 = 1 + skoCOSSC1 * (skoCOSSC1 * -1)),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (0 <=
+     (1 + skoSC1 + skoSC1 ^ 2 + skoSINSC1) *
+     ((1 + skoSC1) * (2 - skoSINSC1) + 2 + 4 * skoSC1 + 2 * skoCOSSC1) -
+     2 * (1 + skoSC1) * (1 + 2 * skoSC1 + skoCOSSC1) ^ 2),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_3, plain,
+    (skoSINSC1 *
+     (-3 + skoCOSSC1 * -2 + skoSC1 * (-4 + skoSC1 * (2 + skoSC1)) +
+      skoSINSC1 * (1 + skoSC1)) <=
+     2 + skoCOSSC1 * (-2 + skoCOSSC1 * -2) +
+     skoSC1 *
+     (skoCOSSC1 * (-10 + skoCOSSC1 * -2) +
+      skoSC1 * (-6 + skoCOSSC1 * -6 + skoSC1 * -2))),
+    inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain, (217/100 <= skoSC1),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_5, plain, ($false),
+    inference(decision, [], [refute_0_1, refute_0_3, refute_0_4])).
+% SZS output end CNFRefutation for Arthan1C.tptp

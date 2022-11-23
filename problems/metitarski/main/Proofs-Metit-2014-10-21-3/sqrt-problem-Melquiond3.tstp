@@ -1,0 +1,186 @@
+% SZS output start CNFRefutation for sqrt-problem-Melquiond3.tptp
+cnf(abs_nonnegative, axiom, (X < 0 | abs(X) = X)).
+
+cnf(abs_negative, axiom, (0 <= X | abs(X) = -X)).
+
+fof(sqrt_problem_Melquiond, conjecture,
+    (! [X, Y, SXY, T] :
+       ((3/2 <= X & X <= 2 & 1 <= Y & Y <= 33/32 & 0 <= SXY &
+         SXY ^ 2 = X + Y & 0 <= T & SXY * T ^ 2 = SXY + X) =>
+        abs(T - 18/125 * X - 59/50) <= 71/32768))).
+
+fof(subgoal_0, plain,
+    (! [X, Y, SXY, T] :
+       ((3/2 <= X & X <= 2 & 1 <= Y & Y <= 33/32 & 0 <= SXY &
+         SXY ^ 2 = X + Y & 0 <= T & SXY * T ^ 2 = SXY + X) =>
+        abs(T - 18/125 * X - 59/50) <= 71/32768)),
+    inference(strip, [], [sqrt_problem_Melquiond])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, Y, SXY, T] :
+         ((3/2 <= X & X <= 2 & 1 <= Y & Y <= 33/32 & 0 <= SXY &
+           SXY ^ 2 = X + Y & 0 <= T & SXY * T ^ 2 = SXY + X) =>
+          abs(T - 18/125 * X - 59/50) <= 71/32768)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [SXY, T, X, Y] :
+       (71/32768 < abs(T - 18/125 * X - 59/50) & X <= 2 & Y <= 33/32 &
+        0 <= SXY & 0 <= T & 1 <= Y & 3/2 <= X & SXY * T ^ 2 = SXY + X &
+        SXY ^ 2 = X + Y)), inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (71/32768 < abs(skoTC1 - 18/125 * skoXC1 - 59/50) & 0 <= skoSXYC1 &
+     0 <= skoTC1 & 1 <= skoYC1 & 3/2 <= skoXC1 & skoXC1 <= 2 &
+     skoYC1 <= 33/32 & skoSXYC1 * skoTC1 ^ 2 = skoSXYC1 + skoXC1 &
+     skoSXYC1 ^ 2 = skoXC1 + skoYC1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (71/32768 < abs(skoTC1 - 18/125 * skoXC1 - 59/50)),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (skoSXYC1 * skoTC1 ^ 2 = skoSXYC1 + skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (skoSXYC1 ^ 2 = skoXC1 + skoYC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_5, plain, (skoYC1 <= 33/32),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_6, plain, (skoXC1 <= 2),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_7, plain, (3/2 <= skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_8, plain, (1 <= skoYC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_9, plain, (0 <= skoTC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_10, plain, (0 <= skoSXYC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain, (71/32768 < abs(skoTC1 - 18/125 * skoXC1 - 59/50)),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (71/32768 < abs(-59/50 + skoTC1 + skoXC1 * -18/125)),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (0 <= -59/50 + skoTC1 + skoXC1 * -18/125 |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) =
+     -(-59/50 + skoTC1 + skoXC1 * -18/125)),
+    inference(subst, [], [abs_negative])).
+
+cnf(refute_0_3, plain,
+    (71/32768 < -(-59/50 + skoTC1 + skoXC1 * -18/125) |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) !=
+     -(-59/50 + skoTC1 + skoXC1 * -18/125) |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) <= 71/32768),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_4, plain,
+    (71/32768 < -(-59/50 + skoTC1 + skoXC1 * -18/125) |
+     0 <= -59/50 + skoTC1 + skoXC1 * -18/125 |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) <= 71/32768),
+    inference(resolve, [], [refute_0_2, refute_0_3])).
+
+cnf(refute_0_5, plain,
+    (71/32768 < -(-59/50 + skoTC1 + skoXC1 * -18/125) |
+     0 <= -59/50 + skoTC1 + skoXC1 * -18/125),
+    inference(resolve, [], [refute_0_4, refute_0_1])).
+
+cnf(refute_0_6, plain,
+    (-536045/65536 + skoTC1 * 125/18 < skoXC1 |
+     skoXC1 <= -295/36 + skoTC1 * 125/18),
+    inference(arithmetic, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (-59/50 + skoTC1 + skoXC1 * -18/125 < 0 |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) =
+     -59/50 + skoTC1 + skoXC1 * -18/125),
+    inference(subst, [], [abs_nonnegative])).
+
+cnf(refute_0_8, plain,
+    (71/32768 < -59/50 + skoTC1 + skoXC1 * -18/125 |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) !=
+     -59/50 + skoTC1 + skoXC1 * -18/125 |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) <= 71/32768),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_9, plain,
+    (-59/50 + skoTC1 + skoXC1 * -18/125 < 0 |
+     71/32768 < -59/50 + skoTC1 + skoXC1 * -18/125 |
+     abs(-59/50 + skoTC1 + skoXC1 * -18/125) <= 71/32768),
+    inference(resolve, [], [refute_0_7, refute_0_8])).
+
+cnf(refute_0_10, plain,
+    (-59/50 + skoTC1 + skoXC1 * -18/125 < 0 |
+     71/32768 < -59/50 + skoTC1 + skoXC1 * -18/125),
+    inference(resolve, [], [refute_0_9, refute_0_1])).
+
+cnf(refute_0_11, plain,
+    (skoXC1 < -4842155/589824 + skoTC1 * 125/18 |
+     -295/36 + skoTC1 * 125/18 < skoXC1),
+    inference(arithmetic, [], [refute_0_10])).
+
+cnf(refute_0_12, plain, (skoSXYC1 * skoTC1 ^ 2 = skoSXYC1 + skoXC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_13, plain,
+    (skoSXYC1 * -1 + skoTC1 * (skoTC1 * skoSXYC1) = skoXC1),
+    inference(arithmetic, [], [refute_0_12])).
+
+cnf(refute_0_14, plain, (skoSXYC1 ^ 2 = skoXC1 + skoYC1),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_15, plain, (skoSXYC1 * skoSXYC1 + skoXC1 * -1 = skoYC1),
+    inference(arithmetic, [], [refute_0_14])).
+
+cnf(refute_0_16, plain, (skoYC1 <= 33/32),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_17, plain, (skoXC1 <= 2),
+    inference(canonicalize, [], [normalize_0_6])).
+
+cnf(refute_0_18, plain, (3/2 <= skoXC1),
+    inference(canonicalize, [], [normalize_0_7])).
+
+cnf(refute_0_19, plain, (1 <= skoYC1),
+    inference(canonicalize, [], [normalize_0_8])).
+
+cnf(refute_0_20, plain, (0 <= skoTC1),
+    inference(canonicalize, [], [normalize_0_9])).
+
+cnf(refute_0_21, plain, (0 <= skoSXYC1),
+    inference(canonicalize, [], [normalize_0_10])).
+
+cnf(refute_0_22, plain,
+    (-295/36 + skoTC1 * 125/18 < skoXC1 |
+     -4842155/589824 + skoTC1 * 125/18 <= skoXC1),
+    inference(decision, [],
+              [refute_0_13, refute_0_15, refute_0_16, refute_0_17,
+               refute_0_18, refute_0_19, refute_0_20, refute_0_21])).
+
+cnf(refute_0_23, plain, (-295/36 + skoTC1 * 125/18 < skoXC1),
+    inference(resolve, [], [refute_0_22, refute_0_11])).
+
+cnf(refute_0_24, plain,
+    (skoXC1 <= -295/36 + skoTC1 * 125/18 |
+     skoXC1 <= -536045/65536 + skoTC1 * 125/18),
+    inference(decision, [],
+              [refute_0_23, refute_0_13, refute_0_15, refute_0_16,
+               refute_0_17, refute_0_18, refute_0_19, refute_0_20,
+               refute_0_21])).
+
+cnf(refute_0_25, plain, (skoXC1 <= -295/36 + skoTC1 * 125/18),
+    inference(resolve, [], [refute_0_24, refute_0_6])).
+
+cnf(refute_0_26, plain, ($false),
+    inference(resolve, [], [refute_0_25, refute_0_23])).
+% SZS output end CNFRefutation for sqrt-problem-Melquiond3.tptp

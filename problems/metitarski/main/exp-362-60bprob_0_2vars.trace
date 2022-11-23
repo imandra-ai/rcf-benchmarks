@@ -1,0 +1,11 @@
+-----[begin problem]-----
+% In Mathematica format:
+Timing[Resolve[Exists[{t,a}, ForAll[{}, And[a!=60,Or[t*t*(-1/60)>-1,t*t*(1/60)>1]]]], Reals]]
+
+% In QepcadB format:
+(E t) (E a) [[a /=60]/\[[-1<(t t (-1/60))]\/[1<(t t (1/60))]]].
+
+% In SMTLib2 format:
+(declare-fun t () Real) (declare-fun a () Real) (assert (and (not (= a 60.)) (or (not (<= (* t (* t (/ (- 1.) 60.))) (- 1.))) (not (<= (* t (* t (/ 1. 60.))) 1.)))))
+-----[end problem]-----
+

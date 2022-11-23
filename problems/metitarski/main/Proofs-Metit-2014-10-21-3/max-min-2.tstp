@@ -1,0 +1,94 @@
+% SZS output start CNFRefutation for max-min-2.tptp
+cnf(max_1, axiom, (X < Y | max(X, Y) = X)).
+
+cnf(max_2, axiom, (Y <= X | max(X, Y) = Y)).
+
+cnf(min_1, axiom, (X < Y | min(X, Y) = Y)).
+
+cnf(min_2, axiom, (Y <= X | min(X, Y) = X)).
+
+fof(max_min, conjecture, (! [X, Y] : min(X, Y) <= max(X, Y))).
+
+fof(subgoal_0, plain, (! [X, Y] : min(X, Y) <= max(X, Y)),
+    inference(strip, [], [max_min])).
+
+fof(negate_0_0, plain, (~ ! [X, Y] : min(X, Y) <= max(X, Y)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain, (? [X, Y] : max(X, Y) < min(X, Y)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain, (max(skoXC1, skoYC1) < min(skoXC1, skoYC1)),
+    inference(skolemize, [], [normalize_0_0])).
+
+cnf(refute_0_0, plain, (max(skoXC1, skoYC1) < min(skoXC1, skoYC1)),
+    inference(canonicalize, [], [normalize_0_1])).
+
+cnf(refute_0_1, plain, (skoYC1 <= skoXC1 | max(skoXC1, skoYC1) = skoYC1),
+    inference(subst, [], [max_2])).
+
+cnf(refute_0_2, plain,
+    (skoYC1 < min(skoXC1, skoYC1) | max(skoXC1, skoYC1) != skoYC1 |
+     min(skoXC1, skoYC1) <= max(skoXC1, skoYC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_3, plain,
+    (skoYC1 < min(skoXC1, skoYC1) |
+     min(skoXC1, skoYC1) <= max(skoXC1, skoYC1) | skoYC1 <= skoXC1),
+    inference(resolve, [], [refute_0_1, refute_0_2])).
+
+cnf(refute_0_4, plain, (skoYC1 < min(skoXC1, skoYC1) | skoYC1 <= skoXC1),
+    inference(resolve, [], [refute_0_3, refute_0_0])).
+
+cnf(refute_0_5, plain, (skoYC1 <= skoXC1 | min(skoXC1, skoYC1) = skoXC1),
+    inference(subst, [], [min_2])).
+
+cnf(refute_0_6, plain,
+    (skoYC1 < skoXC1 | min(skoXC1, skoYC1) != skoXC1 |
+     min(skoXC1, skoYC1) <= skoYC1), introduced(tautology, [equality])).
+
+cnf(refute_0_7, plain,
+    (skoYC1 < skoXC1 | min(skoXC1, skoYC1) <= skoYC1 | skoYC1 <= skoXC1),
+    inference(resolve, [], [refute_0_5, refute_0_6])).
+
+cnf(refute_0_8, plain, (skoYC1 < skoXC1 | skoYC1 <= skoXC1),
+    inference(resolve, [], [refute_0_7, refute_0_4])).
+
+cnf(refute_0_9, plain, (skoXC1 < skoYC1 | max(skoXC1, skoYC1) = skoXC1),
+    inference(subst, [], [max_1])).
+
+cnf(refute_0_10, plain,
+    (skoXC1 < min(skoXC1, skoYC1) | max(skoXC1, skoYC1) != skoXC1 |
+     min(skoXC1, skoYC1) <= max(skoXC1, skoYC1)),
+    introduced(tautology, [equality])).
+
+cnf(refute_0_11, plain,
+    (skoXC1 < min(skoXC1, skoYC1) | skoXC1 < skoYC1 |
+     min(skoXC1, skoYC1) <= max(skoXC1, skoYC1)),
+    inference(resolve, [], [refute_0_9, refute_0_10])).
+
+cnf(refute_0_12, plain, (skoXC1 < min(skoXC1, skoYC1) | skoXC1 < skoYC1),
+    inference(resolve, [], [refute_0_11, refute_0_0])).
+
+cnf(refute_0_13, plain, (skoXC1 < skoYC1 | min(skoXC1, skoYC1) = skoYC1),
+    inference(subst, [], [min_1])).
+
+cnf(refute_0_14, plain,
+    (skoXC1 < skoYC1 | min(skoXC1, skoYC1) != skoYC1 |
+     min(skoXC1, skoYC1) <= skoXC1), introduced(tautology, [equality])).
+
+cnf(refute_0_15, plain, (skoXC1 < skoYC1 | min(skoXC1, skoYC1) <= skoXC1),
+    inference(resolve, [], [refute_0_13, refute_0_14])).
+
+cnf(refute_0_16, plain, (skoXC1 < skoYC1),
+    inference(resolve, [], [refute_0_15, refute_0_12])).
+
+cnf(refute_0_17, plain, (skoYC1 < skoXC1),
+    inference(resolve, [], [refute_0_8, refute_0_16])).
+
+cnf(refute_0_18, plain, (skoXC1 <= skoYC1),
+    inference(decision, [], [refute_0_16])).
+
+cnf(refute_0_19, plain, ($false),
+    inference(resolve, [], [refute_0_18, refute_0_17])).
+% SZS output end CNFRefutation for max-min-2.tptp

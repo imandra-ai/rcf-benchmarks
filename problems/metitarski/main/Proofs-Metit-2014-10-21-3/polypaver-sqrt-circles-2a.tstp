@@ -1,0 +1,93 @@
+% SZS output start CNFRefutation for polypaver-sqrt-circles-2a.tptp
+fof(sqrt_circles_2, conjecture,
+    (! [X, Y, D, S1, S2] :
+       ((0 <= D & 0 <= S1 & S1 ^ 2 = X ^ 2 + (Y - 1) ^ 2 & 0 <= S2 &
+         S2 ^ 2 = X ^ 2 + (Y - (D + 1)) ^ 2 & S1 <= 1) => S2 <= D + 1))).
+
+fof(subgoal_0, plain,
+    (! [X, Y, D, S1, S2] :
+       ((0 <= D & 0 <= S1 & S1 ^ 2 = X ^ 2 + (Y - 1) ^ 2 & 0 <= S2 &
+         S2 ^ 2 = X ^ 2 + (Y - (D + 1)) ^ 2 & S1 <= 1) => S2 <= D + 1)),
+    inference(strip, [], [sqrt_circles_2])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, Y, D, S1, S2] :
+         ((0 <= D & 0 <= S1 & S1 ^ 2 = X ^ 2 + (Y - 1) ^ 2 & 0 <= S2 &
+           S2 ^ 2 = X ^ 2 + (Y - (D + 1)) ^ 2 & S1 <= 1) => S2 <= D + 1)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [D, S1, S2, X, Y] :
+       (D + 1 < S2 & S1 <= 1 & 0 <= D & 0 <= S1 & 0 <= S2 &
+        S1 ^ 2 = X ^ 2 + (Y - 1) ^ 2 &
+        S2 ^ 2 = X ^ 2 + (Y - (D + 1)) ^ 2)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (skoDC1 + 1 < skoS2C1 & 0 <= skoDC1 & 0 <= skoS1C1 & 0 <= skoS2C1 &
+     skoS1C1 <= 1 & skoS1C1 ^ 2 = skoXC1 ^ 2 + (skoYC1 - 1) ^ 2 &
+     skoS2C1 ^ 2 = skoXC1 ^ 2 + (skoYC1 - (skoDC1 + 1)) ^ 2),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (skoS2C1 ^ 2 = skoXC1 ^ 2 + (skoYC1 - (skoDC1 + 1)) ^ 2),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (skoS1C1 ^ 2 = skoXC1 ^ 2 + (skoYC1 - 1) ^ 2),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (skoDC1 + 1 < skoS2C1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_5, plain, (skoS1C1 <= 1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_6, plain, (0 <= skoS2C1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_7, plain, (0 <= skoS1C1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_8, plain, (0 <= skoDC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (skoS2C1 ^ 2 = skoXC1 ^ 2 + (skoYC1 - (skoDC1 + 1)) ^ 2),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (skoYC1 * (2 + skoDC1 * 2 + skoYC1 * -1) =
+     1 + skoDC1 * (2 + skoDC1) + skoS2C1 * (skoS2C1 * -1) +
+     skoXC1 * skoXC1), inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain, (skoS1C1 ^ 2 = skoXC1 ^ 2 + (skoYC1 - 1) ^ 2),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_3, plain,
+    (skoYC1 * (2 + skoYC1 * -1) =
+     1 + skoS1C1 * (skoS1C1 * -1) + skoXC1 * skoXC1),
+    inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain, (skoDC1 + 1 < skoS2C1),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_5, plain, (1 + skoDC1 < skoS2C1),
+    inference(arithmetic, [], [refute_0_4])).
+
+cnf(refute_0_6, plain, (skoS1C1 <= 1),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_7, plain, (0 <= skoS2C1),
+    inference(canonicalize, [], [normalize_0_6])).
+
+cnf(refute_0_8, plain, (0 <= skoS1C1),
+    inference(canonicalize, [], [normalize_0_7])).
+
+cnf(refute_0_9, plain, (0 <= skoDC1),
+    inference(canonicalize, [], [normalize_0_8])).
+
+cnf(refute_0_10, plain, ($false),
+    inference(decision, [],
+              [refute_0_1, refute_0_3, refute_0_5, refute_0_6, refute_0_7,
+               refute_0_8, refute_0_9])).
+% SZS output end CNFRefutation for polypaver-sqrt-circles-2a.tptp

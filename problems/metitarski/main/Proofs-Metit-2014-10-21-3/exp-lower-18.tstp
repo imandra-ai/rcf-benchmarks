@@ -1,0 +1,100 @@
+% SZS output start CNFRefutation for exp-lower-18.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(exp_positive, axiom, (0 < Y | lgen(R, Y, exp(X)))).
+
+fof(exp_lower_bound_problem_18, conjecture,
+    (! [X] :
+       (4 < X =>
+        (X ^ 4 + 4 * X ^ 3 + 12 * X ^ 2 + 24 * X + 24) / 6 * (4 - X) <=
+        exp(X)))).
+
+fof(subgoal_0, plain,
+    (! [X] :
+       (4 < X =>
+        (X ^ 4 + 4 * X ^ 3 + 12 * X ^ 2 + 24 * X + 24) / 6 * (4 - X) <=
+        exp(X))), inference(strip, [], [exp_lower_bound_problem_18])).
+
+fof(negate_0_0, plain,
+    (~ ! [X] :
+         (4 < X =>
+          (X ^ 4 + 4 * X ^ 3 + 12 * X ^ 2 + 24 * X + 24) / 6 * (4 - X) <=
+          exp(X))), inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [X] :
+       (4 < X &
+        exp(X) <
+        (X ^ 4 + 4 * X ^ 3 + 12 * X ^ 2 + 24 * X + 24) / 6 * (4 - X))),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (exp(skoXC1) <
+     (skoXC1 ^ 4 + 4 * skoXC1 ^ 3 + 12 * skoXC1 ^ 2 + 24 * skoXC1 + 24) /
+     6 * (4 - skoXC1) & 4 < skoXC1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (exp(skoXC1) <
+     (skoXC1 ^ 4 + 4 * skoXC1 ^ 3 + 12 * skoXC1 ^ 2 + 24 * skoXC1 + 24) /
+     6 * (4 - skoXC1)), inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (4 < skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    (exp(skoXC1) <
+     (skoXC1 ^ 4 + 4 * skoXC1 ^ 3 + 12 * skoXC1 ^ 2 + 24 * skoXC1 + 24) /
+     6 * (4 - skoXC1)), inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (exp(skoXC1) <
+     16 +
+     skoXC1 *
+     (12 + skoXC1 * (4 + skoXC1 * (2/3 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (~ lgen(0, X_000010, exp(X_000009)) | X_000010 <= exp(X_000009)),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_3, plain, (0 < X_000010 | lgen(0, X_000010, exp(X_000009))),
+    inference(subst, [], [exp_positive])).
+
+cnf(refute_0_4, plain, (0 < X_000010 | X_000010 <= exp(X_000009)),
+    inference(resolve, [], [refute_0_3, refute_0_2])).
+
+cnf(refute_0_5, plain,
+    (0 <
+     16 +
+     skoXC1 *
+     (12 + skoXC1 * (4 + skoXC1 * (2/3 + skoXC1 * (skoXC1 * -1/6)))) |
+     16 +
+     skoXC1 *
+     (12 + skoXC1 * (4 + skoXC1 * (2/3 + skoXC1 * (skoXC1 * -1/6)))) <=
+     exp(skoXC1)), inference(subst, [], [refute_0_4])).
+
+cnf(refute_0_6, plain,
+    (0 <
+     16 +
+     skoXC1 *
+     (12 + skoXC1 * (4 + skoXC1 * (2/3 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(resolve, [], [refute_0_5, refute_0_1])).
+
+cnf(refute_0_7, plain,
+    (-16 <
+     skoXC1 *
+     (12 + skoXC1 * (4 + skoXC1 * (2/3 + skoXC1 * (skoXC1 * -1/6))))),
+    inference(arithmetic, [], [refute_0_6])).
+
+cnf(refute_0_8, plain, (4 < skoXC1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_9, plain,
+    (skoXC1 *
+     (12 + skoXC1 * (4 + skoXC1 * (2/3 + skoXC1 * (skoXC1 * -1/6)))) <=
+     -16), inference(decision, [], [refute_0_8])).
+
+cnf(refute_0_10, plain, ($false),
+    inference(resolve, [], [refute_0_9, refute_0_7])).
+% SZS output end CNFRefutation for exp-lower-18.tptp

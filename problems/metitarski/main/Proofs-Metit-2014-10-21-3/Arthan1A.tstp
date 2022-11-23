@@ -1,0 +1,128 @@
+% SZS output start CNFRefutation for Arthan1A.tptp
+fof(pi_upper_bound, axiom, (pi < 31415927/10000000)).
+
+fof(pi_lower_bound, axiom, (15707963/5000000 < pi)).
+
+fof('Rob_Arthan_problem_1', conjecture,
+    (! [S, COSS, SINS] :
+       ((0 <= S & S < pi / 2 & SINS ^ 2 + COSS ^ 2 = 1 & SINS <= S &
+         0 <= COSS) =>
+        (1 + S + S ^ 2 + SINS) *
+        ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+        2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 < 0))).
+
+fof(subgoal_0, plain,
+    (! [S, COSS, SINS] :
+       ((0 <= S & S < pi / 2 & SINS ^ 2 + COSS ^ 2 = 1 & SINS <= S &
+         0 <= COSS) =>
+        (1 + S + S ^ 2 + SINS) *
+        ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+        2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 < 0)),
+    inference(strip, [], ['Rob_Arthan_problem_1'])).
+
+fof(negate_0_0, plain,
+    (~ ! [S, COSS, SINS] :
+         ((0 <= S & S < pi / 2 & SINS ^ 2 + COSS ^ 2 = 1 & SINS <= S &
+           0 <= COSS) =>
+          (1 + S + S ^ 2 + SINS) *
+          ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+          2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 < 0)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [COSS, S, SINS] :
+       (S < pi / 2 & SINS <= S & 0 <= COSS & 0 <= S &
+        0 <=
+        (1 + S + S ^ 2 + SINS) *
+        ((1 + S) * (2 - SINS) + 2 + 4 * S + 2 * COSS) -
+        2 * (1 + S) * (1 + 2 * S + COSS) ^ 2 & SINS ^ 2 + COSS ^ 2 = 1)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (skoSC1 < pi / 2 &
+     0 <=
+     (1 + skoSC1 + skoSC1 ^ 2 + skoSINSC1) *
+     ((1 + skoSC1) * (2 - skoSINSC1) + 2 + 4 * skoSC1 + 2 * skoCOSSC1) -
+     2 * (1 + skoSC1) * (1 + 2 * skoSC1 + skoCOSSC1) ^ 2 & 0 <= skoCOSSC1 &
+     0 <= skoSC1 & skoSINSC1 <= skoSC1 &
+     skoSINSC1 ^ 2 + skoCOSSC1 ^ 2 = 1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain, (skoSINSC1 ^ 2 + skoCOSSC1 ^ 2 = 1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain,
+    (0 <=
+     (1 + skoSC1 + skoSC1 ^ 2 + skoSINSC1) *
+     ((1 + skoSC1) * (2 - skoSINSC1) + 2 + 4 * skoSC1 + 2 * skoCOSSC1) -
+     2 * (1 + skoSC1) * (1 + 2 * skoSC1 + skoCOSSC1) ^ 2),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (skoSC1 < pi / 2),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_5, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [pi_lower_bound])).
+
+fof(normalize_0_6, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [pi_upper_bound])).
+
+fof(normalize_0_7, plain, (0 <= skoSC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_8, plain, (0 <= skoCOSSC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_9, plain, (skoSINSC1 <= skoSC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain, (skoSINSC1 ^ 2 + skoCOSSC1 ^ 2 = 1),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_1, plain,
+    (skoSINSC1 * skoSINSC1 = 1 + skoCOSSC1 * (skoCOSSC1 * -1)),
+    inference(arithmetic, [], [refute_0_0])).
+
+cnf(refute_0_2, plain,
+    (0 <=
+     (1 + skoSC1 + skoSC1 ^ 2 + skoSINSC1) *
+     ((1 + skoSC1) * (2 - skoSINSC1) + 2 + 4 * skoSC1 + 2 * skoCOSSC1) -
+     2 * (1 + skoSC1) * (1 + 2 * skoSC1 + skoCOSSC1) ^ 2),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_3, plain,
+    (skoSINSC1 *
+     (-3 + skoCOSSC1 * -2 + skoSC1 * (-4 + skoSC1 * (2 + skoSC1)) +
+      skoSINSC1 * (1 + skoSC1)) <=
+     2 + skoCOSSC1 * (-2 + skoCOSSC1 * -2) +
+     skoSC1 *
+     (skoCOSSC1 * (-10 + skoCOSSC1 * -2) +
+      skoSC1 * (-6 + skoCOSSC1 * -6 + skoSC1 * -2))),
+    inference(arithmetic, [], [refute_0_2])).
+
+cnf(refute_0_4, plain, (skoSC1 < pi / 2),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_5, plain, (skoSC1 < pi * 1/2),
+    inference(arithmetic, [], [refute_0_4])).
+
+cnf(refute_0_6, plain, (15707963/5000000 < pi),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_7, plain, (pi < 31415927/10000000),
+    inference(canonicalize, [], [normalize_0_6])).
+
+cnf(refute_0_8, plain, (0 <= skoSC1),
+    inference(canonicalize, [], [normalize_0_7])).
+
+cnf(refute_0_9, plain, (0 <= skoCOSSC1),
+    inference(canonicalize, [], [normalize_0_8])).
+
+cnf(refute_0_10, plain, (skoSINSC1 <= skoSC1),
+    inference(canonicalize, [], [normalize_0_9])).
+
+cnf(refute_0_11, plain, ($false),
+    inference(decision, [],
+              [refute_0_1, refute_0_3, refute_0_5, refute_0_6, refute_0_7,
+               refute_0_8, refute_0_9, refute_0_10])).
+% SZS output end CNFRefutation for Arthan1A.tptp

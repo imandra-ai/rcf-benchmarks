@@ -1,0 +1,328 @@
+% SZS output start CNFRefutation for RL-high-pass-circuit-gain.tptp
+cnf(lgen_le_neg, axiom, (X <= Y | ~ lgen(0, X, Y))).
+
+cnf(leq_left_divide_mul_pos, axiom, (Y * Z < X | X / Z <= Y | Z <= 0)).
+
+cnf(exp_upper_bound_case_3, axiom,
+    (0 < X |
+     ~ lgen(R, 2304 / (-(X ^ 3) + 6 * X ^ 2 - 24 * X + 48) ^ 2, Y) |
+     lgen(R, exp(X), Y))).
+
+fof('RL_Circuit', conjecture,
+    (! [X, S, C] :
+       ((1/500 <= X & X <= 4/5 & S ^ 2 + C ^ 2 = 1) =>
+        247/10000 * exp(-1000 * X) - 31/200 * S + 39/40 * C <= 13/10))).
+
+fof(subgoal_0, plain,
+    (! [X, S, C] :
+       ((1/500 <= X & X <= 4/5 & S ^ 2 + C ^ 2 = 1) =>
+        247/10000 * exp(-1000 * X) - 31/200 * S + 39/40 * C <= 13/10)),
+    inference(strip, [], ['RL_Circuit'])).
+
+fof(negate_0_0, plain,
+    (~ ! [X, S, C] :
+         ((1/500 <= X & X <= 4/5 & S ^ 2 + C ^ 2 = 1) =>
+          247/10000 * exp(-1000 * X) - 31/200 * S + 39/40 * C <= 13/10)),
+    inference(negate, [], [subgoal_0])).
+
+fof(normalize_0_0, plain,
+    (? [C, S, X] :
+       (13/10 < 247/10000 * exp(-1000 * X) - 31/200 * S + 39/40 * C &
+        X <= 4/5 & 1/500 <= X & S ^ 2 + C ^ 2 = 1)),
+    inference(canonicalize, [], [negate_0_0])).
+
+fof(normalize_0_1, plain,
+    (13/10 <
+     247/10000 * exp(-1000 * skoXC1) - 31/200 * skoSC1 + 39/40 * skoCC1 &
+     1/500 <= skoXC1 & skoXC1 <= 4/5 & skoSC1 ^ 2 + skoCC1 ^ 2 = 1),
+    inference(skolemize, [], [normalize_0_0])).
+
+fof(normalize_0_2, plain,
+    (13/10 <
+     247/10000 * exp(-1000 * skoXC1) - 31/200 * skoSC1 + 39/40 * skoCC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_3, plain, (skoSC1 ^ 2 + skoCC1 ^ 2 = 1),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_4, plain, (skoXC1 <= 4/5),
+    inference(conjunct, [], [normalize_0_1])).
+
+fof(normalize_0_5, plain, (1/500 <= skoXC1),
+    inference(conjunct, [], [normalize_0_1])).
+
+cnf(refute_0_0, plain,
+    ((1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247) *
+     (2304 +
+      skoXC1 *
+      (2304000 +
+       skoXC1 *
+       (1152000000 +
+        skoXC1 *
+        (384000000000 +
+         skoXC1 *
+         (84000000000000 +
+          skoXC1 *
+          (12000000000000000 + skoXC1 * 1000000000000000000)))))) < 2304 |
+     2304 +
+     skoXC1 *
+     (2304000 +
+      skoXC1 *
+      (1152000000 +
+       skoXC1 *
+       (384000000000 +
+        skoXC1 *
+        (84000000000000 +
+         skoXC1 * (12000000000000000 + skoXC1 * 1000000000000000000))))) <=
+     0 |
+     2304 /
+     (2304 +
+      skoXC1 *
+      (2304000 +
+       skoXC1 *
+       (1152000000 +
+        skoXC1 *
+        (384000000000 +
+         skoXC1 *
+         (84000000000000 +
+          skoXC1 *
+          (12000000000000000 + skoXC1 * 1000000000000000000)))))) <=
+     1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247),
+    inference(subst, [], [leq_left_divide_mul_pos])).
+
+cnf(refute_0_1, plain,
+    (13/10 <
+     247/10000 * exp(-1000 * skoXC1) - 31/200 * skoSC1 + 39/40 * skoCC1),
+    inference(canonicalize, [], [normalize_0_2])).
+
+cnf(refute_0_2, plain,
+    (1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247 < exp(skoXC1 * -1000)),
+    inference(arithmetic, [], [refute_0_1])).
+
+cnf(refute_0_3, plain,
+    (~ lgen(0, exp(X_000054), X_000055) | exp(X_000054) <= X_000055),
+    inference(subst, [], [lgen_le_neg])).
+
+cnf(refute_0_4, plain,
+    (0 < X_000054 |
+     ~ lgen(0,
+            2304 /
+            (-(X_000054 ^ 3) + 6 * X_000054 ^ 2 - 24 * X_000054 + 48) ^ 2,
+            X_000055) | lgen(0, exp(X_000054), X_000055)),
+    inference(subst, [], [exp_upper_bound_case_3])).
+
+cnf(refute_0_5, plain,
+    (0 < X_000054 |
+     ~ lgen(0,
+            2304 /
+            (-(X_000054 ^ 3) + 6 * X_000054 ^ 2 - 24 * X_000054 + 48) ^ 2,
+            X_000055) | exp(X_000054) <= X_000055),
+    inference(resolve, [], [refute_0_4, refute_0_3])).
+
+cnf(refute_0_6, plain,
+    (0 < X_000054 |
+     X_000055 <
+     2304 /
+     (2304 +
+      X_000054 *
+      (-2304 +
+       X_000054 *
+       (1152 +
+        X_000054 *
+        (-384 + X_000054 * (84 + X_000054 * (-12 + X_000054)))))) |
+     exp(X_000054) <= X_000055), inference(arithmetic, [], [refute_0_5])).
+
+cnf(refute_0_7, plain,
+    (0 < skoXC1 * -1000 |
+     1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247 <
+     2304 /
+     (2304 +
+      skoXC1 * -1000 *
+      (-2304 +
+       skoXC1 * -1000 *
+       (1152 +
+        skoXC1 * -1000 *
+        (-384 +
+         skoXC1 * -1000 *
+         (84 + skoXC1 * -1000 * (-12 + skoXC1 * -1000)))))) |
+     exp(skoXC1 * -1000) <=
+     1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247),
+    inference(subst, [], [refute_0_6])).
+
+cnf(refute_0_8, plain,
+    (0 < skoXC1 * -1000 |
+     1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247 <
+     2304 /
+     (2304 +
+      skoXC1 * -1000 *
+      (-2304 +
+       skoXC1 * -1000 *
+       (1152 +
+        skoXC1 * -1000 *
+        (-384 +
+         skoXC1 * -1000 *
+         (84 + skoXC1 * -1000 * (-12 + skoXC1 * -1000))))))),
+    inference(resolve, [], [refute_0_7, refute_0_2])).
+
+cnf(refute_0_9, plain,
+    (skoXC1 < 0 |
+     1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247 <
+     2304 /
+     (2304 +
+      skoXC1 *
+      (2304000 +
+       skoXC1 *
+       (1152000000 +
+        skoXC1 *
+        (384000000000 +
+         skoXC1 *
+         (84000000000000 +
+          skoXC1 *
+          (12000000000000000 + skoXC1 * 1000000000000000000))))))),
+    inference(arithmetic, [], [refute_0_8])).
+
+cnf(refute_0_10, plain, (skoSC1 ^ 2 + skoCC1 ^ 2 = 1),
+    inference(canonicalize, [], [normalize_0_3])).
+
+cnf(refute_0_11, plain, (skoSC1 * skoSC1 = 1 + skoCC1 * (skoCC1 * -1)),
+    inference(arithmetic, [], [refute_0_10])).
+
+cnf(refute_0_12, plain, (skoXC1 <= 4/5),
+    inference(canonicalize, [], [normalize_0_4])).
+
+cnf(refute_0_13, plain, (1/500 <= skoXC1),
+    inference(canonicalize, [], [normalize_0_5])).
+
+cnf(refute_0_14, plain, (0 <= skoXC1),
+    inference(decision, [], [refute_0_11, refute_0_12, refute_0_13])).
+
+cnf(refute_0_15, plain,
+    (1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247 <
+     2304 /
+     (2304 +
+      skoXC1 *
+      (2304000 +
+       skoXC1 *
+       (1152000000 +
+        skoXC1 *
+        (384000000000 +
+         skoXC1 *
+         (84000000000000 +
+          skoXC1 *
+          (12000000000000000 + skoXC1 * 1000000000000000000))))))),
+    inference(resolve, [], [refute_0_14, refute_0_9])).
+
+cnf(refute_0_16, plain,
+    ((1000/19 + skoCC1 * -750/19 + skoSC1 * 1550/247) *
+     (2304 +
+      skoXC1 *
+      (2304000 +
+       skoXC1 *
+       (1152000000 +
+        skoXC1 *
+        (384000000000 +
+         skoXC1 *
+         (84000000000000 +
+          skoXC1 *
+          (12000000000000000 + skoXC1 * 1000000000000000000)))))) < 2304 |
+     2304 +
+     skoXC1 *
+     (2304000 +
+      skoXC1 *
+      (1152000000 +
+       skoXC1 *
+       (384000000000 +
+        skoXC1 *
+        (84000000000000 +
+         skoXC1 * (12000000000000000 + skoXC1 * 1000000000000000000))))) <=
+     0), inference(resolve, [], [refute_0_0, refute_0_15])).
+
+cnf(refute_0_17, plain,
+    (2260224/19 + skoCC1 * -1728000/19 + skoSC1 * 3571200/247 <
+     skoXC1 *
+     (-2304000000/19 + skoCC1 * 1728000000/19 + skoSC1 * -3571200000/247 +
+      skoXC1 *
+      (-1152000000000/19 + skoCC1 * 864000000000/19 +
+       skoSC1 * -1785600000000/247 +
+       skoXC1 *
+       (-384000000000000/19 + skoCC1 * 288000000000000/19 +
+        skoSC1 * -595200000000000/247 +
+        skoXC1 *
+        (-84000000000000000/19 + skoCC1 * 63000000000000000/19 +
+         skoSC1 * -130200000000000000/247 +
+         skoXC1 *
+         (-12000000000000000000/19 + skoCC1 * 9000000000000000000/19 +
+          skoSC1 * -18600000000000000000/247 +
+          skoXC1 *
+          (-1000000000000000000000/19 + skoCC1 * 750000000000000000000/19 +
+           skoSC1 * -1550000000000000000000/247)))))) |
+     skoXC1 *
+     (2304000 +
+      skoXC1 *
+      (1152000000 +
+       skoXC1 *
+       (384000000000 +
+        skoXC1 *
+        (84000000000000 +
+         skoXC1 * (12000000000000000 + skoXC1 * 1000000000000000000))))) <=
+     -2304), inference(arithmetic, [], [refute_0_16])).
+
+cnf(refute_0_18, plain,
+    (skoXC1 *
+     (2304000 +
+      skoXC1 *
+      (1152000000 +
+       skoXC1 *
+       (384000000000 +
+        skoXC1 *
+        (84000000000000 +
+         skoXC1 * (12000000000000000 + skoXC1 * 1000000000000000000))))) <=
+     -2304 |
+     skoXC1 *
+     (-2304000000/19 + skoCC1 * 1728000000/19 + skoSC1 * -3571200000/247 +
+      skoXC1 *
+      (-1152000000000/19 + skoCC1 * 864000000000/19 +
+       skoSC1 * -1785600000000/247 +
+       skoXC1 *
+       (-384000000000000/19 + skoCC1 * 288000000000000/19 +
+        skoSC1 * -595200000000000/247 +
+        skoXC1 *
+        (-84000000000000000/19 + skoCC1 * 63000000000000000/19 +
+         skoSC1 * -130200000000000000/247 +
+         skoXC1 *
+         (-12000000000000000000/19 + skoCC1 * 9000000000000000000/19 +
+          skoSC1 * -18600000000000000000/247 +
+          skoXC1 *
+          (-1000000000000000000000/19 + skoCC1 * 750000000000000000000/19 +
+           skoSC1 * -1550000000000000000000/247)))))) <=
+     2260224/19 + skoCC1 * -1728000/19 + skoSC1 * 3571200/247),
+    inference(decision, [], [refute_0_11, refute_0_12, refute_0_13])).
+
+cnf(refute_0_19, plain,
+    (skoXC1 *
+     (2304000 +
+      skoXC1 *
+      (1152000000 +
+       skoXC1 *
+       (384000000000 +
+        skoXC1 *
+        (84000000000000 +
+         skoXC1 * (12000000000000000 + skoXC1 * 1000000000000000000))))) <=
+     -2304), inference(resolve, [], [refute_0_18, refute_0_17])).
+
+cnf(refute_0_20, plain,
+    (-2304 <
+     skoXC1 *
+     (2304000 +
+      skoXC1 *
+      (1152000000 +
+       skoXC1 *
+       (384000000000 +
+        skoXC1 *
+        (84000000000000 +
+         skoXC1 * (12000000000000000 + skoXC1 * 1000000000000000000)))))),
+    inference(decision, [], [refute_0_11, refute_0_12, refute_0_13])).
+
+cnf(refute_0_21, plain, ($false),
+    inference(resolve, [], [refute_0_19, refute_0_20])).
+% SZS output end CNFRefutation for RL-high-pass-circuit-gain.tptp
